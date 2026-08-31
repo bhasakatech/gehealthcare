@@ -1,8 +1,10 @@
 {
   "mappings": [
-    "/content/gehealthcare/:/"
+    "/content/gehealthcare/:/",
+    "/content/dam/gehealthcare/:/assets/"
   ],
   "includes": [
-    "/content/gehealthcare/"
+    "/content/gehealthcare/",
+    "/content/dam/gehealthcare/"
   ]
 }
