@@ -1,0 +1,30 @@
+/* Support Card — "For support" contact block (sidebar). */
+.support-card .support-card-inner {
+  padding: 10px 5px 20px;
+  font-size: var(--body-font-size-xs);
+  line-height: 1.5;
+  color: var(--dark-color);
+}
+
+.support-card .support-card-title {
+  margin: 0 0 14px;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.support-card .support-card-icon {
+  display: block;
+  width: 26px;
+  height: 26px;
+  margin: 0 0 12px;
+  color: var(--brand-color);
+}
+
+.support-card .support-card-body p {
+  margin: 0;
+}
+
+.support-card .support-card-body a:any-link {
+  color: var(--brand-color);
+  overflow-wrap: break-word;
+}

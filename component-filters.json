@@ -83,6 +83,18 @@
     ]
   },
   {
+    "id": "media-grid",
+    "components": [
+      "media-tile"
+    ]
+  },
+  {
+    "id": "principle-cards",
+    "components": [
+      "principle-card"
+    ]
+  },
+  {
     "id": "section-nav",
     "components": [
       "section-nav-item"

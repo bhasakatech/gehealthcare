@@ -1,1 +1,47 @@
 /* add global styles that can be loaded post LCP here */
+
+/*
+ * Sidebar layout — brand-foundation & resource pages.
+ * A sticky left sidebar (section-nav accordion + support card) beside the main
+ * content. Below 900px it stacks (sidebar first, collapsible disclosure).
+ */
+main .section.sidebar-layout {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+@media (width >= 900px) {
+  /* Two-column flex row: fixed sidebar + flexible content. Flex guarantees the
+     sidebar stays pinned at the top (no grid auto-placement to push it down). */
+  main .section.sidebar-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  /* Override the boilerplate `main > .section > div { margin-top: auto }`,
+     which on a flex container would push these children down the flex line. */
+  main .section.sidebar-layout > .section-nav-wrapper,
+  main .section.sidebar-layout > .sidebar-layout-content {
+    margin-top: 0;
+  }
+
+  /* Sidebar: the nav + support card in one wrapper (moved in by
+     section-nav.js) that sticks as a single unit, so the two never overlap. */
+  main .section.sidebar-layout > .section-nav-wrapper {
+    flex: 0 0 220px;
+    position: sticky;
+    top: var(--nav-height);
+    align-self: flex-start;
+    max-height: calc(100vh - var(--nav-height));
+    overflow-y: auto;
+    padding-right: 16px;
+    border-right: 1px solid var(--border-color);
+  }
+
+  /* Content column takes the remaining width. */
+  main .section.sidebar-layout > .sidebar-layout-content {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+}

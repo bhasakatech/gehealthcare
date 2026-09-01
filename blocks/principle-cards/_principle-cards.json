@@ -1,0 +1,56 @@
+{
+  "definitions": [
+    {
+      "title": "Principle Cards",
+      "id": "principle-cards",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Principle Cards",
+              "filter": "principle-cards"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Principle Card",
+      "id": "principle-card",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Principle Card",
+              "model": "principle-card"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "principle-card",
+      "fields": [
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "text",
+          "label": "Card Content",
+          "description": "An icon (e.g. :users:), the card heading (H4), and the description paragraph"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "principle-cards",
+      "components": [
+        "principle-card"
+      ]
+    }
+  ]
+}

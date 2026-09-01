@@ -1,0 +1,62 @@
+/*
+ * Principle Cards — "experience principles" grid (our-brand).
+ * Sits inside a rounded, light-purple panel. 1 col mobile, 2 col tablet,
+ * 3 col desktop — matching the live flip-box layout.
+ */
+.principle-cards {
+  background-color: var(--light-color);
+  border-radius: 16px;
+  padding: 32px;
+}
+
+.principle-cards .principle-cards-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.principle-cards .principle-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.principle-cards .principle-card-icon {
+  width: 51px;
+  height: 51px;
+  margin-bottom: 8px;
+}
+
+.principle-cards .principle-card-icon img,
+.principle-cards .principle-card-icon .icon,
+.principle-cards .principle-card-icon svg {
+  width: 51px;
+  height: 51px;
+}
+
+.principle-cards .principle-card-body h4 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.principle-cards .principle-card-body p {
+  margin: 0;
+  color: var(--dark-color);
+}
+
+@media (width >= 600px) {
+  .principle-cards .principle-cards-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+}
+
+@media (width >= 900px) {
+  .principle-cards .principle-cards-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

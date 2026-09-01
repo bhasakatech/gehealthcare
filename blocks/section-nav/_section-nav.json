@@ -47,14 +47,14 @@
           "valueType": "string",
           "name": "link",
           "label": "Link",
-          "description": "A URL or in-page anchor (e.g. #logo-versions)"
+          "description": "A page URL (e.g. /brand-foundations/logos/) or an in-page anchor (e.g. #logo-versions)"
         },
         {
           "component": "text",
           "valueType": "string",
           "name": "parent",
           "label": "Parent",
-          "description": "Label of the parent group for nesting. Leave empty for a top-level item."
+          "description": "Title of the parent item this nests under. Leave empty for a top-level item. Supports any depth."
         }
       ]
     }

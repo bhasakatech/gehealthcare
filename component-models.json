@@ -650,6 +650,50 @@
     ]
   },
   {
+    "id": "media-tile",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "description": "Used when no video is provided",
+        "multi": false
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "video",
+        "label": "Video (MP4)",
+        "description": "Autoplaying looping tile; takes precedence over the image"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "link",
+        "label": "Tile Link"
+      }
+    ]
+  },
+  {
+    "id": "principle-card",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Card Content",
+        "description": "An icon (e.g. :users:), the card heading (H4), and the description paragraph"
+      }
+    ]
+  },
+  {
     "id": "section-nav-item",
     "fields": [
       {
@@ -664,14 +708,34 @@
         "valueType": "string",
         "name": "link",
         "label": "Link",
-        "description": "A URL or in-page anchor (e.g. #logo-versions)"
+        "description": "A page URL (e.g. /brand-foundations/logos/) or an in-page anchor (e.g. #logo-versions)"
       },
       {
         "component": "text",
         "valueType": "string",
         "name": "parent",
         "label": "Parent",
-        "description": "Label of the parent group for nesting. Leave empty for a top-level item."
+        "description": "Title of the parent item this nests under. Leave empty for a top-level item. Supports any depth."
+      }
+    ]
+  },
+  {
+    "id": "support-card",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Heading",
+        "description": "Small heading above the contact details (e.g. \"For support\")",
+        "value": "For support"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "body",
+        "label": "Contact Text",
+        "description": "Contact details. Add the support email as a link."
       }
     ]
   },

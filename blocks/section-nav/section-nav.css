@@ -1,4 +1,6 @@
-/* Mobile-first: collapsible disclosure at the top of the page */
+/* Section Nav — reusable brand-hub sidebar accordion.
+   Mobile-first: collapsible disclosure; desktop: sticky, scrollable sidebar. */
+
 .section-nav .section-nav-collapsible {
   border: 1px solid var(--border-color);
   border-radius: 4px;
@@ -18,7 +20,7 @@
 }
 
 .section-nav .section-nav-summary::after {
-  content: "\25be"; /* down triangle */
+  content: "\25be";
   float: right;
   transition: transform 0.2s ease;
 }
@@ -28,7 +30,7 @@
 }
 
 .section-nav .section-nav-menu {
-  padding: 0 8px 8px;
+  padding: 0;
 }
 
 .section-nav .section-nav-list,
@@ -38,49 +40,105 @@
   padding: 0;
 }
 
-.section-nav .section-nav-sublist {
-  padding-left: 16px;
-  border-left: 1px solid var(--border-color);
-  margin-left: 8px;
+.section-nav .section-nav-item {
+  position: relative;
+}
+
+/* divider line under each top-level item only */
+.section-nav .section-nav-list > .section-nav-item {
+  border-bottom: 1px solid var(--border-color);
 }
 
 .section-nav .section-nav-link {
   display: block;
-  padding: 8px 12px;
-  color: var(--text-color);
+  padding: 16px 12px 16px 34px; /* left room for the caret */
+  color: var(--dark-color);
   text-decoration: none;
-  border-left: 3px solid transparent;
   line-height: 1.3;
 }
 
 .section-nav .section-nav-link:hover,
 .section-nav .section-nav-link:focus {
   color: var(--brand-color);
-  background-color: var(--lighter-color);
 }
 
-.section-nav .section-nav-item-parent > .section-nav-link {
+/* top-level items: heavier weight (specificity override is intentional) */
+/* stylelint-disable no-descending-specificity */
+.section-nav .section-nav-list > .section-nav-item > .section-nav-link {
   font-weight: 700;
+  color: var(--text-color);
 }
 
-/* Active in-page anchor highlighting (scrollspy) */
-.section-nav .section-nav-link[aria-current="true"] {
+/* current page + active anchor: brand purple + bold.
+   Selectors are kept at/above the top-level rule's specificity so the current
+   item wins over the top-level colour. */
+.section-nav .section-nav-list .section-nav-current > .section-nav-link,
+.section-nav .section-nav-list .section-nav-link[aria-current="true"] {
   color: var(--brand-color);
-  border-left-color: var(--brand-color);
   font-weight: 700;
 }
 
-/* Desktop: sticky sidebar, always expanded */
+/* caret toggle on the LEFT of the item (chevron points right, down when open) */
+.section-nav .section-nav-toggle {
+  position: absolute;
+  top: 14px;
+  left: 4px;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.section-nav .section-nav-toggle::before {
+  content: "";
+  display: block;
+  width: 7px;
+  height: 7px;
+  margin: 0 auto;
+  border: 2px solid var(--dark-color);
+  border-width: 2px 2px 0 0;
+  transform: rotate(45deg); /* points right */
+  transition: transform 0.2s ease;
+}
+
+.section-nav .section-nav-open > .section-nav-toggle::before {
+  transform: rotate(135deg); /* points down */
+}
+
+/* accordion: hide sublists until the parent is open */
+.section-nav .section-nav-sublist {
+  display: none;
+  padding-left: 0;
+  margin: 0 0 8px;
+}
+
+.section-nav .section-nav-open > .section-nav-sublist {
+  display: block;
+}
+
+.section-nav .section-nav-sublist .section-nav-link {
+  /* stylelint-enable no-descending-specificity */
+  padding: 8px 12px 8px 34px;
+  font-size: var(--body-font-size-xs);
+  font-weight: 400;
+}
+
+/* deeper (grandchild) level indents further and is muted */
+.section-nav .section-nav-sublist .section-nav-sublist .section-nav-link {
+  padding-left: 48px;
+  color: var(--dark-color);
+}
+
+/* Desktop: disclosure always shown; the whole sidebar wrapper scrolls (see
+   lazy-styles .sidebar-layout), so the nav itself does not scroll internally. */
 @media (width >= 900px) {
   .section-nav .section-nav-collapsible {
-    position: sticky;
-    top: var(--nav-height);
-    width: 260px;
-    max-height: calc(100vh - var(--nav-height));
-    overflow-y: auto;
     background-color: transparent;
     border: none;
-    border-right: 1px solid var(--border-color);
     border-radius: 0;
   }
 
@@ -88,9 +146,8 @@
     display: none;
   }
 
-  /* keep the nav visible on desktop even when <details> is collapsed */
   .section-nav .section-nav-collapsible .section-nav-menu {
     display: block;
-    padding: 0 16px 0 0;
+    padding: 0;
   }
 }

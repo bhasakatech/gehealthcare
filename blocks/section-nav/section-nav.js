@@ -1,95 +1,94 @@
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
- * Reads the three authored cells (title, link, parent) from a block row.
- * @param {Element} row The authored row element
- * @returns {{ title: string, link: string, parent: string, cell: Element }}
+ * Section Nav — the brand hub sidebar navigation.
+ *
+ * A reusable, multi-level, click-to-expand accordion sidebar. Authored as
+ * repeatable "Section Nav Item" rows (see _section-nav.json), each carrying:
+ *   [title, link, parent]
+ * where `parent` is the title of the item this row nests under (empty = top
+ * level). Nesting can be arbitrary depth (a child can itself be a parent).
+ *
+ * Behaviour mirrors the live site sidebar:
+ *   - items with children show a caret; clicking it expands/collapses
+ *   - the current page's branch is expanded by default
+ *   - in-page anchor links (#..) scroll smoothly and highlight via scrollspy
+ *
+ * The "For support" contact card is a separate, reusable Support Card block
+ * placed beneath this one in the sidebar.
+ *
+ * @param {Element} block
  */
 function parseRow(row) {
   const cells = [...row.children];
-  const title = cells[0]?.textContent.trim() || '';
-  const link = cells[1]?.textContent.trim() || '';
-  const parent = cells[2]?.textContent.trim() || '';
   return {
-    title, link, parent, cell: cells[0],
+    title: cells[0]?.textContent.trim() || '',
+    link: cells[1]?.textContent.trim() || '',
+    parent: cells[2]?.textContent.trim() || '',
+    cell: cells[0],
   };
 }
 
 /**
- * Creates a single <li><a> navigation entry.
- * @param {object} item Parsed row data
- * @returns {Element} The list item element
+ * Resolve an authored link to the environment the page is served from.
+ * Authored links use production paths (e.g. "/our-brand/"). In a preview that
+ * serves pages under a "/content" prefix, those need the prefix added (and the
+ * trailing slash removed, since only the extension-less path resolves there).
+ * In production `prefix` is empty and links are returned unchanged.
  */
-function createNavItem(item) {
-  const li = document.createElement('li');
-  li.className = 'section-nav-item';
-  const a = document.createElement('a');
-  a.className = 'section-nav-link';
-  a.href = item.link || '#';
-  a.textContent = item.title;
-  // relocate authoring instrumentation from the title cell onto the link
-  if (item.cell) moveInstrumentation(item.cell, a);
-  li.append(a);
-  return li;
+function resolveHref(href, prefix) {
+  if (!prefix || !href.startsWith('/') || href.startsWith('//')
+    || href.startsWith(prefix) || href.startsWith('/assets')) return href;
+  const hashIdx = href.indexOf('#');
+  const path = (hashIdx === -1 ? href : href.slice(0, hashIdx)).replace(/\/$/, '');
+  const hash = hashIdx === -1 ? '' : href.slice(hashIdx);
+  return prefix + path + hash;
 }
 
-/**
- * Smoothly scrolls to an in-page anchor target.
- * @param {string} hash The anchor hash (e.g. #logo-versions)
- * @returns {boolean} true if a target existed and was scrolled to
- */
+function createLink(item, prefix) {
+  const a = document.createElement('a');
+  a.className = 'section-nav-link';
+  a.href = resolveHref(item.link || '#', prefix);
+  a.textContent = item.title;
+  if (item.cell) moveInstrumentation(item.cell, a);
+  return a;
+}
+
 function scrollToAnchor(hash) {
-  const id = decodeURIComponent(hash.slice(1));
-  const target = document.getElementById(id)
-    || document.querySelector(`[name="${CSS.escape(id)}"]`);
+  const id = decodeURIComponent((hash || '').slice(1));
+  const target = document.getElementById(id) || document.querySelector(`[name="${CSS.escape(id)}"]`);
   if (!target) return false;
   target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   return true;
 }
 
-/**
- * Sets up an IntersectionObserver scrollspy that marks the anchor link whose
- * target is currently in view with aria-current="true".
- * @param {Map<string, Element>} anchorLinks Map of element id -> anchor link
- */
 function setupScrollSpy(anchorLinks) {
   const targets = [];
   anchorLinks.forEach((link, id) => {
-    const target = document.getElementById(id)
-      || document.querySelector(`[name="${CSS.escape(id)}"]`);
-    if (target) targets.push(target);
+    const t = document.getElementById(id) || document.querySelector(`[name="${CSS.escape(id)}"]`);
+    if (t) targets.push(t);
   });
   if (!targets.length) return;
-
   const visible = new Set();
-
-  const setActive = (id) => {
-    anchorLinks.forEach((link, key) => {
-      if (key === id) link.setAttribute('aria-current', 'true');
-      else link.removeAttribute('aria-current');
-    });
-  };
-
+  const setActive = (id) => anchorLinks.forEach((link, key) => {
+    if (key === id) link.setAttribute('aria-current', 'true');
+    else link.removeAttribute('aria-current');
+  });
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      const { id } = entry.target;
-      if (entry.isIntersecting) visible.add(id);
-      else visible.delete(id);
+    entries.forEach((e) => {
+      if (e.isIntersecting) visible.add(e.target.id);
+      else visible.delete(e.target.id);
     });
-    // pick the first target (in document order) that is currently visible
     const active = targets.find((t) => visible.has(t.id));
     if (active) setActive(active.id);
   }, { rootMargin: '0px 0px -60% 0px', threshold: 0 });
-
   targets.forEach((t) => observer.observe(t));
 }
 
-/**
- * loads and decorates the section navigation
- * @param {Element} block The block element
- */
 export default async function decorate(block) {
-  const items = [...block.children].map(parseRow).filter((item) => item.title);
+  const items = [...block.children]
+    .map(parseRow)
+    .filter((i) => i.title);
 
   const nav = document.createElement('nav');
   nav.className = 'section-nav-menu';
@@ -98,60 +97,140 @@ export default async function decorate(block) {
   const rootList = document.createElement('ul');
   rootList.className = 'section-nav-list';
 
-  const groups = new Map(); // parent label -> nested <ul>
-  const topLevel = new Map(); // label -> <li> (for attaching children)
-  const anchorLinks = new Map(); // target id -> anchor link element
+  const liByTitle = new Map();
+  const anchorLinks = new Map();
+  // Normalise the current path so preview (/content/our-brand) and production
+  // (/our-brand/) resolve the same way when matching authored links.
+  const normalisePath = (p) => p.replace(/^\/content/, '').replace(/\/$/, '') || '/';
+  const here = normalisePath(window.location.pathname);
+  // In a preview that serves pages under "/content", rewrite authored links to
+  // that prefix; in production the prefix is empty and links are unchanged.
+  const prefix = window.location.pathname.startsWith('/content/') ? '/content' : '';
 
-  const registerAnchor = (link) => {
-    if (link.getAttribute('href')?.startsWith('#')) {
-      const id = decodeURIComponent(link.getAttribute('href').slice(1));
-      anchorLinks.set(id, link);
-      link.addEventListener('click', (e) => {
-        if (scrollToAnchor(link.getAttribute('href'))) e.preventDefault();
-      });
+  // A link is "on this page" when it has a #hash and either starts with '#' or
+  // its pathname matches the current page. Those scroll in-page (with
+  // scrollspy); everything else navigates normally.
+  const registerAnchor = (a) => {
+    const href = a.getAttribute('href') || '';
+    if (!href.includes('#')) return;
+    const hash = href.slice(href.indexOf('#'));
+    if (hash.length <= 1) return;
+
+    let samePage = href.startsWith('#');
+    if (!samePage) {
+      try {
+        const url = new URL(href, window.location.origin);
+        samePage = normalisePath(url.pathname) === here;
+      } catch (e) { /* non-URL href */ }
     }
+    if (!samePage) return;
+
+    anchorLinks.set(decodeURIComponent(hash.slice(1)), a);
+    a.addEventListener('click', (e) => {
+      if (scrollToAnchor(hash)) {
+        e.preventDefault();
+        window.history.replaceState(null, '', hash);
+      }
+    });
   };
 
-  // first pass: create top-level items
-  items.filter((item) => !item.parent).forEach((item) => {
-    const li = createNavItem(item);
-    topLevel.set(item.title, li);
-    registerAnchor(li.querySelector('a'));
-    rootList.append(li);
-  });
+  // Build in authored order so parents exist before their children.
+  items.forEach((item) => {
+    const li = document.createElement('li');
+    li.className = 'section-nav-item';
+    const link = createLink(item, prefix);
+    li.append(link);
+    registerAnchor(link);
+    // Mark the exact page link (no #hash) as current so its branch highlights
+    // and auto-expands; child anchors highlight via scrollspy while scrolling.
+    const rawHref = link.getAttribute('href') || '';
+    if (!rawHref.startsWith('#') && !rawHref.includes('#')) {
+      try {
+        const linkPath = normalisePath(new URL(link.href, window.location.origin).pathname);
+        if (linkPath && linkPath === here) li.classList.add('section-nav-current');
+      } catch (e) { /* non-URL href */ }
+    }
+    liByTitle.set(item.title, li);
 
-  // second pass: nest children under their parent
-  items.filter((item) => item.parent).forEach((item) => {
-    const parentLi = topLevel.get(item.parent);
-    const li = createNavItem(item);
-    registerAnchor(li.querySelector('a'));
-    if (parentLi) {
-      let nested = groups.get(item.parent);
-      if (!nested) {
-        nested = document.createElement('ul');
-        nested.className = 'section-nav-sublist';
+    if (item.parent && liByTitle.has(item.parent)) {
+      const parentLi = liByTitle.get(item.parent);
+      let sub = parentLi.querySelector(':scope > ul.section-nav-sublist');
+      if (!sub) {
+        sub = document.createElement('ul');
+        sub.className = 'section-nav-sublist';
         parentLi.classList.add('section-nav-item-parent');
-        parentLi.append(nested);
-        groups.set(item.parent, nested);
+        const toggle = document.createElement('button');
+        toggle.type = 'button';
+        toggle.className = 'section-nav-toggle';
+        toggle.setAttribute('aria-label', `Toggle ${item.parent}`);
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.addEventListener('click', (e) => {
+          e.preventDefault();
+          const open = parentLi.classList.toggle('section-nav-open');
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        parentLi.append(toggle, sub);
       }
-      nested.append(li);
+      sub.append(li);
     } else {
-      // orphaned child with no matching parent: treat as top level
       rootList.append(li);
     }
   });
 
+  // Expand the branch containing the current page.
+  let node = rootList.querySelector('.section-nav-current');
+  while (node && node !== rootList) {
+    if (node.classList?.contains('section-nav-item-parent')) {
+      node.classList.add('section-nav-open');
+      const t = node.querySelector(':scope > .section-nav-toggle');
+      if (t) t.setAttribute('aria-expanded', 'true');
+    }
+    node = node.parentElement ? node.parentElement.closest('.section-nav-item') : null;
+  }
+
   nav.append(rootList);
 
-  // Build the mobile collapsible wrapper. Content lives inside <details>.
+  // Mobile collapsible wrapper (disclosure); desktop shows it always open.
   const details = document.createElement('details');
   details.className = 'section-nav-collapsible';
   const summary = document.createElement('summary');
   summary.className = 'section-nav-summary';
-  summary.textContent = 'On this page';
+  summary.textContent = 'Menu';
   details.append(summary, nav);
 
-  block.replaceChildren(details);
+  // A closed <details> hides its content, so on desktop (where the summary is
+  // hidden) keep the navigation open regardless of the disclosure state.
+  const desktop = window.matchMedia('(min-width: 900px)');
+  const syncDisclosure = () => { if (desktop.matches) details.open = true; };
+  syncDisclosure();
+  desktop.addEventListener('change', syncDisclosure);
 
+  block.replaceChildren(details);
   setupScrollSpy(anchorLinks);
+
+  // Rebuild the sidebar layout as a robust two-column flex row:
+  //   .section-nav-wrapper  (sidebar: nav + support card, one sticky unit)
+  //   .sidebar-layout-content (everything else, in document order)
+  // Grouping the content in its own wrapper guarantees the sidebar stays a
+  // single fixed-width flex child pinned to the top — it can't be pushed down
+  // by grid auto-placement or tall content rows.
+  const wrapper = block.closest('.section-nav-wrapper');
+  const section = block.closest('.section');
+  if (wrapper && section) {
+    const supportWrapper = section.querySelector('.support-card-wrapper');
+    // Pull the support card into the sidebar so both scroll together.
+    if (supportWrapper && !wrapper.contains(supportWrapper)) {
+      wrapper.append(supportWrapper);
+    }
+    // Wrap all remaining direct children (the page content) in one column,
+    // preserving their order.
+    if (!section.querySelector(':scope > .sidebar-layout-content')) {
+      const content = document.createElement('div');
+      content.className = 'sidebar-layout-content';
+      [...section.children].forEach((child) => {
+        if (child !== wrapper) content.append(child);
+      });
+      section.append(content);
+    }
+  }
 }
