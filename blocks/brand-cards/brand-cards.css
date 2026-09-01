@@ -1,0 +1,120 @@
+/*
+ * Brand Cards — homepage "Core brand elements" grid.
+ * 3 columns on desktop, 2 on tablet, 1 on mobile. White rounded cards with a
+ * media element on top (video or image) and a title/description/CTA below.
+ * Matches the source Avada post-cards grid (16px radius, 24px gaps).
+ */
+
+/* light section band (source core-brand-section bg #fbf9fd, 95/125 padding) */
+.brand-cards-wrapper {
+  background-color: var(--light-color);
+}
+
+.brand-cards {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 64px 20px 80px;
+}
+
+.brand-cards .brand-cards-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.brand-cards .brand-card {
+  background-color: var(--background-color);
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 32px;
+}
+
+.brand-cards .brand-card-media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.brand-cards .brand-card-media-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.brand-cards .brand-card-media img,
+.brand-cards .brand-card-media video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.brand-cards .brand-card-body {
+  padding: 20px 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.brand-cards .brand-card-body h3 {
+  margin: 0;
+  font-size: var(--heading-font-size-l);
+}
+
+.brand-cards .brand-card-body p {
+  margin: 0;
+  font-size: 18px;
+  color: var(--dark-color);
+}
+
+/* "Learn more" — purple text link with a chevron, underline on hover */
+.brand-cards .brand-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  color: var(--brand-color);
+  font-weight: 600;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.brand-cards .brand-card-cta::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border: 2px solid currentcolor;
+  border-width: 2px 2px 0 0;
+  transform: rotate(45deg);
+  display: inline-block;
+}
+
+.brand-cards .brand-card-cta:hover {
+  color: var(--brand-color-dark);
+}
+
+.brand-cards .brand-card-cta:hover span {
+  text-decoration: underline;
+}
+
+@media (width >= 600px) {
+  .brand-cards .brand-cards-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .brand-cards {
+    padding: 95px 20px 125px;
+  }
+
+  .brand-cards .brand-cards-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

@@ -19,9 +19,27 @@
     ]
   },
   {
+    "id": "accordion",
+    "components": [
+      "accordion-item"
+    ]
+  },
+  {
+    "id": "brand-cards",
+    "components": [
+      "brand-card"
+    ]
+  },
+  {
     "id": "cards",
     "components": [
       "card"
+    ]
+  },
+  {
+    "id": "carousel",
+    "components": [
+      "slide"
     ]
   },
   {
@@ -37,6 +55,43 @@
       "image",
       "button",
       "title"
+    ]
+  },
+  {
+    "id": "dos-donts",
+    "components": [
+      "guidance"
+    ]
+  },
+  {
+    "id": "download-list",
+    "components": [
+      "download-item"
+    ]
+  },
+  {
+    "id": "footer",
+    "components": [
+      "footer-quick-link",
+      "footer-policy-link"
+    ]
+  },
+  {
+    "id": "image-marquee",
+    "components": [
+      "marquee-image"
+    ]
+  },
+  {
+    "id": "section-nav",
+    "components": [
+      "section-nav-item"
+    ]
+  },
+  {
+    "id": "video-cards",
+    "components": [
+      "video-card"
     ]
   }
 ]

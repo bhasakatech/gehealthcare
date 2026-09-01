@@ -1,0 +1,64 @@
+.accordion .accordion-item {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.accordion .accordion-item:first-child {
+  border-top: 1px solid var(--border-color);
+}
+
+.accordion .accordion-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 8px;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.accordion .accordion-item-header::-webkit-details-marker {
+  display: none;
+}
+
+.accordion .accordion-item-header:hover {
+  color: var(--link-color);
+}
+
+.accordion .accordion-item-title {
+  flex: 1;
+}
+
+.accordion .accordion-item-title > :first-child {
+  margin: 0;
+}
+
+.accordion .accordion-chevron {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  transition: transform 0.2s ease;
+}
+
+.accordion .accordion-item[open] .accordion-chevron {
+  transform: rotate(180deg);
+}
+
+.accordion .accordion-item-panel {
+  padding: 0 8px 16px;
+}
+
+.accordion .accordion-item-panel > :first-child {
+  margin-top: 0;
+}
+
+.accordion .accordion-item-panel > :last-child {
+  margin-bottom: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion .accordion-chevron {
+    transition: none;
+  }
+}

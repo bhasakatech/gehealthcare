@@ -83,6 +83,66 @@
       "id": "blocks",
       "components": [
         {
+          "title": "Accordion",
+          "id": "accordion",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Accordion",
+                  "filter": "accordion"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Accordion Item",
+          "id": "accordion-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Accordion Item",
+                  "model": "accordion-item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Brand Cards",
+          "id": "brand-cards",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Brand Cards",
+                  "filter": "brand-cards"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Brand Card",
+          "id": "brand-card",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Brand Card",
+                  "model": "brand-card"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Cards",
           "id": "cards",
           "plugins": {
@@ -113,6 +173,36 @@
           }
         },
         {
+          "title": "Carousel",
+          "id": "carousel",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Carousel",
+                  "filter": "carousel"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Slide",
+          "id": "slide",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Slide",
+                  "model": "slide"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Columns",
           "id": "columns",
           "plugins": {
@@ -122,6 +212,157 @@
                 "template": {
                   "columns": "2",
                   "rows": "1"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Content Media",
+          "id": "content-media",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Content Media",
+                  "model": "content-media"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Cta Banner",
+          "id": "cta-banner",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Cta Banner",
+                  "model": "cta-banner"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Dos Donts",
+          "id": "dos-donts",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Dos Donts",
+                  "filter": "dos-donts"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Guidance",
+          "id": "guidance",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Guidance",
+                  "model": "guidance"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Download List",
+          "id": "download-list",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Download List",
+                  "filter": "download-list"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Download Item",
+          "id": "download-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Download Item",
+                  "model": "download-item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Feature Card",
+          "id": "feature-card",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Feature Card",
+                  "model": "feature-card"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Footer",
+          "id": "footer",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Footer",
+                  "model": "footer",
+                  "filter": "footer"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Footer Quick Link",
+          "id": "footer-quick-link",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Footer Quick Link",
+                  "model": "footer-quick-link"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Footer Policy Link",
+          "id": "footer-policy-link",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Footer Policy Link",
+                  "model": "footer-policy-link"
                 }
               }
             }
@@ -143,6 +384,21 @@
           }
         },
         {
+          "title": "Header",
+          "id": "header",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Header",
+                  "model": "header"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Hero",
           "id": "hero",
           "plugins": {
@@ -152,6 +408,96 @@
                 "template": {
                   "name": "Hero",
                   "model": "hero"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Image Marquee",
+          "id": "image-marquee",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Image Marquee",
+                  "filter": "image-marquee"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Marquee Image",
+          "id": "marquee-image",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Marquee Image",
+                  "model": "marquee-image"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Section Nav",
+          "id": "section-nav",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Section Nav",
+                  "filter": "section-nav"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Section Nav Item",
+          "id": "section-nav-item",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Section Nav Item",
+                  "model": "section-nav-item"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Video Cards",
+          "id": "video-cards",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Video Cards",
+                  "filter": "video-cards"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Video Card",
+          "id": "video-card",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Video Card",
+                  "model": "video-card"
                 }
               }
             }

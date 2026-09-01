@@ -142,6 +142,65 @@
     ]
   },
   {
+    "id": "accordion-item",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Title",
+        "valueType": "string",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "content",
+        "label": "Content",
+        "valueType": "string",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "brand-card",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Card Image",
+        "description": "Used when no video is provided",
+        "multi": false
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "video",
+        "label": "Card Video (MP4)",
+        "description": "Autoplaying looping video; takes precedence over the image"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Title & Description",
+        "description": "Card heading (H3) followed by the description paragraph"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "cardLink",
+        "label": "Card Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "cardLinkText",
+        "label": "Link Text",
+        "value": "Learn more"
+      }
+    ]
+  },
+  {
     "id": "card",
     "fields": [
       {
@@ -157,6 +216,30 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "slide",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "alt",
+        "label": "Alt / Caption"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "link",
+        "label": "Link"
       }
     ]
   },
@@ -180,6 +263,313 @@
     ]
   },
   {
+    "id": "content-media",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string",
+        "description": "Heading and body copy"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false,
+        "description": "Optional image or figure"
+      },
+      {
+        "component": "select",
+        "name": "layout",
+        "label": "Layout",
+        "valueType": "string",
+        "value": "text-left",
+        "options": [
+          {
+            "name": "Text left",
+            "value": "text-left"
+          },
+          {
+            "name": "Text right",
+            "value": "text-right"
+          },
+          {
+            "name": "Text only",
+            "value": "text-only"
+          },
+          {
+            "name": "Image only",
+            "value": "image-only"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cta-banner",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "button",
+        "label": "Button Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "buttonText",
+        "label": "Button Text"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "backgroundImage",
+        "label": "Background Image",
+        "multi": false
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "style",
+        "label": "Style",
+        "value": "purple",
+        "options": [
+          {
+            "name": "Purple",
+            "value": "purple"
+          },
+          {
+            "name": "Dark",
+            "value": "dark"
+          },
+          {
+            "name": "Image",
+            "value": "image"
+          },
+          {
+            "name": "Light",
+            "value": "light"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "guidance",
+    "fields": [
+      {
+        "component": "select",
+        "name": "status",
+        "label": "Status",
+        "valueType": "string",
+        "value": "dont",
+        "options": [
+          {
+            "name": "Do",
+            "value": "do"
+          },
+          {
+            "name": "Don't",
+            "value": "dont"
+          }
+        ]
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "richtext",
+        "name": "example",
+        "value": "",
+        "label": "Example",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "caption",
+        "value": "",
+        "label": "Caption",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "download-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "group",
+        "label": "Group Heading",
+        "description": "Category heading. Repeat the same value across items to cluster them into one group."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "fileLink",
+        "label": "File Link (URL)",
+        "description": "URL for the download or external link."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "fileLinkText",
+        "label": "Item Label",
+        "description": "Name of the downloadable asset (shown as the link text)."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "infoLink",
+        "label": "Info Link (URL)",
+        "description": "Optional URL for the info (i) icon."
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "kind",
+        "label": "Link Type",
+        "value": "download",
+        "options": [
+          {
+            "name": "Download",
+            "value": "download"
+          },
+          {
+            "name": "External",
+            "value": "external"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "feature-card",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Feature Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text"
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "valueType": "string",
+        "label": "Text",
+        "description": "Eyebrow, heading and body copy"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "button",
+        "label": "Button Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "buttonText",
+        "label": "Button Text"
+      }
+    ]
+  },
+  {
+    "id": "footer",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "logo",
+        "label": "GE HealthCare Logo",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "logoAlt",
+        "label": "Logo Alt Text",
+        "value": "GE HealthCare"
+      },
+      {
+        "component": "aem-content",
+        "name": "logoLink",
+        "label": "Logo Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "copyright",
+        "label": "Copyright Text",
+        "value": "© 2026 GE HealthCare. GE is a trademark of General Electric Company used under trademark license."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "legalNote",
+        "label": "Additional Legal Note"
+      }
+    ]
+  },
+  {
+    "id": "footer-quick-link",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "text",
+        "label": "Link Text"
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link URL"
+      }
+    ]
+  },
+  {
+    "id": "footer-policy-link",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "text",
+        "label": "Link Text"
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link URL"
+      },
+      {
+        "component": "boolean",
+        "valueType": "boolean",
+        "name": "newTab",
+        "label": "Open in New Tab"
+      }
+    ]
+  },
+  {
     "id": "fragment",
     "fields": [
       {
@@ -190,7 +580,59 @@
     ]
   },
   {
+    "id": "header",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "nav",
+        "label": "Navigation Fragment",
+        "description": "Reference to the navigation fragment (defaults to /nav). The fragment holds the GE HealthCare logo, the Brand Hub wordmark, the primary menu and the search."
+      }
+    ]
+  },
+  {
     "id": "hero",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Background Image",
+        "description": "Used when no background video is provided",
+        "multi": false
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "video",
+        "label": "Background Video (MP4)",
+        "description": "Autoplaying looping background; takes precedence over the image"
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "description": "Eyebrow, heading and any intro copy",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "cta",
+        "label": "CTA Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "ctaText",
+        "label": "CTA Text",
+        "value": "Explore the brand"
+      }
+    ]
+  },
+  {
+    "id": "marquee-image",
     "fields": [
       {
         "component": "reference",
@@ -203,15 +645,84 @@
         "component": "text",
         "valueType": "string",
         "name": "imageAlt",
-        "label": "Alt",
-        "value": ""
+        "label": "Alt Text"
+      }
+    ]
+  },
+  {
+    "id": "section-nav-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "description": "The link label shown in the navigation"
       },
       {
-        "component": "richtext",
-        "name": "text",
-        "value": "",
-        "label": "Text",
-        "valueType": "string"
+        "component": "text",
+        "valueType": "string",
+        "name": "link",
+        "label": "Link",
+        "description": "A URL or in-page anchor (e.g. #logo-versions)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "parent",
+        "label": "Parent",
+        "description": "Label of the parent group for nesting. Leave empty for a top-level item."
+      }
+    ]
+  },
+  {
+    "id": "video-card",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "caption",
+        "label": "Caption"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "links_link1",
+        "label": "Link 1 URL"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "links_link1Text",
+        "label": "Link 1 Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "links_link2",
+        "label": "Link 2 URL",
+        "description": "Optional second link URL."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "links_link2Text",
+        "label": "Link 2 Text",
+        "description": "Optional second link text."
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false,
+        "description": "Optional thumbnail. If absent, a purple tile is used."
       }
     ]
   }

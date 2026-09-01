@@ -1,0 +1,136 @@
+{
+  "definitions": [
+    {
+      "title": "Footer",
+      "id": "footer",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Footer",
+              "model": "footer",
+              "filter": "footer"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Footer Quick Link",
+      "id": "footer-quick-link",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Footer Quick Link",
+              "model": "footer-quick-link"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Footer Policy Link",
+      "id": "footer-policy-link",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Footer Policy Link",
+              "model": "footer-policy-link"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "footer",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "logo",
+          "label": "GE HealthCare Logo",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "logoAlt",
+          "label": "Logo Alt Text",
+          "value": "GE HealthCare"
+        },
+        {
+          "component": "aem-content",
+          "name": "logoLink",
+          "label": "Logo Link"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "copyright",
+          "label": "Copyright Text",
+          "value": "© 2026 GE HealthCare. GE is a trademark of General Electric Company used under trademark license."
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "legalNote",
+          "label": "Additional Legal Note"
+        }
+      ]
+    },
+    {
+      "id": "footer-quick-link",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "text",
+          "label": "Link Text"
+        },
+        {
+          "component": "aem-content",
+          "name": "link",
+          "label": "Link URL"
+        }
+      ]
+    },
+    {
+      "id": "footer-policy-link",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "text",
+          "label": "Link Text"
+        },
+        {
+          "component": "aem-content",
+          "name": "link",
+          "label": "Link URL"
+        },
+        {
+          "component": "boolean",
+          "valueType": "boolean",
+          "name": "newTab",
+          "label": "Open in New Tab"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "footer",
+      "components": [
+        "footer-quick-link",
+        "footer-policy-link"
+      ]
+    }
+  ]
+}

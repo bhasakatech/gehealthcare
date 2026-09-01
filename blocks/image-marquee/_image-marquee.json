@@ -1,0 +1,62 @@
+{
+  "definitions": [
+    {
+      "title": "Image Marquee",
+      "id": "image-marquee",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Image Marquee",
+              "filter": "image-marquee"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Marquee Image",
+      "id": "marquee-image",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Marquee Image",
+              "model": "marquee-image"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "marquee-image",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageAlt",
+          "label": "Alt Text"
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "image-marquee",
+      "components": [
+        "marquee-image"
+      ]
+    }
+  ]
+}

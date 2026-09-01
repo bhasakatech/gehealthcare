@@ -11,17 +11,21 @@
  */
 
 :root {
-  /* colors */
+  /* colors — GE HealthCare Brand Hub */
   --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  --light-color: #fbf9fd;
+  --lighter-color: #f4f0f9;
+  --dark-color: #5b5b67;
+  --text-color: #222;
+  --brand-color: #6022a6;
+  --brand-color-dark: #4a1a80;
+  --link-color: #6022a6;
+  --link-hover-color: #4a1a80;
+  --border-color: #d1d2d4;
 
   /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --body-font-family: source-sans, source-sans-fallback, sans-serif;
+  --heading-font-family: var(--body-font-family);
 
   /* body sizes */
   --body-font-size-m: 22px;
@@ -85,7 +89,8 @@ body.appear {
 }
 
 header {
-  height: var(--nav-height);
+  /* two-row header (purple brand bar + nav row); leave height to content */
+  min-height: var(--nav-height);
 }
 
 header .header,
@@ -107,8 +112,9 @@ h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
-  font-weight: 600;
-  line-height: 1.25;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-color);
   scroll-margin: 40px;
 }
 
@@ -178,17 +184,19 @@ button.button {
   justify-content: center;
   max-width: 100%;
   margin: 0;
-  border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
+  border: 2px solid var(--brand-color);
+  border-radius: 4px;
+  padding: 0.6em 1.4em;
   font: inherit;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.25;
   text-decoration: none;
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  background-color: var(--brand-color);
+  color: var(--background-color);
 }
 
 a.button[aria-disabled="true"],
@@ -199,8 +207,8 @@ button.button:disabled {
 
 a.button.primary,
 button.button.primary {
-  border-color: var(--text-color);
-  background-color: var(--text-color);
+  border-color: var(--brand-color);
+  background-color: var(--brand-color);
   color: var(--background-color);
 }
 
@@ -208,9 +216,9 @@ a.button.primary:hover,
 a.button.primary:focus-visible,
 button.button.primary:hover,
 button.button.primary:focus-visible {
-  border-color: var(--dark-color);
-  background-color: var(--dark-color);
-  color: var(--light-color);
+  border-color: var(--brand-color-dark);
+  background-color: var(--brand-color-dark);
+  color: var(--background-color);
 }
 
 a.button.primary[aria-disabled="true"],
@@ -226,18 +234,18 @@ button.button.primary:disabled:focus-visible {
 
 a.button.secondary,
 button.button.secondary {
-  border-color: var(--text-color);
+  border-color: var(--brand-color);
   background-color: transparent;
-  color: var(--text-color);
+  color: var(--brand-color);
 }
 
 a.button.secondary:hover,
 a.button.secondary:focus-visible,
 button.button.secondary:hover,
 button.button.secondary:focus-visible {
-  border-color: var(--dark-color);
-  background-color: var(--light-color);
-  color: var(--dark-color);
+  border-color: var(--brand-color-dark);
+  background-color: var(--lighter-color);
+  color: var(--brand-color-dark);
 }
 
 a.button.secondary[aria-disabled="true"],

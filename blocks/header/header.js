@@ -1,4 +1,4 @@
-import { getMetadata } from '../../scripts/aem.js';
+import { getMetadata, decorateIcons } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // media query match that indicates mobile/tablet width
@@ -118,27 +118,65 @@ export default async function decorate(block) {
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
   const fragment = await loadFragment(navPath);
 
-  // decorate nav DOM
+  // Read the authored model fields from the fragment and rebuild a clean,
+  // semantic two-row header. Rather than trusting fixed row positions, classify
+  // the authored content by meaning so the header stays correct even if authors
+  // reorder rows:
+  //   - logo image        → purple brand bar (row 1)
+  //   - "Search" link      → search form in tools
+  //   - a list of links    → primary nav menu (sections)
+  //   - the remaining link → "Brand Hub" wordmark (brand)
+  const logoImg = fragment.querySelector('picture, img');
+  const logoAnchor = logoImg ? logoImg.closest('a') : null;
+  const menuList = fragment.querySelector('ul');
+  const allAnchors = [...fragment.querySelectorAll('a')];
+  const searchAnchor = allAnchors.find((a) => {
+    const href = a.getAttribute('href') || '';
+    return /\/search\/?$/.test(href) || /search/i.test(a.textContent);
+  });
+  // The wordmark is a standalone link that is not the logo, not the search,
+  // and not inside the nav menu list.
+  const brandAnchor = allAnchors.find((a) => a !== logoAnchor
+    && a !== searchAnchor
+    && !a.closest('ul')
+    && !(logoImg && a.contains(logoImg)));
+
   block.textContent = '';
   const nav = document.createElement('nav');
   nav.id = 'nav';
-  while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
-  const classes = ['brand', 'sections', 'tools'];
-  classes.forEach((c, i) => {
-    const section = nav.children[i];
-    if (section) section.classList.add(`nav-${c}`);
-  });
-
-  const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand.querySelector('.button');
-  if (brandLink) {
-    brandLink.className = '';
-    brandLink.closest('.button-container').className = '';
+  // --- Row 1: purple brand bar with the GE HealthCare logo ---
+  const navBrandbar = document.createElement('div');
+  navBrandbar.className = 'nav-brandbar';
+  if (logoImg) {
+    const link = document.createElement('a');
+    link.href = (logoAnchor && logoAnchor.getAttribute('href')) || '/';
+    link.setAttribute('aria-label', 'GE HealthCare');
+    link.append(logoImg.closest('picture') || logoImg);
+    const p = document.createElement('p');
+    p.append(link);
+    navBrandbar.append(p);
   }
+  nav.append(navBrandbar);
 
-  const navSections = nav.querySelector('.nav-sections');
-  if (navSections) {
+  // --- "Brand Hub" wordmark ---
+  const navBrand = document.createElement('div');
+  navBrand.className = 'nav-brand';
+  if (brandAnchor) {
+    const p = document.createElement('p');
+    p.append(brandAnchor);
+    navBrand.append(p);
+  }
+  nav.append(navBrand);
+
+  // --- Primary nav menu ---
+  const navSections = document.createElement('div');
+  navSections.className = 'nav-sections';
+  if (menuList) {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'default-content-wrapper';
+    wrapper.append(menuList);
+    navSections.append(wrapper);
     navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
       if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
       navSection.addEventListener('click', () => {
@@ -150,6 +188,20 @@ export default async function decorate(block) {
       });
     });
   }
+  nav.append(navSections);
+
+  // --- Tools: build a real search form from the "Search" link ---
+  const navTools = document.createElement('div');
+  navTools.className = 'nav-tools';
+  const action = (searchAnchor && searchAnchor.getAttribute('href')) || '/search';
+  navTools.innerHTML = `
+    <form class="nav-search" role="search" action="${action}" method="get">
+      <input type="search" name="q" aria-label="Search" placeholder="Search">
+      <button type="submit" aria-label="Search">
+        <span class="icon icon-search"></span>
+      </button>
+    </form>`;
+  nav.append(navTools);
 
   // hamburger for mobile
   const hamburger = document.createElement('div');
@@ -163,6 +215,9 @@ export default async function decorate(block) {
   // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
+
+  // render inline SVG icons (GE logo, search)
+  decorateIcons(nav);
 
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';

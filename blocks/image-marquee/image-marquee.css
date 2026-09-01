@@ -1,0 +1,70 @@
+/*
+ * Image Marquee — continuously scrolling image row.
+ * Matches the source Avada marquee: seamless left auto-scroll, 24px gaps,
+ * ~1 image visible on mobile, 2 on tablet, 3 on desktop.
+ */
+.image-marquee {
+  padding: 24px 0; /* source slider-section-wrap vertical padding */
+}
+
+.image-marquee .image-marquee-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.image-marquee .image-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: max-content;
+  animation: image-marquee-scroll var(--image-marquee-duration, 40s) linear infinite;
+}
+
+.image-marquee .image-marquee-item {
+  flex: 0 0 auto;
+  width: calc(100vw - 48px); /* one image visible on mobile, minus the gap */
+  max-width: 360px;
+}
+
+.image-marquee .image-marquee-item picture,
+.image-marquee .image-marquee-item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* The track holds two copies of the slides; shifting by -50% loops seamlessly. */
+@keyframes image-marquee-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+@media (width >= 600px) {
+  .image-marquee .image-marquee-item {
+    width: calc((100vw - 72px) / 2);
+    max-width: 420px;
+  }
+}
+
+@media (width >= 900px) {
+  .image-marquee .image-marquee-item {
+    width: 360px;
+  }
+}
+
+/* Respect users who prefer reduced motion: stop the auto-scroll and allow
+   manual horizontal scrolling instead. */
+@media (prefers-reduced-motion: reduce) {
+  .image-marquee .image-marquee-viewport {
+    overflow-x: auto;
+  }
+
+  .image-marquee .image-marquee-track {
+    animation: none;
+  }
+}

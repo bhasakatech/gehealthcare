@@ -1,0 +1,133 @@
+.cta-banner {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.cta-banner .cta-banner-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.cta-banner .cta-banner-content > :first-child {
+  margin-top: 0;
+}
+
+.cta-banner .cta-banner-content > :last-child {
+  margin-bottom: 0;
+}
+
+.cta-banner .cta-banner-content h1,
+.cta-banner .cta-banner-content h2,
+.cta-banner .cta-banner-content h3 {
+  margin: 0 0 12px;
+}
+
+.cta-banner .button-wrapper {
+  margin: 0;
+}
+
+/* Background image */
+.cta-banner .cta-banner-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  line-height: 0;
+}
+
+.cta-banner .cta-banner-bg picture,
+.cta-banner .cta-banner-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Purple variant (default) */
+.cta-banner.cta-banner-style-purple {
+  background-color: var(--brand-color);
+  color: #fff;
+}
+
+.cta-banner.cta-banner-style-purple .cta-banner-content {
+  color: #fff;
+}
+
+.cta-banner.cta-banner-style-purple a.button.primary {
+  background-color: #fff;
+  border-color: #fff;
+  color: var(--brand-color);
+}
+
+.cta-banner.cta-banner-style-purple a.button.primary:hover,
+.cta-banner.cta-banner-style-purple a.button.primary:focus-visible {
+  background-color: var(--lighter-color);
+  border-color: var(--lighter-color);
+  color: var(--brand-color-dark);
+}
+
+/* Dark variant */
+.cta-banner.cta-banner-style-dark {
+  background-color: #222;
+  color: #fff;
+  padding-top: 96px;
+  padding-bottom: 112px;
+}
+
+/* dark gradient overlay over any background image (source home-cta-bg) */
+.cta-banner.cta-banner-style-dark .cta-banner-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(34 34 34 / 0%) 27%, #222 100%);
+}
+
+.cta-banner.cta-banner-style-dark .cta-banner-content {
+  color: #fff;
+}
+
+/* Light variant */
+.cta-banner.cta-banner-style-light {
+  background-color: var(--lighter-color);
+  color: var(--text-color);
+}
+
+/* Image variant / any banner with a background image: gradient overlay + light text */
+.cta-banner.cta-banner-style-has-image {
+  color: #fff;
+}
+
+.cta-banner.cta-banner-style-has-image .cta-banner-content {
+  color: #fff;
+}
+
+.cta-banner.cta-banner-style-has-image .cta-banner-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgb(26 10 46 / 55%), rgb(26 10 46 / 80%));
+}
+
+@media (width >= 600px) {
+  .cta-banner {
+    padding: 64px 32px;
+  }
+}
+
+@media (width >= 900px) {
+  .cta-banner {
+    padding: 88px 48px;
+  }
+
+  .cta-banner.cta-banner-style-dark {
+    padding-top: 165px;
+    padding-bottom: 185px;
+  }
+}

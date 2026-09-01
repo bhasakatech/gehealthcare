@@ -5,33 +5,106 @@
 
 .hero {
   position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
-}
-
-.hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 560px;
+  padding: 120px 24px 160px;
+  overflow: hidden;
   color: var(--background-color);
 }
 
-.hero picture {
+/* full-bleed background media + dark overlay */
+.hero .hero-bg {
   position: absolute;
-  z-index: -1;
   inset: 0;
-  object-fit: cover;
-  box-sizing: border-box;
+  z-index: 0;
 }
 
-.hero img {
-  object-fit: cover;
+.hero .hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 35%);
+}
+
+.hero .hero-bg video,
+.hero .hero-bg picture,
+.hero .hero-bg img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero .hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero .hero-eyebrow {
+  margin: 0;
+  font-size: var(--body-font-size-s);
+  letter-spacing: 0.02em;
+  opacity: 0.95;
+}
+
+.hero .hero-content h1 {
+  margin: 0;
+  color: var(--background-color);
+  font-size: 40px;
+  line-height: 1.1;
+}
+
+.hero .hero-content p {
+  margin: 0;
+  color: var(--background-color);
+}
+
+/* "Explore the brand" scroll link with a down chevron */
+.hero .hero-cta {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  color: var(--background-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.hero .hero-cta::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border: 2px solid currentcolor;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.hero .hero-cta:hover {
+  color: var(--background-color);
+}
+
+.hero .hero-cta:hover span {
+  text-decoration: underline;
 }
 
 @media (width >= 900px) {
   .hero {
-    padding: 40px 32px;
+    min-height: 720px;
+    padding: 200px 32px 300px;
+  }
+
+  .hero .hero-content h1 {
+    font-size: 64px;
   }
 }

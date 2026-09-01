@@ -1,0 +1,106 @@
+/*
+ * Feature Card — homepage "Brand training" split section.
+ * Two-tone background (light top / GE purple bottom), a square image on the left
+ * that overlaps a white card on the right. Mirrors the source
+ * `brand-training-section` (gradient 50/50, translate offset, 16px radii).
+ */
+.feature-card-wrapper {
+  max-width: unset;
+}
+
+.feature-card {
+  /* two-tone: top half light (#fbf9fd), bottom half GE purple (#6022a6) */
+  background: linear-gradient(180deg, var(--light-color) 50%, var(--brand-color) 50%);
+  padding: 85px 20px 160px;
+}
+
+.feature-card > div,
+.feature-card .feature-card-media,
+.feature-card .feature-card-body {
+  box-sizing: border-box;
+}
+
+/* mobile-first: stacked, image on top */
+.feature-card .feature-card-media {
+  max-width: 1140px;
+  margin: 0 auto;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+}
+
+.feature-card .feature-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.feature-card .feature-card-body {
+  max-width: 1140px;
+  margin: 0 auto;
+  background-color: var(--background-color);
+  border-radius: 0 0 16px 16px;
+  padding: 34px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.feature-card .feature-card-eyebrow {
+  margin: 0;
+  font-size: var(--body-font-size-s);
+}
+
+.feature-card .feature-card-body h1,
+.feature-card .feature-card-body h2,
+.feature-card .feature-card-body h3 {
+  margin: 0;
+  font-size: var(--heading-font-size-xl);
+  line-height: 1.15;
+}
+
+.feature-card .feature-card-body p {
+  margin: 0;
+  color: var(--text-color);
+}
+
+.feature-card .button-wrapper {
+  margin-top: 12px;
+}
+
+@media (width >= 900px) {
+  /* two columns inside a shared frame */
+  .feature-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 85px 20px 160px;
+    column-gap: 0;
+  }
+
+  .feature-card .feature-card-media {
+    aspect-ratio: 1 / 1;
+    border-radius: 16px;
+    transform: translate(65px, 65px); /* overlap the card like the source */
+    z-index: 3;
+    position: relative;
+    align-self: center;
+    max-width: none;
+  }
+
+  .feature-card .feature-card-body {
+    border-radius: 0 16px 16px 0;
+    padding: 120px 120px 120px 96px;
+    justify-content: center;
+    max-width: none;
+  }
+
+  .feature-card .feature-card-body h1,
+  .feature-card .feature-card-body h2,
+  .feature-card .feature-card-body h3 {
+    font-size: 48px;
+  }
+}

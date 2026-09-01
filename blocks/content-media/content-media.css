@@ -1,0 +1,95 @@
+/*
+ * Content Media — text + image split row.
+ * Matches the live GE HealthCare `brand-resource-section`: light background,
+ * vertically-centered content in a 1140px frame, ~2/3 text + 1/3 image on
+ * desktop, image hidden on mobile/tablet, large heading, buttons in a row.
+ */
+
+/* the section band */
+.content-media-wrapper {
+  background-color: var(--light-color);
+}
+
+/* Mobile-first: single column, image hidden (matches source small/medium) */
+.content-media {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: center;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 50px 20px;
+}
+
+.content-media .content-media-text > :first-child {
+  margin-top: 0;
+}
+
+.content-media .content-media-text > :last-child {
+  margin-bottom: 0;
+}
+
+.content-media .content-media-text .content-media-eyebrow {
+  font-size: var(--body-font-size-s);
+  margin-bottom: 8px;
+}
+
+.content-media .content-media-text h2 {
+  font-size: var(--heading-font-size-xl);
+  line-height: 1.1;
+  margin: 0 0 12px;
+}
+
+/* buttons sit in a row, 16px gap (source inner flex row) */
+.content-media .content-media-text .button-wrapper {
+  display: inline-block;
+  margin: 16px 12px 0 0;
+}
+
+.content-media .content-media-figure {
+  line-height: 0;
+  display: none; /* desktop-only, per source fusion-no-small/medium-visibility */
+}
+
+.content-media .content-media-figure img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Full-width single-purpose layouts */
+.content-media.text-only,
+.content-media.image-only {
+  grid-template-columns: 1fr;
+}
+
+/* Desktop: 2/3 text + 1/3 image, image visible */
+@media (width >= 900px) {
+  .content-media {
+    grid-template-columns: 2fr 1fr;
+    gap: 48px;
+    padding: 50px 20px;
+  }
+
+  .content-media .content-media-figure {
+    display: block;
+  }
+
+  .content-media .content-media-text h2 {
+    font-size: 64px;
+  }
+
+  .content-media.text-only,
+  .content-media.image-only {
+    grid-template-columns: 1fr;
+  }
+
+  /* text-right reverses the visual order */
+  .content-media.text-right .content-media-text {
+    order: 2;
+  }
+
+  .content-media.text-right .content-media-figure {
+    order: 1;
+  }
+}

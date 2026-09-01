@@ -1,20 +1,151 @@
+/*
+ * GE HealthCare Brand Hub footer — matched to the live site DOM.
+ * Two bands (both bg --awb-custom_color_1 #f4f1f8, border --awb-custom_color_3 #c7c8cf):
+ *   Band 1: footer logo (purple GE HealthCare) + quick-links nav row
+ *   Band 2: copyright (50%) + cookies/policy links (50%)
+ * Plus a floating circular back-to-top control (bottom-right).
+ */
 footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+  background-color: #f4f1f8;
+  font-size: 16px;
+  position: relative;
 }
 
-footer .footer > div {
-  margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+footer .footer {
+  margin: 0 auto;
+  max-width: 1140px;
+  padding: 0;
 }
 
 footer .footer p {
   margin: 0;
 }
 
-@media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
+footer .footer a:any-link {
+  color: #222;
+  text-decoration: none;
+}
+
+footer .footer a:hover {
+  color: #472271;
+}
+
+/* ---- Band 1: logo + quick links (bottom border) ---- */
+footer .footer-logo {
+  padding: 32px 24px 0;
+}
+
+footer .footer-logo img {
+  max-width: 145px;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+footer .footer-nav {
+  padding: 20px 24px 24px;
+  border-bottom: 1px solid #c7c8cf;
+}
+
+footer .footer-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+}
+
+footer .footer-nav a:any-link {
+  padding: 4px;
+}
+
+/* ---- Band 2: copyright + legal links ---- */
+footer .footer-copyright {
+  padding: 16px 24px 8px;
+  color: #222;
+}
+
+footer .footer-legal {
+  padding: 0 24px 20px;
+}
+
+footer .footer-legal ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+}
+
+footer .footer-legal a:any-link {
+  color: #222;
+}
+
+/* circular back-to-top control (source: .to-top-container, purple ring) */
+footer .footer-to-top {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  width: 56px;
+  height: 56px;
+  margin: 0;
+  border: 2px solid #6022a6;
+  border-radius: 50%;
+  padding: 0;
+  background-color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+footer .footer-to-top:hover {
+  background-color: #f4f1f8;
+}
+
+footer .footer-to-top-icon {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-top: 2px solid #6022a6;
+  border-right: 2px solid #6022a6;
+  transform: rotate(-45deg);
+  margin-top: 4px;
+}
+
+@media (width >= 1024px) {
+  footer .footer-logo {
+    padding: 32px 24px 0;
+  }
+
+  footer .footer-nav {
+    padding: 16px 24px 24px;
+  }
+
+  /* Band 2 becomes two 50% columns: copyright left, legal right */
+  footer .footer-bottom,
+  footer .footer-copyright,
+  footer .footer-legal {
+    box-sizing: border-box;
+  }
+
+  footer .footer-copyright {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    padding: 24px 40px;
+  }
+
+  footer .footer-legal {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    padding: 24px 40px;
+  }
+
+  footer .footer-legal ul {
+    gap: 12px 16px;
   }
 }
