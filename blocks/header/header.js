@@ -1,110 +1,35 @@
 import { getMetadata, decorateIcons } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
-// media query match that indicates mobile/tablet width
-const isDesktop = window.matchMedia('(min-width: 900px)');
+// Below this width the nav collapses to icons (matches source data-breakpoint=1024).
+const isDesktop = window.matchMedia('(min-width: 1024px)');
 
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
     const nav = document.getElementById('nav');
     const navSections = nav.querySelector('.nav-sections');
-    if (!navSections) return;
-    const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
-    if (navSectionExpanded && isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleAllNavSections(navSections);
-      navSectionExpanded.focus();
-    } else if (!isDesktop.matches) {
+    const expanded = nav.getAttribute('aria-expanded') === 'true';
+    if (expanded && !isDesktop.matches) {
       // eslint-disable-next-line no-use-before-define
       toggleMenu(nav, navSections);
-      nav.querySelector('button').focus();
+      nav.querySelector('.nav-hamburger button').focus();
     }
   }
 }
 
-function closeOnFocusLost(e) {
-  const nav = e.currentTarget;
-  if (!nav.contains(e.relatedTarget)) {
-    const navSections = nav.querySelector('.nav-sections');
-    if (!navSections) return;
-    const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
-    if (navSectionExpanded && isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleAllNavSections(navSections, false);
-    } else if (!isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleMenu(nav, navSections, false);
-    }
-  }
-}
-
-function openOnKeydown(e) {
-  const focused = document.activeElement;
-  const isNavDrop = focused.className === 'nav-drop';
-  if (isNavDrop && (e.code === 'Enter' || e.code === 'Space')) {
-    const dropExpanded = focused.getAttribute('aria-expanded') === 'true';
-    // eslint-disable-next-line no-use-before-define
-    toggleAllNavSections(focused.closest('.nav-sections'));
-    focused.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
-  }
-}
-
-function focusNavSection() {
-  document.activeElement.addEventListener('keydown', openOnKeydown);
-}
-
 /**
- * Toggles all nav sections
- * @param {Element} sections The container element
- * @param {Boolean} expanded Whether the element should be expanded or collapsed
- */
-function toggleAllNavSections(sections, expanded = false) {
-  if (!sections) return;
-  sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {
-    section.setAttribute('aria-expanded', expanded);
-  });
-}
-
-/**
- * Toggles the entire nav
- * @param {Element} nav The container element
- * @param {Element} navSections The nav sections within the container element
- * @param {*} forceExpanded Optional param to force nav expand behavior when not null
+ * Toggles the mobile nav drawer (menu links) open/closed.
  */
 function toggleMenu(nav, navSections, forceExpanded = null) {
   const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
   const button = nav.querySelector('.nav-hamburger button');
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
-  button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
-  // enable nav dropdown keyboard accessibility
-  if (navSections) {
-    const navDrops = navSections.querySelectorAll('.nav-drop');
-    if (isDesktop.matches) {
-      navDrops.forEach((drop) => {
-        if (!drop.hasAttribute('tabindex')) {
-          drop.setAttribute('tabindex', 0);
-          drop.addEventListener('focus', focusNavSection);
-        }
-      });
-    } else {
-      navDrops.forEach((drop) => {
-        drop.removeAttribute('tabindex');
-        drop.removeEventListener('focus', focusNavSection);
-      });
-    }
-  }
-
-  // enable menu collapse on escape keypress
+  if (button) button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
   if (!expanded || isDesktop.matches) {
-    // collapse menu on escape press
     window.addEventListener('keydown', closeOnEscape);
-    // collapse menu on focus lost
-    nav.addEventListener('focusout', closeOnFocusLost);
   } else {
     window.removeEventListener('keydown', closeOnEscape);
-    nav.removeEventListener('focusout', closeOnFocusLost);
   }
 }
 
@@ -118,14 +43,11 @@ export default async function decorate(block) {
   const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
   const fragment = await loadFragment(navPath);
 
-  // Read the authored model fields from the fragment and rebuild a clean,
-  // semantic two-row header. Rather than trusting fixed row positions, classify
-  // the authored content by meaning so the header stays correct even if authors
-  // reorder rows:
-  //   - logo image        → purple brand bar (row 1)
-  //   - "Search" link      → search form in tools
-  //   - a list of links    → primary nav menu (sections)
-  //   - the remaining link → "Brand Hub" wordmark (brand)
+  // Classify authored content by meaning (order-independent):
+  //   - logo image        -> purple brand bar (NOT sticky)
+  //   - "Search" link      -> search form
+  //   - a list of links    -> primary nav menu
+  //   - the remaining link -> "Brand Hub" wordmark
   const logoImg = fragment.querySelector('picture, img');
   const logoAnchor = logoImg ? logoImg.closest('a') : null;
   const menuList = fragment.querySelector('ul');
@@ -134,32 +56,36 @@ export default async function decorate(block) {
     const href = a.getAttribute('href') || '';
     return /\/search\/?$/.test(href) || /search/i.test(a.textContent);
   });
-  // The wordmark is a standalone link that is not the logo, not the search,
-  // and not inside the nav menu list.
   const brandAnchor = allAnchors.find((a) => a !== logoAnchor
     && a !== searchAnchor
     && !a.closest('ul')
     && !(logoImg && a.contains(logoImg)));
 
   block.textContent = '';
-  const nav = document.createElement('nav');
-  nav.id = 'nav';
 
-  // --- Row 1: purple brand bar with the GE HealthCare logo ---
-  const navBrandbar = document.createElement('div');
-  navBrandbar.className = 'nav-brandbar';
+  // ===== Row 1: purple brand bar (its own wrapper, NOT sticky) =====
+  const brandbar = document.createElement('div');
+  brandbar.className = 'nav-brandbar';
   if (logoImg) {
     const link = document.createElement('a');
     link.href = (logoAnchor && logoAnchor.getAttribute('href')) || '/';
     link.setAttribute('aria-label', 'GE HealthCare');
     link.append(logoImg.closest('picture') || logoImg);
-    const p = document.createElement('p');
-    p.append(link);
-    navBrandbar.append(p);
+    const inner = document.createElement('div');
+    inner.className = 'nav-brandbar-inner';
+    inner.append(link);
+    brandbar.append(inner);
   }
-  nav.append(navBrandbar);
+  const brandbarWrapper = document.createElement('div');
+  brandbarWrapper.className = 'nav-brandbar-wrapper';
+  brandbarWrapper.append(brandbar);
 
-  // --- "Brand Hub" wordmark ---
+  // ===== Row 2: sticky secondary nav row =====
+  const nav = document.createElement('nav');
+  nav.id = 'nav';
+  nav.setAttribute('aria-expanded', 'false');
+
+  // "Brand Hub" wordmark
   const navBrand = document.createElement('div');
   navBrand.className = 'nav-brand';
   if (brandAnchor) {
@@ -167,9 +93,8 @@ export default async function decorate(block) {
     p.append(brandAnchor);
     navBrand.append(p);
   }
-  nav.append(navBrand);
 
-  // --- Primary nav menu ---
+  // Primary nav menu
   const navSections = document.createElement('div');
   navSections.className = 'nav-sections';
   if (menuList) {
@@ -177,20 +102,9 @@ export default async function decorate(block) {
     wrapper.className = 'default-content-wrapper';
     wrapper.append(menuList);
     navSections.append(wrapper);
-    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
-      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-      navSection.addEventListener('click', () => {
-        if (isDesktop.matches) {
-          const expanded = navSection.getAttribute('aria-expanded') === 'true';
-          toggleAllNavSections(navSections);
-          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        }
-      });
-    });
   }
-  nav.append(navSections);
 
-  // --- Tools: build a real search form from the "Search" link ---
+  // Search form (full box on desktop; toggled panel on mobile)
   const navTools = document.createElement('div');
   navTools.className = 'nav-tools';
   const action = (searchAnchor && searchAnchor.getAttribute('href')) || '/search';
@@ -201,26 +115,44 @@ export default async function decorate(block) {
         <span class="icon icon-search"></span>
       </button>
     </form>`;
-  nav.append(navTools);
 
-  // hamburger for mobile
-  const hamburger = document.createElement('div');
-  hamburger.classList.add('nav-hamburger');
-  hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
-      <span class="nav-hamburger-icon"></span>
-    </button>`;
-  hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
-  nav.prepend(hamburger);
-  nav.setAttribute('aria-expanded', 'false');
-  // prevent mobile nav behavior on window resize
+  // Mobile controls: a search-icon toggle + a hamburger (shown < 1024px)
+  const navMobileTools = document.createElement('div');
+  navMobileTools.className = 'nav-mobile-tools';
+  navMobileTools.innerHTML = `
+    <button type="button" class="nav-search-toggle" aria-label="Search" aria-expanded="false">
+      <span class="icon icon-search"></span>
+    </button>
+    <div class="nav-hamburger">
+      <button type="button" aria-controls="nav" aria-label="Open navigation">
+        <span class="nav-hamburger-icon"></span>
+      </button>
+    </div>`;
+
+  nav.append(navBrand, navSections, navTools, navMobileTools);
+
+  // hamburger opens the menu drawer
+  const hamburgerBtn = navMobileTools.querySelector('.nav-hamburger button');
+  hamburgerBtn.addEventListener('click', () => toggleMenu(nav, navSections));
+
+  // search icon toggles the search box on mobile
+  const searchToggle = navMobileTools.querySelector('.nav-search-toggle');
+  searchToggle.addEventListener('click', () => {
+    const open = nav.getAttribute('data-search-open') === 'true';
+    nav.setAttribute('data-search-open', open ? 'false' : 'true');
+    searchToggle.setAttribute('aria-expanded', open ? 'false' : 'true');
+    if (!open) navTools.querySelector('input')?.focus();
+  });
+
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
-
-  // render inline SVG icons (GE logo, search)
-  decorateIcons(nav);
 
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
-  block.append(navWrapper);
+
+  decorateIcons(brandbar);
+  decorateIcons(nav);
+
+  block.append(brandbarWrapper, navWrapper);
 }
