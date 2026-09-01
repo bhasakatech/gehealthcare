@@ -40,8 +40,11 @@
   padding: 0;
 }
 
+/* left gutter reserves space for the caret toggle so it never overlaps the
+   link's clickable area (clicking the label always navigates) */
 .section-nav .section-nav-item {
   position: relative;
+  padding-left: 28px;
 }
 
 /* divider line under each top-level item only */
@@ -51,7 +54,7 @@
 
 .section-nav .section-nav-link {
   display: block;
-  padding: 16px 12px 16px 34px; /* left room for the caret */
+  padding: 16px 12px; /* caret lives in the item's left gutter, not here */
   color: var(--dark-color);
   text-decoration: none;
   line-height: 1.3;
@@ -78,12 +81,13 @@
   font-weight: 700;
 }
 
-/* caret toggle on the LEFT of the item (chevron points right, down when open) */
+/* caret toggle in the item's left gutter (chevron points right, down when
+   open). It sits left of the link box so it never intercepts link clicks. */
 .section-nav .section-nav-toggle {
   position: absolute;
   top: 14px;
-  left: 4px;
-  width: 24px;
+  left: 0;
+  width: 28px;
   height: 24px;
   margin: 0;
   padding: 0;
@@ -122,14 +126,13 @@
 
 .section-nav .section-nav-sublist .section-nav-link {
   /* stylelint-enable no-descending-specificity */
-  padding: 8px 12px 8px 34px;
+  padding: 8px 12px;
   font-size: var(--body-font-size-xs);
   font-weight: 400;
 }
 
-/* deeper (grandchild) level indents further and is muted */
+/* deeper (grandchild) level is muted; indentation comes from the item gutter */
 .section-nav .section-nav-sublist .section-nav-sublist .section-nav-link {
-  padding-left: 48px;
   color: var(--dark-color);
 }
 
