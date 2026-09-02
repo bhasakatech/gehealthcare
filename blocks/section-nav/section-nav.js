@@ -31,17 +31,24 @@ function parseRow(row) {
 
 /**
  * Resolve an authored link to the environment the page is served from.
- * Authored links use production paths (e.g. "/our-brand/"). In a preview that
- * serves pages under a "/content" prefix, those need the prefix added (and the
- * trailing slash removed, since only the extension-less path resolves there).
- * In production `prefix` is empty and links are returned unchanged.
+ * Authored links use production paths with a trailing slash (e.g.
+ * "/our-brand/"). EDS serves pages at the extension-less path *without* the
+ * trailing slash, so the trailing slash must always be stripped — keeping it
+ * redirects to a 404. In a preview that serves pages under a "/content"
+ * prefix, that prefix is also added. External links, in-page anchors and
+ * asset URLs are returned unchanged.
  */
 function resolveHref(href, prefix) {
-  if (!prefix || !href.startsWith('/') || href.startsWith('//')
-    || href.startsWith(prefix) || href.startsWith('/assets')) return href;
+  // Leave external links, protocol-relative links, in-page anchors and assets
+  // untouched. Also skip anything already carrying the preview prefix.
+  if (!href.startsWith('/') || href.startsWith('//') || href.startsWith('#')
+    || href.startsWith('/assets') || (prefix && href.startsWith(prefix))) return href;
+
   const hashIdx = href.indexOf('#');
-  const path = (hashIdx === -1 ? href : href.slice(0, hashIdx)).replace(/\/$/, '');
+  const rawPath = hashIdx === -1 ? href : href.slice(0, hashIdx);
   const hash = hashIdx === -1 ? '' : href.slice(hashIdx);
+  // Strip a trailing slash from the page path (but never reduce root "/" to "").
+  const path = rawPath.length > 1 ? rawPath.replace(/\/$/, '') : rawPath;
   return prefix + path + hash;
 }
 
