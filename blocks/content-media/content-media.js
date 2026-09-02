@@ -20,9 +20,22 @@ export default function decorate(block) {
   // otherwise the default.
   const authoredLayout = layoutCell?.textContent.trim();
   const variantLayout = LAYOUTS.find((l) => block.classList.contains(l));
-  const layout = LAYOUTS.includes(authoredLayout)
+  let layout = LAYOUTS.includes(authoredLayout)
     ? authoredLayout
     : (variantLayout || 'text-left');
+
+  // Decide when to keep the side-by-side split vs. go full-width. The 2/3 + 1/3
+  // hero split only makes sense for a rich text side (with a heading). When the
+  // text is empty or just a short caption/label (no heading), the live design
+  // shows the image full-width — so drop the split so the image isn't squeezed
+  // into the narrow 1/3 column.
+  const textIsEmpty = !(textCell?.textContent || '').trim()
+    && !textCell?.querySelector('img, a, ul, ol, table');
+  const hasImage = !!imageCell?.querySelector('img');
+  const hasHeading = !!textCell?.querySelector('h1, h2, h3, h4, h5, h6');
+  if (hasImage && (layout === 'text-left' || layout === 'text-right') && !hasHeading) {
+    layout = textIsEmpty ? 'image-only' : 'caption';
+  }
 
   // Text side
   const text = document.createElement('div');
