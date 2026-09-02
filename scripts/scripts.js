@@ -203,6 +203,126 @@ const COLOR_GALLERIES = [
       'ge-healthcare-promotional-items-backpack-scaled.jpg',
     ],
   },
+  // photography
+  {
+    seed: 'ge-healthcare-home-care-visit-authentic-300x169.jpg',
+    cols: 2,
+    members: ['ge-healthcare-home-care-visit-authentic-scaled.jpg', 'ge-healthcare-manufacturing-workshop-authentic-scaled.jpg'],
+  },
+  // photography
+  {
+    seed: 'gehealthcare-patient-human-300x169.jpg',
+    cols: 2,
+    members: ['gehealthcare-patient-human-scaled.jpg', 'ge-healthcare-clinician-patient-bedside-interaction-scaled.jpg'],
+  },
+  // photography
+  {
+    seed: 'ge-healthcare-clinical-staff-patient-walkthrough-hospital-300x169.jpg',
+    cols: 2,
+    members: ['ge-healthcare-clinical-staff-patient-walkthrough-hospital-scaled.jpg', 'ge-healthcare-children-home-kitchen-home-spontaneous-scaled.jpg'],
+  },
+  // photography
+  {
+    seed: 'ge-healthcare-patient-clinical-conversation-diversity-300x169.jpg',
+    cols: 2,
+    members: ['ge-healthcare-patient-clinical-conversation-diversity-scaled.jpg', 'ge-healthcare-elderly-care-home-diversity-scaled.jpg'],
+  },
+  // photography
+  {
+    seed: 'ge-healthcare-mother-newborn-hospital-patients-300x169.jpg',
+    cols: 2,
+    members: ['ge-healthcare-mother-newborn-hospital-patients-scaled.jpg', 'ge-healthcare-remote-laptop-patients-scaled.jpg'],
+  },
+  // photography
+  {
+    seed: 'ge-healthcare-office-team-collaboration-office-300x169.jpg',
+    cols: 2,
+    members: ['ge-healthcare-office-team-collaboration-office-scaled.jpg', 'ge-healthcare-customer-support-call-center-office-scaled.jpg'],
+  },
+  // photography
+  {
+    seed: 'ge-healthcare-manufacturing-facility-exterior-building-300x169.jpg',
+    cols: 2,
+    members: ['ge-healthcare-manufacturing-facility-exterior-building-scaled.jpg', 'ge-healthcare-corporate-office-building-scaled.jpg'],
+  },
+  // photography
+  {
+    seed: 'ge-healthcare-precision-engineered-component-technology-300x169.jpg',
+    cols: 2,
+    members: ['ge-healthcare-precision-engineered-component-technology-scaled.jpg', 'ge-healthcare-laboratory-automation-equipment-technology-scaled.jpg'],
+  },
+  // photography
+  {
+    seed: 'ge-healthcare-mammography-imaging-system-clinical-use-300x169.jpg',
+    cols: 2,
+    members: ['ge-healthcare-mammography-imaging-system-clinical-use-scaled.jpg', 'ge-healthcare-mri-system-exam-room-studio-image-product-scaled.jpg'],
+  },
+  // photography
+  {
+    seed: 'ge-healthcare-ultrasound-system-product-300x169.jpg',
+    cols: 2,
+    members: ['ge-healthcare-ultrasound-system-product-scaled.jpg', 'ge-healthcare-ct-scanner-product-scaled.jpg', 'ge-healthcare-clinical-monitor-tablet-interface-scaled.jpg', 'ge-healthcare-Invenia-ABUS-Premium-product-scaled.jpg'],
+  },
+  // photography
+  {
+    seed: 'ge-healthcare-leadership-portrait-300x169.jpg',
+    cols: 2,
+    members: ['ge-healthcare-leadership-portrait-scaled.jpg', 'ge-healthcare-executive-portrait-scaled.jpg'],
+  },
+  // photography
+  {
+    seed: 'ge-healthcare-team-member-portrait-300x169.jpg',
+    cols: 2,
+    members: ['ge-healthcare-team-member-portrait-scaled.jpg', 'ge-healthcare-team-member-portrait2-scaled.jpg'],
+  },
+  // video
+  {
+    seed: 'gehealthcare-lighting-tone1-300x169.jpg',
+    cols: 2,
+    members: ['gehealthcare-lighting-tone1-scaled.jpg', 'gehealthcare-lighting-tone2-scaled.jpg', 'gehealthcare-filming-branded-products-scaled.jpg', 'gehealthcare-lighting-tone4-scaled.jpg'],
+  },
+  // motion
+  {
+    seed: 'gehealthcare-subtitles-centered-at-the-bottom-300x169.jpg',
+    cols: 2,
+    members: ['gehealthcare-subtitles-centered-at-the-bottom-scaled.jpg', 'gehealthcare-spect-ratio-safe-areas-scaled.jpg', 'gehealthcare-bottom-centered-subtitles-1-scaled.jpg'],
+  },
+  // motion
+  {
+    seed: 'gehealthcare-infographic-and-graphic-overlay-elements-1-1-scaled.jpg',
+    cols: 2,
+    members: ['gehealthcare-infographic-and-graphic-overlay-elements-1-1-scaled.jpg', 'gehealthcare-infographic-and-graphic-overlay-elements-2-1-scaled.jpg', 'gehealthcare-infographic-and-graphic-overlay-elements-3-1-scaled.jpg'],
+  },
+  // motion
+  {
+    seed: 'gehealthcare-on-screen-text-1-1-scaled.jpg',
+    cols: 2,
+    members: ['gehealthcare-on-screen-text-1-1-scaled.jpg', 'gehealthcare-on-screen-text-2-1-scaled.jpg', 'gehealthcare-on-screen-text-3-1-scaled.jpg', 'gehealthcare-on-screen-text-4-1-scaled.jpg'],
+  },
+  // typography
+  {
+    seed: 'ge-healthcare-fonts-calibri-scaled.jpg',
+    cols: 2,
+    members: ['ge-healthcare-fonts-calibri-scaled.jpg', 'ge-healthcare-fonts-calibri-reg-scaled.jpg', 'ge-healthcare-fonts-calibri-italic-scaled.jpg', 'ge-healthcare-fonts-calibri-bold-scaled.jpg', 'ge-healthcare-fonts-calibri-bold-italic-scaled.jpg'],
+  },
+  // typography
+  {
+    seed: 'ge-healthcare-fonts-source-sans-pro-all-scaled.jpg',
+    cols: 2,
+    members: ['ge-healthcare-fonts-source-sans-pro-all-scaled.jpg', 'ge-healthcare-fonts-source-sans-pro-reg-scaled.jpg', 'ge-healthcare-fonts-source-sans-pro-semi-bold-scaled.jpg', 'ge-healthcare-fonts-source-sans-pro-italic-scaled.jpg', 'ge-healthcare-fonts-source-sans-pro-semi-bold-italic-scaled.jpg', 'ge-healthcare-fonts-source-sans-pro-light-scaled.jpg'],
+  },
+  // typography
+  {
+    seed: 'ge-healthcare-Type-hierarchy-1-scaled.jpg',
+    cols: 2,
+    members: ['ge-healthcare-Type-hierarchy-1-scaled.jpg', 'ge-healthcare-Type-hierarchy-2-scaled.jpg'],
+  },
+  // typography
+  {
+    seed: 'ge-healthcare-Type-hierarchy-in-use-special-use1.jpg',
+    cols: 2,
+    members: ['ge-healthcare-Type-hierarchy-in-use-special-use1.jpg', 'ge-healthcare-Type-hierarchy-in-use-special-use2-scaled.jpg'],
+  },
 ];
 
 const ASSET_BASE = '/content/dam/gehealthcare/assets/';
