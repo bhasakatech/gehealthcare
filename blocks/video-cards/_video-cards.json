@@ -74,6 +74,20 @@
           "description": "Optional second link text."
         },
         {
+          "component": "text",
+          "valueType": "string",
+          "name": "links_link3",
+          "label": "Link 3 URL",
+          "description": "Optional third link URL."
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "links_link3Text",
+          "label": "Link 3 Text",
+          "description": "Optional third link text."
+        },
+        {
           "component": "reference",
           "valueType": "string",
           "name": "image",

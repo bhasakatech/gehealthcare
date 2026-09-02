@@ -26,24 +26,26 @@ export default function decorate(block) {
   rows.forEach((row) => {
     const title = getCellText(row, 0);
     const caption = getCellText(row, 1);
-    // cell 2 groups the (collapsed) link anchors; cell 3 is the image
+    // cell 2 groups the (collapsed) link anchors; cell 3 is the image.
+    // Link 1 is the video/tile target (the thumbnail links to the training
+    // video); links 2+ are the "View presentation" / "View guideline" actions
+    // rendered in the card body.
     const linkAnchors = row.children[2] ? [...row.children[2].querySelectorAll('a')] : [];
-    const link1Url = linkAnchors[0] ? linkAnchors[0].getAttribute('href') : '';
-    const link1Text = linkAnchors[0] ? linkAnchors[0].textContent.trim() : '';
-    const link2Url = linkAnchors[1] ? linkAnchors[1].getAttribute('href') : '';
-    const link2Text = linkAnchors[1] ? linkAnchors[1].textContent.trim() : '';
+    const tileUrl = linkAnchors[0] ? linkAnchors[0].getAttribute('href') : '';
+    const tileText = linkAnchors[0] ? linkAnchors[0].textContent.trim() : '';
+    const bodyAnchors = linkAnchors.slice(1);
     const img = getCellImg(row, 3);
 
     const li = document.createElement('li');
     li.className = 'video-cards-card';
     moveInstrumentation(row, li);
 
-    // Media tile (links to link1Url when available)
-    const tile = document.createElement(link1Url ? 'a' : 'div');
+    // Media tile (links to the video/tile URL when available)
+    const tile = document.createElement(tileUrl ? 'a' : 'div');
     tile.className = 'video-cards-tile';
-    if (link1Url) {
-      tile.href = link1Url;
-      tile.setAttribute('aria-label', title || link1Text || 'Watch video');
+    if (tileUrl) {
+      tile.href = tileUrl;
+      tile.setAttribute('aria-label', title ? `Watch ${title}` : (tileText || 'Watch video'));
     }
 
     if (img) {
@@ -83,10 +85,9 @@ export default function decorate(block) {
       body.append(captionEl);
     }
 
-    const links = [
-      { text: link1Text, url: link1Url },
-      { text: link2Text, url: link2Url },
-    ].filter((l) => l.url);
+    const links = bodyAnchors
+      .map((a) => ({ text: a.textContent.trim(), url: a.getAttribute('href') }))
+      .filter((l) => l.url);
 
     if (links.length) {
       const linksEl = document.createElement('div');

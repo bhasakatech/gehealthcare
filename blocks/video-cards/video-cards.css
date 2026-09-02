@@ -7,24 +7,28 @@
   gap: 32px;
 }
 
+/* Whole card is a light rounded panel with a subtle shadow. */
 .video-cards .video-cards-card {
   display: flex;
   flex-direction: column;
+  background-color: var(--light-color);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 8%);
 }
 
 .video-cards .video-cards-tile {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  aspect-ratio: 16 / 10;
-  padding: 24px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  aspect-ratio: 16 / 9;
+  padding: 32px;
   background-color: var(--brand-color);
   color: #fff;
   text-decoration: none;
   overflow: hidden;
-  text-align: center;
 }
 
 .video-cards .video-cards-tile-image {
@@ -39,26 +43,29 @@
   object-fit: cover;
 }
 
-.video-cards .video-cards-tile-has-image::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: rgb(74 26 128 / 65%);
-}
-
+/* Play control: a small triangle pinned to the bottom-left corner. */
 .video-cards .video-cards-play {
-  position: relative;
+  position: absolute;
   z-index: 2;
+  left: 16px;
+  bottom: 16px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 64px;
-  height: 64px;
-  margin-bottom: 16px;
-  border: 2px solid rgb(255 255 255 / 90%);
-  border-radius: 50%;
   color: #fff;
+}
+
+.video-cards .video-cards-play svg {
+  width: 28px;
+  height: 28px;
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 35%));
+}
+
+/* Fallback (no image): centered title + wordmark on the purple tile. */
+.video-cards .video-cards-tile:not(.video-cards-tile-has-image) {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .video-cards .video-cards-tile-title {
@@ -80,20 +87,32 @@
   opacity: 0.95;
 }
 
+/*
+ * The training thumbnail already has the title + GE HealthCare wordmark baked
+ * into the purple deck cover, so when an image is present we show it as-is and
+ * hide the fallback text overlays. The purple tile + centered title/wordmark
+ * remain as a fallback for cards authored without a thumbnail.
+ */
+.video-cards .video-cards-tile-has-image .video-cards-tile-title,
+.video-cards .video-cards-tile-has-image .video-cards-wordmark {
+  display: none;
+}
+
+/* Body: caption + inline links on the light panel. */
 .video-cards .video-cards-body {
-  padding: 12px 0 0;
+  padding: 24px;
 }
 
 .video-cards .video-cards-caption {
-  margin: 0 0 8px;
+  margin: 0 0 16px;
   font-size: var(--body-font-size-s);
-  color: var(--dark-color);
+  color: var(--text-color);
 }
 
 .video-cards .video-cards-links {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  flex-flow: row wrap;
+  gap: 20px;
 }
 
 .video-cards .video-cards-link {
@@ -102,21 +121,18 @@
   gap: 6px;
   color: var(--brand-color);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 400;
   font-size: var(--body-font-size-s);
+}
+
+/* Live links are plain text (no arrow); keep markup but hide the icon. */
+.video-cards .video-cards-link svg {
+  display: none;
 }
 
 .video-cards .video-cards-link:hover {
   color: var(--brand-color-dark);
   text-decoration: underline;
-}
-
-.video-cards .video-cards-link svg {
-  transition: transform 0.15s ease;
-}
-
-.video-cards .video-cards-link:hover svg {
-  transform: translateX(3px);
 }
 
 @media (width >= 600px) {
@@ -127,7 +143,7 @@
 
 @media (width >= 900px) {
   .video-cards .video-cards-list {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 40px;
   }
 }

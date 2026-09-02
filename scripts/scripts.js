@@ -114,12 +114,44 @@ export function decorateButtons(main) {
  * @param {Element} main The main element
  */
 // eslint-disable-next-line import/prefer-default-export
+/**
+ * Group default content in a "legal-panels" section into rounded panels.
+ *
+ * The Legal page is flat default content (H3 headings followed by their
+ * paragraphs/lists). To present each sub-section as a card without changing
+ * the authored content (which must stay flat to convert cleanly to JCR), we
+ * group each H3 and the content up to the next H3 into a `.legal-panel` at
+ * render time. Styling lives in styles.css.
+ *
+ * @param {Element} main
+ */
+export function decorateLegalPanels(main) {
+  main.querySelectorAll('.section.legal-panels').forEach((section) => {
+    const container = section.querySelector(':scope > .default-content-wrapper');
+    if (!container) return;
+    const nodes = [...container.children];
+    let panel = null;
+    nodes.forEach((node) => {
+      // Intro content before the first H3 stays outside any panel.
+      if (node.tagName === 'H3') {
+        panel = document.createElement('div');
+        panel.className = 'legal-panel';
+        container.insertBefore(panel, node);
+        panel.append(node);
+      } else if (panel) {
+        panel.append(node);
+      }
+    });
+  });
+}
+
 export function decorateMain(main) {
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
+  decorateLegalPanels(main);
 }
 
 /**
