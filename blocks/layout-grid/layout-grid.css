@@ -14,6 +14,10 @@
   gap: 24px;
 }
 
+.layout-grid .layout-grid-label {
+  margin: 0 0 8px;
+}
+
 .layout-grid .layout-grid-diagram img {
   width: 100%;
   height: auto;

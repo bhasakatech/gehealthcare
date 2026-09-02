@@ -471,6 +471,16 @@ function buildLayoutGrid(main) {
     return { elems: [wrap] };
   });
 
+  // Remove the stray "6-column grid" / "12-column grid" text labels — they now
+  // render inside the block above each diagram.
+  [...main.querySelectorAll('strong')].forEach((s) => {
+    const t = s.textContent.trim().toLowerCase();
+    if (t === '6-column grid' || t === '12-column grid') {
+      const wrap = s.closest('p') || s;
+      wrap.remove();
+    }
+  });
+
   const block = buildBlock('layout-grid', row2.length ? [row1, row2] : [row1]);
   six.replaceWith(block);
   twelve.remove();

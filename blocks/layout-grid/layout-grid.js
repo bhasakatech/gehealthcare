@@ -19,7 +19,7 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
 export default function decorate(block) {
   const rows = [...block.children];
 
-  // Row 1 — the two big grid diagrams, side by side.
+  // Row 1 — the two big grid diagrams, side by side, each with its label on top.
   const grids = document.createElement('div');
   grids.className = 'layout-grid-diagrams';
   const gridRow = rows[0];
@@ -27,9 +27,18 @@ export default function decorate(block) {
     [...gridRow.children].forEach((cell) => {
       const img = cell.querySelector('img');
       if (!img) return;
+      const alt = img.getAttribute('alt') || '';
       const fig = document.createElement('div');
       fig.className = 'layout-grid-diagram';
-      fig.append(createOptimizedPicture(img.getAttribute('src'), img.getAttribute('alt') || '', false, [{ width: '750' }]));
+      if (alt) {
+        const label = document.createElement('p');
+        label.className = 'layout-grid-label';
+        const strong = document.createElement('strong');
+        strong.textContent = alt;
+        label.append(strong);
+        fig.append(label);
+      }
+      fig.append(createOptimizedPicture(img.getAttribute('src'), alt, false, [{ width: '750' }]));
       grids.append(fig);
     });
   }
