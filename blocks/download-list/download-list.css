@@ -69,6 +69,46 @@
   transform: scale(1.1);
 }
 
+/* Info icon rendered as a button (tooltip trigger) — strip button chrome. */
+.download-list button.download-list-icon {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+/* Info tooltip: hidden until the icon is hovered or focused. */
+.download-list .download-list-info {
+  position: relative;
+  display: inline-flex;
+}
+
+.download-list .download-list-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  right: 0;
+  z-index: 2;
+  width: max-content;
+  max-width: 280px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background-color: var(--text-color);
+  color: var(--background-color);
+  font-size: var(--body-font-size-xs, 14px);
+  line-height: 1.4;
+  text-align: left;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+  pointer-events: none;
+}
+
+.download-list .download-list-info:hover .download-list-tooltip,
+.download-list .download-list-info:focus-within .download-list-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
 @media (width >= 900px) {
   .download-list .download-list-group {
     display: grid;

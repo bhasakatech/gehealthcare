@@ -57,13 +57,6 @@
           "description": "Name of the downloadable asset (shown as the link text)."
         },
         {
-          "component": "text",
-          "valueType": "string",
-          "name": "infoLink",
-          "label": "Info Link (URL)",
-          "description": "Optional URL for the info (i) icon."
-        },
-        {
           "component": "select",
           "valueType": "string",
           "name": "kind",
@@ -79,6 +72,13 @@
               "value": "external"
             }
           ]
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "info",
+          "label": "Info Text (tooltip)",
+          "description": "Optional description shown as a tooltip on the info (i) icon."
         }
       ]
     }

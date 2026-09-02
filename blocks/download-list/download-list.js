@@ -26,15 +26,17 @@ export default function decorate(block) {
     const labelAnchor = row.children[1] ? row.children[1].querySelector('a') : null;
     const label = labelAnchor ? labelAnchor.textContent.trim() : getCellText(row, 1);
     const fileLink = labelAnchor ? labelAnchor.getAttribute('href') : '';
-    const infoLink = getCellText(row, 2);
-    const kind = (getCellText(row, 3) || 'download').toLowerCase();
+    // fileLink + fileLinkText collapse into one anchor cell (index 1), so the
+    // rendered cells are: group(0), link(1), kind(2), info(3).
+    const kind = (getCellText(row, 2) || 'download').toLowerCase();
+    const info = getCellText(row, 3);
 
     if (!groupIndex.has(group)) {
       groupIndex.set(group, groups.length);
       groups.push({ name: group, items: [] });
     }
     groups[groupIndex.get(group)].items.push({
-      row, label, infoLink, fileLink, kind,
+      row, label, fileLink, kind, info,
     });
   });
 
@@ -73,13 +75,23 @@ export default function decorate(block) {
       const actions = document.createElement('span');
       actions.className = 'download-list-actions';
 
-      if (item.infoLink) {
-        const infoAnchor = document.createElement('a');
-        infoAnchor.className = 'download-list-icon download-list-icon-info';
-        infoAnchor.href = item.infoLink;
-        infoAnchor.setAttribute('aria-label', `More information about ${item.label}`);
-        infoAnchor.innerHTML = ICONS.info;
-        actions.append(infoAnchor);
+      if (item.info) {
+        // Info as a hover/focus tooltip describing the item.
+        const infoBtn = document.createElement('button');
+        infoBtn.type = 'button';
+        infoBtn.className = 'download-list-icon download-list-icon-info';
+        infoBtn.setAttribute('aria-label', `More information about ${item.label}`);
+        infoBtn.innerHTML = ICONS.info;
+
+        const tip = document.createElement('span');
+        tip.className = 'download-list-tooltip';
+        tip.setAttribute('role', 'tooltip');
+        tip.textContent = item.info;
+
+        const infoWrap = document.createElement('span');
+        infoWrap.className = 'download-list-info';
+        infoWrap.append(infoBtn, tip);
+        actions.append(infoWrap);
       }
 
       if (item.fileLink) {
