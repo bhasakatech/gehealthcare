@@ -685,11 +685,25 @@
     "id": "principle-card",
     "fields": [
       {
+        "component": "text",
+        "valueType": "string",
+        "name": "icon",
+        "label": "Icon",
+        "description": "The icon token shown on the card, e.g. :users:"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Title",
+        "description": "The principle name shown on the card front, e.g. Approachable"
+      },
+      {
         "component": "richtext",
         "valueType": "string",
         "name": "text",
-        "label": "Card Content",
-        "description": "An icon (e.g. :users:), the card heading (H4), and the description paragraph"
+        "label": "Description",
+        "description": "The short description revealed on the card back"
       }
     ]
   },
