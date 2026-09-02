@@ -38,13 +38,13 @@
 }
 
 .download-list .download-list-label {
-  color: var(--text-color);
+  color: var(--brand-color);
   text-decoration: none;
   font-size: var(--body-font-size-m);
 }
 
 .download-list .download-list-label:hover {
-  color: var(--brand-color);
+  color: var(--brand-color-dark);
   text-decoration: underline;
 }
 
