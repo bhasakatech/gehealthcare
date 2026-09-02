@@ -484,6 +484,15 @@ function buildLayoutGrid(main) {
   const block = buildBlock('layout-grid', row2.length ? [row1, row2] : [row1]);
   six.replaceWith(block);
   twelve.remove();
+
+  // The "Rounded corner of unit" construction diagram is a square image that
+  // should render at a modest size (like live), not full content width. Tag
+  // its content-media block so the block CSS can cap it.
+  const cornerBlock = [...main.querySelectorAll('.content-media')].find((b) => {
+    const im = b.querySelector('img');
+    return im && (im.getAttribute('src') || '').includes('graphic-device-rounded-corner-of-unit');
+  });
+  if (cornerBlock) cornerBlock.classList.add('content-media-compact');
 }
 
 /**
