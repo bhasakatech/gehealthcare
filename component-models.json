@@ -650,6 +650,18 @@
     ]
   },
   {
+    "id": "legal-panels",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "content",
+        "label": "Content",
+        "description": "The legal sections as flat content: an H3 heading followed by its paragraphs/lists, repeated. \"Dos\"/\"Don'ts\" lists get check/cross markers; a \"Best practice tips\" section renders as a purple card."
+      }
+    ]
+  },
+  {
     "id": "media-tile",
     "fields": [
       {
