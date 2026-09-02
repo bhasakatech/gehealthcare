@@ -1,4 +1,5 @@
 import {
+  buildBlock,
   loadHeader,
   loadFooter,
   decorateIcons,
@@ -58,12 +59,205 @@ async function loadFonts() {
 }
 
 /**
+ * Groups the flat "On <color>, text should be …" accessibility entries on the
+ * Color page into a `color-swatches` block so they render as colored contrast
+ * cards (matching the live brand hub). The imported content is flat default
+ * content — a swatch heading followed by its AA/AAA pass paragraphs — so we
+ * find each contiguous run of such headings and wrap it in one block in place.
+ * Colors, card styling and layout all live in blocks/color-swatches/.
+ * @param {Element} main The container element
+ */
+function buildColorSwatches(main) {
+  const isSwatchHeading = (el) => el && /^H[1-6]$/.test(el.tagName)
+    && /^On .+text\s+should\s+be/i.test(el.textContent.trim());
+  const isPassLabel = (el) => el && el.tagName === 'P'
+    && /pass|normal text|large text/i.test(el.textContent);
+
+  const headings = [...main.querySelectorAll('h1, h2, h3, h4, h5, h6')]
+    .filter(isSwatchHeading);
+  if (!headings.length) return;
+
+  // Collect a heading + its following pass-label paragraphs as one card cell.
+  const groupOf = (heading) => {
+    const nodes = [heading];
+    let next = heading.nextElementSibling;
+    while (isPassLabel(next)) {
+      nodes.push(next);
+      next = next.nextElementSibling;
+    }
+    return { nodes, end: next };
+  };
+
+  const handled = new Set();
+  headings.forEach((heading) => {
+    if (handled.has(heading)) return;
+
+    // Build a contiguous run: consecutive swatch groups with nothing (no
+    // caption) between them share one grid.
+    const rows = [];
+    let cursor = heading;
+    while (isSwatchHeading(cursor) && !handled.has(cursor)) {
+      handled.add(cursor);
+      const { nodes, end } = groupOf(cursor);
+      rows.push(nodes);
+      cursor = end;
+    }
+
+    // Capture the insertion point before building — buildBlock() moves the
+    // heading/label nodes into the new block, so the run's own nodes can't be
+    // used as an anchor afterwards. `cursor` is the first element after the run
+    // (or null at end of parent), which stays put.
+    const parent = heading.parentElement;
+    const anchor = cursor && cursor.parentElement === parent ? cursor : null;
+    const block = buildBlock('color-swatches', rows.map((nodes) => [{ elems: nodes }]));
+    parent.insertBefore(block, anchor);
+  });
+}
+
+// Color page example-image galleries. The import captured only the first image
+// of each grid; this maps each seed filename to the full ordered set of members
+// (as they appear on the live page) plus the desktop column count.
+const COLOR_GALLERIES = [
+  {
+    seed: 'ge-healthcare-primary-color-usage-example1-1-scaled.jpg',
+    cols: 2,
+    members: Array.from({ length: 8 }, (_, i) => `ge-healthcare-primary-color-usage-example${i + 1}-1-scaled.jpg`),
+  },
+  {
+    seed: 'ge-healthcare-primary-color-usage-example9-1-1-scaled.jpg',
+    cols: 2,
+    members: [
+      'ge-healthcare-primary-color-usage-example9-1-1-scaled.jpg',
+      'ge-healthcare-primary-color-usage-example16-1-scaled.jpg',
+      'ge-healthcare-primary-color-usage-example17-1-scaled.jpg',
+    ],
+  },
+  {
+    seed: 'ge-healthcare-balance-contrast1-scaled.jpg',
+    cols: 2,
+    members: ['ge-healthcare-balance-contrast1-scaled.jpg', 'ge-healthcare-balance-contrast2-scaled.jpg', 'ge-healthcare-balance-contrast3-scaled.jpg'],
+  },
+  {
+    seed: 'ge-healthcare-balance-contrast4-scaled.jpg',
+    cols: 2,
+    members: ['ge-healthcare-balance-contrast4-scaled.jpg', 'ge-healthcare-balance-contrast5-scaled.jpg', 'ge-healthcare-balance-contrast6-scaled.jpg'],
+  },
+  {
+    seed: 'ge-healthcare-primary-color-ratio-usage-1-scaled.jpg',
+    cols: 2,
+    members: Array.from({ length: 3 }, (_, i) => `ge-healthcare-primary-color-ratio-usage-${i + 1}-scaled.jpg`),
+  },
+  {
+    seed: 'ge-healthcare-primary-color-accent-ratio-usage-1-scaled.jpg',
+    cols: 2,
+    members: Array.from({ length: 3 }, (_, i) => `ge-healthcare-primary-color-accent-ratio-usage-${i + 1}-scaled.jpg`),
+  },
+  {
+    seed: 'ge-healthcare-primary-accent-hint-ratio-usage-1-scaled.jpg',
+    cols: 2,
+    members: Array.from({ length: 3 }, (_, i) => `ge-healthcare-primary-accent-hint-ratio-usage-${i + 1}-scaled.jpg`),
+  },
+];
+
+const ASSET_BASE = '/content/dam/gehealthcare/assets/';
+
+// Builds a `color-gallery` block element from a list of image filenames.
+function makeColorGallery(members, cols) {
+  const rows = members.map((name) => {
+    const pic = document.createElement('picture');
+    const el = document.createElement('img');
+    el.src = `${ASSET_BASE}${name}`;
+    el.alt = '';
+    pic.append(el);
+    return [{ elems: [pic] }];
+  });
+  const block = buildBlock('color-gallery', rows);
+  block.dataset.cols = String(cols);
+  return block;
+}
+
+const usageExamples = (from, to) => Array.from(
+  { length: to - from + 1 },
+  (_, i) => `ge-healthcare-primary-color-usage-example${from + i}-1-scaled.jpg`,
+);
+
+/**
+ * Rebuilds the "Interactivity / Building hierarchy / Categorization" region of
+ * the Color page's accent-usage section. The import mangled this stretch: the
+ * "Interactivity" caption survived as a bare paragraph, the "Building hierarchy"
+ * caption got glued to example9's image in a single-image content-media block,
+ * and the "Categorization" caption + its grid were dropped entirely. This
+ * reconstructs all three galleries (example9; 10–11; 12–15) in place, keyed off
+ * the surviving "Interactivity" / "Building hierarchy" caption text.
+ * @param {Element} main The container element
+ */
+function buildAccentUsageRegion(main) {
+  // Find the "Building hierarchy …" content-media seed (carries example9).
+  const seed = [...main.querySelectorAll('.content-media')].find((b) => {
+    const img = b.querySelector('img');
+    return img && (img.getAttribute('src') || '').includes('primary-color-usage-example9-1-scaled');
+  });
+  if (!seed) return;
+
+  // The "Interactivity" caption is the paragraph immediately before the seed.
+  const interCaption = [...main.querySelectorAll('p')]
+    .find((p) => /^Interactivity:/i.test(p.textContent.trim()));
+
+  // Interactivity → single image (example9).
+  if (interCaption) {
+    interCaption.after(makeColorGallery(usageExamples(9, 9), 1));
+  }
+
+  // Building hierarchy → example10–11. Reuse the seed's own caption text as a
+  // paragraph, then the 2-up grid, replacing the mis-paired seed block. Take
+  // only the first cell's text (the caption); later cells hold the image and
+  // the "text-left" layout hint, which must not leak into the caption.
+  const hierText = (seed.querySelector(':scope > div > div')?.textContent || '').trim();
+  const frag = document.createDocumentFragment();
+  if (hierText) {
+    const p = document.createElement('p');
+    p.textContent = hierText;
+    frag.append(p);
+  }
+  frag.append(makeColorGallery(usageExamples(10, 11), 2));
+
+  // Categorization → caption + example12–15 (dropped at import; re-add here).
+  const catP = document.createElement('p');
+  catP.textContent = 'Categorization: Accent color can be used to categorize and separate information for data and charts.';
+  frag.append(catP);
+  frag.append(makeColorGallery(usageExamples(12, 15), 2));
+
+  seed.replaceWith(frag);
+}
+
+/**
+ * Rebuilds the truncated example-image grids on the Color page. Each grid was
+ * imported as a single-image `content-media` block; this finds those seed
+ * blocks by their image filename and swaps them for a `color-gallery` block
+ * holding the full set of images (see COLOR_GALLERIES). Layout lives in
+ * blocks/color-gallery/.
+ * @param {Element} main The container element
+ */
+function buildColorGalleries(main) {
+  main.querySelectorAll('.content-media').forEach((seedBlock) => {
+    const img = seedBlock.querySelector('img');
+    if (!img) return;
+    const file = (img.getAttribute('src') || '').split('/').pop();
+    const gallery = COLOR_GALLERIES.find((g) => g.seed === file);
+    if (!gallery) return;
+    seedBlock.replaceWith(makeColorGallery(gallery.members, gallery.cols));
+  });
+}
+
+/**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
-function buildAutoBlocks() {
+function buildAutoBlocks(main) {
   try {
-    // TODO: add auto block, if needed
+    buildColorSwatches(main);
+    buildAccentUsageRegion(main);
+    buildColorGalleries(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);

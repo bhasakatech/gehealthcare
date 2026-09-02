@@ -1,0 +1,30 @@
+/*
+ * Color Gallery — example-image grids for the Color page.
+ * Responsive grid of example images; column count is set per-gallery via the
+ * --gallery-cols custom property (capped at 4), matching the live layout.
+ */
+.color-gallery {
+  margin: 24px 0;
+}
+
+.color-gallery .color-gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.color-gallery .color-gallery-item {
+  line-height: 0;
+}
+
+.color-gallery .color-gallery-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+@media (width >= 900px) {
+  .color-gallery .color-gallery-grid {
+    grid-template-columns: repeat(var(--gallery-cols, 2), 1fr);
+  }
+}

@@ -1,0 +1,68 @@
+/*
+ * Color Swatches — accessibility contrast cards for the Color page.
+ * Each card is filled with its named color; the heading and AA/AAA pass labels
+ * sit inside. Cards flow in a responsive grid (1 col mobile, 2 cols desktop),
+ * matching the live brand-hub layout.
+ */
+.color-swatches {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin: 24px 0;
+}
+
+.color-swatches .color-swatch {
+  --swatch-bg: var(--light-color);
+  --swatch-fg: var(--text-color);
+
+  background-color: var(--swatch-bg);
+  color: var(--swatch-fg);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+/* Light swatches (white, yellow, gray B) get a hairline border so the card
+   edge is visible against the white page. */
+.color-swatches .color-swatch-bordered {
+  border: 1px solid var(--border-color);
+}
+
+.color-swatches .color-swatch > :first-child {
+  margin-top: 0;
+}
+
+.color-swatches .color-swatch > :last-child {
+  margin-bottom: 0;
+}
+
+.color-swatches .color-swatch h1,
+.color-swatches .color-swatch h2,
+.color-swatches .color-swatch h3,
+.color-swatches .color-swatch h4,
+.color-swatches .color-swatch h5,
+.color-swatches .color-swatch h6 {
+  color: var(--swatch-fg);
+  margin: 0 0 20px;
+}
+
+/* Pass/fail labels: two columns inside the card. */
+.color-swatches .color-swatch-labels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 24px;
+}
+
+.color-swatches .color-swatch-labels p {
+  margin: 0;
+  color: var(--swatch-fg);
+}
+
+@media (width >= 900px) {
+  .color-swatches {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .color-swatches .color-swatch {
+    padding: 28px 32px;
+  }
+}
