@@ -157,6 +157,52 @@ const COLOR_GALLERIES = [
     cols: 2,
     members: Array.from({ length: 3 }, (_, i) => `ge-healthcare-primary-accent-hint-ratio-usage-${i + 1}-scaled.jpg`),
   },
+  // Design elements page — "Content placement" example grid (seed = full-image).
+  {
+    seed: 'ge-healthcare-content-placement-full-image-scaled.jpg',
+    cols: 2,
+    members: [
+      'ge-healthcare-content-placement-full-image-scaled.jpg',
+      'ge-healthcare-content-placement-half-image-scaled.jpg',
+      'ge-healthcare-content-placement-full-image-graphic-device-outer-margin-scaled.jpg',
+      'ge-healthcare-content-placement-half-image-graphic-device-outer-margin-scaled.jpg',
+      'gehealthcare-multi-column-text-image-adjacent-to-full-bleed-scaled.jpg',
+      'gehealthcare-12-column-layout-complexity-of-content-info-scaled.jpg',
+    ],
+  },
+  // Design elements — "Graphic device usage" example grid (seed = align-outer-margin).
+  {
+    seed: 'ge-healthcare-graphic-device-align-outer-margin-full-page-scaled.jpg',
+    cols: 2,
+    members: [
+      'ge-healthcare-graphic-device-align-outer-margin-full-page-scaled.jpg',
+      'ge-healthcare-graphic-device-align-margin-with-content-scaled.jpg',
+      'ge-healthcare-multiple-graphic-devices-aligned-with-columns-scaled.jpg',
+    ],
+  },
+  // Design elements — "Brochure" usage grid (seed = brochure-hero-spread).
+  {
+    seed: 'ge-healthcare-graphic-device-brochure-hero-spread-scaled.jpg',
+    cols: 2,
+    members: [
+      'ge-healthcare-graphic-device-brochure-hero-spread-scaled.jpg',
+      'ge-healthcare-graphic-device-brochure-product-layout-scaled.jpg',
+      'ge-healthcare-graphic-device-brochure-image-content-scaled.jpg',
+    ],
+  },
+  // Design elements — "Promotional items" grid (seed = polo-shirt).
+  {
+    seed: 'ge-healthcare-promotional-items-polo-shirt-scaled.jpg',
+    cols: 2,
+    members: [
+      'ge-healthcare-promotional-items-polo-shirt-scaled.jpg',
+      'ge-healthcare-promotional-items-water-bottles-scaled.jpg',
+      'ge-healthcare-promotional-items-travel-mug-scaled.jpg',
+      'ge-healthcare-promotional-items-hoodie-scaled.jpg',
+      'ge-healthcare-promotional-items-quarter-zip-jacket-scaled.jpg',
+      'ge-healthcare-promotional-items-backpack-scaled.jpg',
+    ],
+  },
 ];
 
 const ASSET_BASE = '/content/dam/gehealthcare/assets/';
