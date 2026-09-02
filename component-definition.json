@@ -452,7 +452,22 @@
                 "resourceType": "core/franklin/components/block/v1/block",
                 "template": {
                   "name": "Legal Panels",
-                  "model": "legal-panels"
+                  "filter": "legal-panels"
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "Legal Panel",
+          "id": "legal-panel",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Legal Panel",
+                  "model": "legal-panel"
                 }
               }
             }

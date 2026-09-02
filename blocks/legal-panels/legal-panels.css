@@ -1,26 +1,71 @@
 /*
- * Legal Panels — rounded cards for the Legal page. Each H3 sub-section is a
- * light-purple card with a brand-purple heading + accent bar. "Best practice
- * tips" inverts to a solid purple card. Dos/Don'ts lists render with green
- * check / red cross markers.
+ * Legal Panels — the sectioned Legal page layout, mirroring the live brand hub.
+ * Three panel variants:
+ *   - plain  : no card; a divider rule separates each section (default)
+ *   - grey   : light-grey rounded card (Vendors, Co-branding, Partnerships,
+ *              Double-check, Testimonials, Endorsements)
+ *   - purple : solid purple, white-text card (Best practice tips)
+ * Dos/Don'ts lists render with green-check / red-cross markers.
  */
+.legal-panels .legal-panels-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Base panel spacing. */
 .legal-panels .legal-panel {
-  background-color: var(--light-color);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 24px 28px;
-  margin: 24px 0;
+  padding: 12px 0 32px;
 }
 
 .legal-panels .legal-panel > h3:first-child {
   margin-top: 0;
-  padding-bottom: 12px;
-  border-bottom: 2px solid var(--brand-color);
-  color: var(--brand-color);
+  color: var(--text-color);
 }
 
 .legal-panels .legal-panel > :last-child {
   margin-bottom: 0;
+}
+
+/* Plain panels are separated by a divider rule (matches the live section-bottom
+   border), except the last one. */
+.legal-panels .legal-panel-plain {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.legal-panels .legal-panel-plain:last-child {
+  border-bottom: none;
+}
+
+/* Grey card panels. */
+.legal-panels .legal-panel-grey {
+  background-color: var(--light-color);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin: 16px 0;
+}
+
+/* Solid purple card ("Best practice tips"). */
+.legal-panels .legal-panel-purple {
+  background-color: var(--brand-color);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin: 16px 0;
+  color: #fff;
+}
+
+.legal-panels .legal-panel-purple > h3:first-child {
+  color: #fff;
+}
+
+.legal-panels .legal-panel-purple a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* A "Dos"/"Don'ts" heading gets an underline accent like the live page. */
+.legal-panels .legal-panel:has(.legal-list) > h3:first-child {
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 /* Dos / Don'ts lists — round green check (Dos) or red cross (Don'ts) markers. */
@@ -66,32 +111,9 @@
   margin: 0;
 }
 
-/* "Best practice tips" — solid purple panel with white text. */
-.legal-panels .legal-panel-purple {
-  background-color: var(--brand-color);
-  border-color: var(--brand-color);
-  color: #fff;
-}
-
-.legal-panels .legal-panel-purple > h3:first-child {
-  color: #fff;
-  border-bottom-color: rgb(255 255 255 / 40%);
-}
-
-.legal-panels .legal-panel-purple a {
-  color: #fff;
-  text-decoration: underline;
-}
-
-/* Images get rounded corners like the live page. */
-.legal-panels .legal-panel picture img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-}
-
 @media (width >= 900px) {
-  .legal-panels .legal-panel {
+  .legal-panels .legal-panel-grey,
+  .legal-panels .legal-panel-purple {
     padding: 32px 36px;
   }
 }

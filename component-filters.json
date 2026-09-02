@@ -83,6 +83,12 @@
     ]
   },
   {
+    "id": "legal-panels",
+    "components": [
+      "legal-panel"
+    ]
+  },
+  {
     "id": "media-grid",
     "components": [
       "media-tile"

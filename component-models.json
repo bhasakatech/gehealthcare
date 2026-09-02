@@ -650,14 +650,14 @@
     ]
   },
   {
-    "id": "legal-panels",
+    "id": "legal-panel",
     "fields": [
       {
         "component": "richtext",
         "valueType": "string",
         "name": "content",
-        "label": "Content",
-        "description": "The legal sections as flat content: an H3 heading followed by its paragraphs/lists, repeated. \"Dos\"/\"Don'ts\" lists get check/cross markers; a \"Best practice tips\" section renders as a purple card."
+        "label": "Panel Content",
+        "description": "One legal sub-section: its heading (H3) followed by paragraphs/lists. A \"Dos\"/\"Don'ts\" panel gets check/cross markers; a \"Best practice tips\" panel renders purple."
       }
     ]
   },

@@ -1,57 +1,66 @@
 /**
- * Legal Panels — the sectioned card layout for the Legal page.
+ * Legal Panels — the sectioned layout for the Legal page, mirroring the live
+ * brand-hub design.
  *
- * The Legal content is authored as flat default content (an H3 heading
- * followed by its paragraphs/lists, repeated). This block groups each H3 and
- * the content up to the next H3 into a rounded `.legal-panel` card, and:
- *   - tags "Dos" / "Don'ts" lists so their items render with green-check /
- *     red-cross markers (styled in legal-panels.css)
- *   - marks the "Best practice tips" panel as the solid-purple variant
- *
- * Authored markup: a single-cell block whose one cell holds the flat content,
- * e.g.
- *   | Legal Panels |
- *   | <h3>…</h3><p>…</p><ul>…</ul>… |
+ * Authored as repeatable "Legal Panel" rows (see _legal-panels.json). Each row
+ * is one panel: a single rich-text cell holding that sub-section's heading (H3)
+ * plus its paragraphs/lists. Each panel is classified by its heading to match
+ * the live variants:
+ *   - `legal-panel-grey`   — light-grey rounded card (Vendors, Co-branding,
+ *                            Partnerships, Double-check, Testimonials,
+ *                            Endorsements)
+ *   - `legal-panel-purple` — solid purple, white-text card (Best practice tips)
+ *   - plain                — no card; a divider rule separates it from the next
+ *                            (Trademark, Approval, Video, Patient data, etc.)
+ * "Dos" / "Don'ts" lists get green-check / red-cross markers.
  *
  * @param {Element} block
  */
-export default function decorate(block) {
-  // The flat content lives in the block's single inner cell.
-  const cell = block.querySelector(':scope > div > div') || block.querySelector(':scope > div') || block;
-  const nodes = [...cell.children];
 
+// Headings that render as a light-grey rounded card on the live page.
+const GREY_PANELS = new Set([
+  'vendors and suppliers',
+  'co-branding',
+  'partnerships, sponsorships and jvs',
+  'double- and triple-check the following:',
+  'testimonials',
+  'endorsements',
+]);
+
+export default function decorate(block) {
   const container = document.createElement('div');
   container.className = 'legal-panels-list';
 
-  let panel = null;
-  let markerFor = null;
+  [...block.children].forEach((row) => {
+    const cell = row.querySelector(':scope > div') || row;
 
-  nodes.forEach((node) => {
-    if (node.tagName === 'H3') {
-      panel = document.createElement('div');
-      panel.className = 'legal-panel';
-      container.append(panel);
-      panel.append(node);
+    const panel = document.createElement('div');
+    panel.className = 'legal-panel';
+    while (cell.firstChild) panel.append(cell.firstChild);
 
-      // Remember whether the next list is a "Dos" or "Don'ts" list so its
-      // items render with green-check / red-cross markers like the live page.
-      const heading = node.textContent.trim().toLowerCase().replace(/[’']/g, "'");
-      if (heading === 'dos') markerFor = 'do';
-      else if (heading === "don'ts" || heading === 'donts') markerFor = 'dont';
-      else markerFor = null;
+    const heading = panel.querySelector('h1, h2, h3, h4, h5, h6');
+    const label = (heading?.textContent || '')
+      .replace(/[\u200B-\u200D\uFEFF]/g, '') // strip zero-width / BOM chars
+      .replace(/\s+/g, ' ')
+      .trim()
+      .toLowerCase()
+      .replace(/[‘’']/g, "'"); // normalize curly apostrophes
 
-      // "Best practice tips" is a solid purple, white-text panel on the live page.
-      if (heading === 'best practice tips') panel.classList.add('legal-panel-purple');
-    } else if (panel) {
-      if (node.tagName === 'UL' && markerFor) {
-        node.classList.add('legal-list', `legal-list-${markerFor}`);
-        markerFor = null;
-      }
-      panel.append(node);
-    } else {
-      // Intro content before the first H3 stays above the panels.
-      container.append(node);
+    // Panel variant by heading.
+    if (label === 'best practice tips') panel.classList.add('legal-panel-purple');
+    else if (GREY_PANELS.has(label)) panel.classList.add('legal-panel-grey');
+    else panel.classList.add('legal-panel-plain');
+
+    // Tag a Dos / Don'ts list so its items get check / cross markers.
+    let markerFor = null;
+    if (label === 'dos') markerFor = 'do';
+    else if (label === "don'ts" || label === 'donts') markerFor = 'dont';
+    if (markerFor) {
+      const list = panel.querySelector('ul');
+      if (list) list.classList.add('legal-list', `legal-list-${markerFor}`);
     }
+
+    container.append(panel);
   });
 
   block.replaceChildren(container);
