@@ -425,34 +425,57 @@ function buildColorGalleries(main) {
  * @param {Element} main The container element
  */
 function buildLayoutGrid(main) {
-  const findGridSeed = (part) => [...main.querySelectorAll('.content-media')].find((b) => {
-    const img = b.querySelector('img');
-    return img && (img.getAttribute('src') || '').includes(`layout-system-grid-${part}-column-grid`);
-  });
-  const six = findGridSeed('6');
-  const twelve = findGridSeed('12');
-  if (!six || !twelve) return;
+  // Structural (hash-proof) matching: anchor on the "6-column grid" /
+  // "12-column grid" strong labels, and reuse whatever <img> src is already in
+  // the DOM (readable on preview, hashed on the published site). Never depends
+  // on image filenames, so it works on both preview and live.
+  const strongByText = (re) => [...main.querySelectorAll('strong')]
+    .find((s) => re.test(s.textContent.trim()));
+  const sixLabel = strongByText(/^6-column grid$/i);
+  const twelveLabel = strongByText(/^12-column grid$/i);
+  if (!sixLabel || !twelveLabel) return;
 
-  const gridImg = (seed) => seed.querySelector('img')?.getAttribute('src');
-  // Collect the Margins/Gutters/Columns thumbnails (label paragraph + image
-  // paragraph pairs) that sit between the "6-column grid" and "12-column grid"
-  // labels in the same default-content wrapper.
+  // The diagram for each label is the first image that follows that label in
+  // document order. The image may sit in a `.content-media` block (local import)
+  // or a bare `<p><picture><img></p>` (published content) — handle both. Use a
+  // flat ordered node list so ordering is a simple index comparison (no bitwise
+  // on compareDocumentPosition).
+  const order = [...main.querySelectorAll('*')];
+  const allImgs = [...main.querySelectorAll('img')];
+  // The removable host for a diagram image: its content-media block if any,
+  // else its enclosing paragraph.
+  const hostOf = (img) => img.closest('.content-media') || img.closest('p') || img;
+  const followingImg = (label, exclude) => {
+    const li = order.indexOf(label);
+    return allImgs.find((im) => order.indexOf(im) > li && hostOf(im) !== exclude);
+  };
+  const sixImg = followingImg(sixLabel);
+  const sixHost = sixImg && hostOf(sixImg);
+  const twelveImg = followingImg(twelveLabel, sixHost);
+  const twelveHost = twelveImg && hostOf(twelveImg);
+  if (!sixImg || !twelveImg || sixHost === twelveHost) return;
+
+  // Collect the Margins/Gutters/Columns thumbnails: a label paragraph followed
+  // by an image paragraph, matched by the label text (not filename). Capture
+  // references first; remove their DOM hosts after the block is built.
   const thumbs = [];
-  ['margins', 'gutters', 'columns'].forEach((name) => {
-    const img = [...main.querySelectorAll('img')]
-      .find((im) => (im.getAttribute('src') || '').includes(`layout-system-grid-${name}`));
+  const thumbHosts = [];
+  ['Margins', 'Gutters', 'Columns'].forEach((label) => {
+    const labelP = [...main.querySelectorAll('p')]
+      .find((p) => p.textContent.trim() === label && p.querySelector('img') === null);
+    if (!labelP) return;
+    // the image is in the next paragraph (or the label paragraph itself)
+    let imgP = labelP.nextElementSibling;
+    if (!(imgP && imgP.querySelector && imgP.querySelector('img'))) {
+      imgP = labelP.querySelector('img') ? labelP : null;
+    }
+    const img = imgP?.querySelector('img');
     if (!img) return;
-    const src = img.getAttribute('src');
-    const label = name.charAt(0).toUpperCase() + name.slice(1);
-    thumbs.push({ src, label });
-    // remove the bare image paragraph + its preceding label paragraph
-    const p = img.closest('p');
-    const prev = p?.previousElementSibling;
-    if (prev && prev.tagName === 'P' && prev.textContent.trim().toLowerCase() === name) prev.remove();
-    p?.remove();
+    thumbs.push({ src: img.getAttribute('src'), label });
+    if (imgP !== labelP) thumbHosts.push(imgP);
+    thumbHosts.push(labelP);
   });
 
-  // Build rows: row1 = two diagram cells; row2 = three thumbnail cells.
   const mkImgCell = (src, alt) => {
     const pic = document.createElement('picture');
     const im = document.createElement('img');
@@ -460,7 +483,8 @@ function buildLayoutGrid(main) {
     pic.append(im);
     return { elems: [pic] };
   };
-  const row1 = [mkImgCell(gridImg(six), '6-column grid'), mkImgCell(gridImg(twelve), '12-column grid')];
+  const row1 = [mkImgCell(sixImg.getAttribute('src'), '6-column grid'),
+    mkImgCell(twelveImg.getAttribute('src'), '12-column grid')];
   const row2 = thumbs.map((t) => {
     const wrap = document.createElement('div');
     const pic = document.createElement('picture');
@@ -473,25 +497,19 @@ function buildLayoutGrid(main) {
 
   // Remove the stray "6-column grid" / "12-column grid" text labels — they now
   // render inside the block above each diagram.
-  [...main.querySelectorAll('strong')].forEach((s) => {
-    const t = s.textContent.trim().toLowerCase();
-    if (t === '6-column grid' || t === '12-column grid') {
-      const wrap = s.closest('p') || s;
-      wrap.remove();
-    }
-  });
+  [sixLabel, twelveLabel].forEach((s) => (s.closest('p') || s).remove());
 
   const block = buildBlock('layout-grid', row2.length ? [row1, row2] : [row1]);
-  six.replaceWith(block);
-  twelve.remove();
+  sixHost.replaceWith(block);
+  twelveHost.remove();
+  thumbHosts.forEach((h) => h.remove());
 
   // The "Rounded corner of unit" construction diagram is a square image that
   // should render at a modest size (like live), not full content width. Tag
-  // its content-media block so the block CSS can cap it.
-  const cornerBlock = [...main.querySelectorAll('.content-media')].find((b) => {
-    const im = b.querySelector('img');
-    return im && (im.getAttribute('src') || '').includes('graphic-device-rounded-corner-of-unit');
-  });
+  // its content-media block by its "Constructing" caption text (not filename)
+  // so the block CSS can cap it.
+  const cornerBlock = [...main.querySelectorAll('.content-media')]
+    .find((b) => /Constructing|Rounded corner of unit/i.test(b.textContent || ''));
   if (cornerBlock) cornerBlock.classList.add('content-media-compact');
 }
 
