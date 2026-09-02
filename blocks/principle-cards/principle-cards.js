@@ -1,14 +1,16 @@
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
- * Principle Cards — the "experience principles" icon-card grid (our-brand).
+ * Principle Cards — the "experience principles" flip-card grid (our-brand).
  *
- * A responsive grid of cards; each card holds an icon (an :token: icon span),
- * a title (H4) and a short description. Mirrors the live flip-box grid,
- * rendered as static cards.
+ * A responsive grid of purple cards mirroring the live Avada flip-box:
+ *   - front: the icon (an :token: icon span) + the heading (H4)
+ *   - back:  the short description, revealed on hover/focus with a 3D flip
  *
  * Each card is authored as a single rich-text cell containing the icon, the
- * heading and the description. The icon span is lifted into its own icon slot.
+ * heading and the description. The icon + heading form the card front; the
+ * remaining description forms the back. Cards are keyboard focusable so the
+ * back is reachable without a pointer (touch / no-hover devices).
  *
  * @param {Element} block
  */
@@ -21,9 +23,16 @@ export default function decorate(block) {
 
     const li = document.createElement('li');
     li.className = 'principle-card';
+    li.tabIndex = 0;
     moveInstrumentation(row, li);
 
-    // Icon: lift a leading icon span into its own slot.
+    const inner = document.createElement('div');
+    inner.className = 'principle-card-inner';
+
+    // Front: icon + heading.
+    const front = document.createElement('div');
+    front.className = 'principle-card-face principle-card-front';
+
     const iconWrap = document.createElement('div');
     iconWrap.className = 'principle-card-icon';
     const iconSpan = cell.querySelector('span.icon');
@@ -33,14 +42,18 @@ export default function decorate(block) {
       iconWrap.append(iconSpan);
       if (host && !host.textContent.trim() && !host.querySelector('img, a')) host.remove();
     }
-    li.append(iconWrap);
+    front.append(iconWrap);
 
-    // Body: whatever remains (heading + description).
-    const body = document.createElement('div');
-    body.className = 'principle-card-body';
-    while (cell.firstChild) body.append(cell.firstChild);
-    li.append(body);
+    const heading = cell.querySelector('h1, h2, h3, h4, h5, h6');
+    if (heading) front.append(heading);
 
+    // Back: whatever remains (the description).
+    const back = document.createElement('div');
+    back.className = 'principle-card-face principle-card-back';
+    while (cell.firstChild) back.append(cell.firstChild);
+
+    inner.append(front, back);
+    li.append(inner);
     ul.append(li);
   });
 
