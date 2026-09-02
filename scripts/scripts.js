@@ -416,6 +416,67 @@ function buildColorGalleries(main) {
 }
 
 /**
+ * Rebuilds the Design elements "Layout system" grid section. The import split
+ * it into two single-image content-media blocks (6-column and 12-column grid
+ * diagrams) with the small Margins/Gutters/Columns thumbnails scattered as
+ * bare full-size <picture> paragraphs between them. This collects those pieces
+ * and swaps them for one `layout-grid` block: the two diagrams side by side
+ * with a labeled thumbnail row beneath (see blocks/layout-grid/).
+ * @param {Element} main The container element
+ */
+function buildLayoutGrid(main) {
+  const findGridSeed = (part) => [...main.querySelectorAll('.content-media')].find((b) => {
+    const img = b.querySelector('img');
+    return img && (img.getAttribute('src') || '').includes(`layout-system-grid-${part}-column-grid`);
+  });
+  const six = findGridSeed('6');
+  const twelve = findGridSeed('12');
+  if (!six || !twelve) return;
+
+  const gridImg = (seed) => seed.querySelector('img')?.getAttribute('src');
+  // Collect the Margins/Gutters/Columns thumbnails (label paragraph + image
+  // paragraph pairs) that sit between the "6-column grid" and "12-column grid"
+  // labels in the same default-content wrapper.
+  const thumbs = [];
+  ['margins', 'gutters', 'columns'].forEach((name) => {
+    const img = [...main.querySelectorAll('img')]
+      .find((im) => (im.getAttribute('src') || '').includes(`layout-system-grid-${name}`));
+    if (!img) return;
+    const src = img.getAttribute('src');
+    const label = name.charAt(0).toUpperCase() + name.slice(1);
+    thumbs.push({ src, label });
+    // remove the bare image paragraph + its preceding label paragraph
+    const p = img.closest('p');
+    const prev = p?.previousElementSibling;
+    if (prev && prev.tagName === 'P' && prev.textContent.trim().toLowerCase() === name) prev.remove();
+    p?.remove();
+  });
+
+  // Build rows: row1 = two diagram cells; row2 = three thumbnail cells.
+  const mkImgCell = (src, alt) => {
+    const pic = document.createElement('picture');
+    const im = document.createElement('img');
+    im.src = src; im.alt = alt || '';
+    pic.append(im);
+    return { elems: [pic] };
+  };
+  const row1 = [mkImgCell(gridImg(six), '6-column grid'), mkImgCell(gridImg(twelve), '12-column grid')];
+  const row2 = thumbs.map((t) => {
+    const wrap = document.createElement('div');
+    const pic = document.createElement('picture');
+    const im = document.createElement('img'); im.src = t.src; im.alt = t.label;
+    pic.append(im);
+    wrap.append(pic);
+    wrap.append(document.createTextNode(t.label));
+    return { elems: [wrap] };
+  });
+
+  const block = buildBlock('layout-grid', row2.length ? [row1, row2] : [row1]);
+  six.replaceWith(block);
+  twelve.remove();
+}
+
+/**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
@@ -423,6 +484,7 @@ function buildAutoBlocks(main) {
   try {
     buildColorSwatches(main);
     buildAccentUsageRegion(main);
+    buildLayoutGrid(main);
     buildColorGalleries(main);
   } catch (error) {
     // eslint-disable-next-line no-console
