@@ -70,12 +70,15 @@ export default function decorate(block) {
   const ctaLabel = (ctaTextCell?.textContent.trim())
     || ctaAnchor?.textContent.trim()
     || 'Explore the brand';
+  // The CTA is a separate element pinned to the bottom-center of the hero (a
+  // scroll link with a trailing arrow), so it sits below the centered heading —
+  // matching the live banner.
+  let cta = null;
   if (ctaHref) {
-    const cta = document.createElement('a');
+    cta = document.createElement('a');
     cta.className = 'hero-cta';
     cta.href = ctaHref;
     cta.innerHTML = `<span>${ctaLabel}</span>`;
-    content.append(cta);
   }
 
   // A hero with only a video and no overlay heading/CTA renders the video
@@ -94,5 +97,7 @@ export default function decorate(block) {
     return;
   }
 
-  block.replaceChildren(bg, content);
+  const children = [bg, content];
+  if (cta) children.push(cta);
+  block.replaceChildren(...children);
 }

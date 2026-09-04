@@ -10,6 +10,14 @@
   background-color: var(--light-color);
 }
 
+/* The "Core brand elements" intro (eyebrow + heading + subcopy) sits in the
+   default-content block directly above the cards grid — center it to match the
+   live section. Scoped to that adjacency so other left-aligned content is
+   unaffected. */
+main .section > .default-content-wrapper:has(+ .brand-cards-wrapper) {
+  text-align: center;
+}
+
 .brand-cards {
   max-width: 1140px;
   margin: 0 auto;

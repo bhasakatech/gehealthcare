@@ -2,13 +2,14 @@
 
 /*
  * GE HealthCare Brand Hub uses Source Sans. We self-host a latin-subset
- * variable woff2 (weights 400–600 cover body + semibold headings/eyebrows)
- * and keep the metric-matched Arial fallback for stable layout/LCP.
+ * variable woff2 (weights 300–600 cover the light hero heading, body, and
+ * semibold eyebrows) and keep the metric-matched Arial fallback for stable
+ * layout/LCP.
  */
 @font-face {
   font-family: source-sans;
   font-style: normal;
-  font-weight: 400 600;
+  font-weight: 300 600;
   font-display: swap;
   src: url('/fonts/source-sans-3.woff2') format('woff2');
 }

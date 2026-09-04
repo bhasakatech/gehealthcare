@@ -62,6 +62,7 @@
   margin: 0;
   color: var(--background-color);
   font-size: 40px;
+  font-weight: 300; /* light weight, matches the live Source Sans Light heading */
   line-height: 1.1;
 }
 
@@ -70,25 +71,31 @@
   color: var(--background-color);
 }
 
-/* "Explore the brand" scroll link with a down chevron */
+/* "Explore the brand" scroll link — pinned to the bottom-center of the hero,
+   label and a trailing down-arrow in a row (matches the live banner). */
 .hero .hero-cta {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
   display: inline-flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 8px;
-  margin-top: 24px;
+  gap: 10px;
   color: var(--background-color);
-  font-weight: 600;
+  font-weight: 300;
+  font-size: var(--body-font-size-s);
   text-decoration: none;
 }
 
 .hero .hero-cta::after {
   content: '';
-  width: 10px;
-  height: 10px;
-  border: 2px solid currentcolor;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+  width: 9px;
+  height: 9px;
+  border: 1px solid currentcolor;
+  border-width: 0 1px 1px 0;
+  transform: translateY(-3px) rotate(45deg);
 }
 
 .hero .hero-cta:hover {
