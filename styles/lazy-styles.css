@@ -27,16 +27,43 @@ main .section.sidebar-layout {
   }
 
   /* Sidebar: the nav + support card in one wrapper (moved in by
-     section-nav.js) that sticks as a single unit, so the two never overlap. */
+     section-nav.js) that sticks as a single unit, so the two never overlap.
+     A light-grey background band runs the full column height (matches the
+     live brand-hub sidebar). */
   main .section.sidebar-layout > .section-nav-wrapper {
-    flex: 0 0 220px;
+    flex: 0 0 240px;
     position: sticky;
     top: var(--nav-height);
-    align-self: flex-start;
+    align-self: stretch;
     max-height: calc(100vh - var(--nav-height));
     overflow-y: auto;
-    padding-right: 16px;
-    border-right: 1px solid var(--border-color);
+    padding: 24px 16px;
+
+    /* Soft lavender-grey band + divider, matching the live sidebar
+       (#main_sidebar in the brand-hub theme). The box-shadow extends the same
+       grey to the left viewport edge (full-bleed), so there's no white strip on
+       the far left where the centered 1140px container has its gutter. */
+    background-color: #f4f1f8;
+    border-right: 1px solid #d1d2d4;
+    box-shadow: -100vw 0 0 #f4f1f8;
+
+    /* Tint the internal scrollbar so its track blends into the grey band
+       instead of showing a white strip on the right. */
+    scrollbar-width: thin;
+    scrollbar-color: #c9c4d6 #f4f1f8;
+  }
+
+  main .section.sidebar-layout > .section-nav-wrapper::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  main .section.sidebar-layout > .section-nav-wrapper::-webkit-scrollbar-track {
+    background: #f4f1f8;
+  }
+
+  main .section.sidebar-layout > .section-nav-wrapper::-webkit-scrollbar-thumb {
+    background: #c9c4d6;
+    border-radius: 4px;
   }
 
   /* Content column takes the remaining width. */
