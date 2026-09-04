@@ -7,6 +7,22 @@
  *   - purple : solid purple, white-text card (Best practice tips)
  * Dos/Don'ts lists render with green-check / red-cross markers.
  */
+
+/* Page intro heading ("Legal requirements for brand usage") — the default
+   content block directly above the panels. Large light heading like the live
+   page. Scoped to that adjacency so no other page is affected. */
+main .default-content-wrapper:has(+ .legal-panels-wrapper) h2 {
+  font-weight: 300;
+  font-size: 40px;
+  line-height: 1.1;
+}
+
+@media (width >= 900px) {
+  main .default-content-wrapper:has(+ .legal-panels-wrapper) h2 {
+    font-size: 64px;
+  }
+}
+
 .legal-panels .legal-panels-list {
   display: flex;
   flex-direction: column;
@@ -15,6 +31,24 @@
 /* Base panel spacing. */
 .legal-panels .legal-panel {
   padding: 12px 0 32px;
+}
+
+/* Heading type scale — matches the live page (medium weight, large sizes).
+   Default sub-section headings (Dos, Example, Vendors, etc.) ~36px. */
+.legal-panels .legal-panel > h3 {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+/* Top-level section headings render largest (~48px desktop). */
+.legal-panels .legal-panel-section > h3 {
+  font-size: 34px;
+}
+
+/* Nested sub-headings (Testimonials, Endorsements) render smallest (~24px). */
+.legal-panels .legal-panel-sub > h3 {
+  font-size: 24px;
 }
 
 .legal-panels .legal-panel > h3:first-child {
@@ -68,6 +102,110 @@
   border-bottom: 1px solid var(--border-color);
 }
 
+/* Restored content images inside panels (Video and motion, Patient data, Best
+   practice tips). Single = full-width; grid = two side by side then one below. */
+.legal-panels .legal-panel-media {
+  margin: 24px 0 8px;
+}
+
+.legal-panels .legal-panel-media picture {
+  display: block;
+}
+
+.legal-panels .legal-panel-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.legal-panels .legal-panel-media-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (width >= 600px) {
+  .legal-panels .legal-panel-media-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Third image (odd one out) spans the full row below the first two. */
+  .legal-panels .legal-panel-media-grid > picture:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Half-width image aligned left (Patient data "Bone SPECT/CT" image sits in a
+   1/2 column on the live page). */
+@media (width >= 600px) {
+  .legal-panels .legal-panel-media-half {
+    max-width: calc(50% - 8px);
+  }
+}
+
+/* "Best practice tips": employee portrait (left) beside the purple card (right),
+   side by side on desktop, stacked on mobile — matches the live two-column row. */
+.legal-panels .legal-bestpractice-row {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 16px 0;
+  align-items: stretch;
+}
+
+.legal-panels .legal-bestpractice-row > picture {
+  display: block;
+}
+
+.legal-panels .legal-bestpractice-row > picture img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* The card, inside the row, drops its own vertical margin (the row owns it). */
+.legal-panels .legal-bestpractice-row > .legal-panel-purple {
+  margin: 0;
+}
+
+@media (width >= 600px) {
+  .legal-panels .legal-bestpractice-row {
+    flex-direction: row;
+  }
+
+  .legal-panels .legal-bestpractice-row > picture,
+  .legal-panels .legal-bestpractice-row > .legal-panel-purple {
+    flex: 1 1 50%;
+    min-width: 0;
+  }
+}
+
+/* Download links get a leading download arrow icon (matches the live page,
+   where these links carry a small download glyph). */
+.legal-panels .legal-panel a[href$=".xlsx"],
+.legal-panels .legal-panel a[href$=".zip"],
+.legal-panels .legal-panel a[href*="agreement-templates"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legal-panels .legal-panel a[href$=".xlsx"]::before,
+.legal-panels .legal-panel a[href$=".zip"]::before,
+.legal-panels .legal-panel a[href*="agreement-templates"]::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%23000" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 11l5 5 5-5"/><path d="M4 20h16"/></svg>');
+}
+
 /* Dos / Don'ts lists — round green check (Dos) or red cross (Don'ts) markers. */
 .legal-panels .legal-list {
   list-style: none;
@@ -115,5 +253,18 @@
   .legal-panels .legal-panel-grey,
   .legal-panels .legal-panel-purple {
     padding: 32px 36px;
+  }
+
+  /* Desktop type scale (matches live): sub-sections 36px, top-level 48px. */
+  .legal-panels .legal-panel > h3 {
+    font-size: 36px;
+  }
+
+  .legal-panels .legal-panel-section > h3 {
+    font-size: 48px;
+  }
+
+  .legal-panels .legal-panel-sub > h3 {
+    font-size: 24px;
   }
 }

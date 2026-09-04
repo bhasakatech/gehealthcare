@@ -41,6 +41,28 @@
           "name": "content",
           "label": "Panel Content",
           "description": "One legal sub-section: its heading (H3) followed by paragraphs/lists. A \"Dos\"/\"Don'ts\" panel gets check/cross markers; a \"Best practice tips\" panel renders purple."
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "mediaLayout",
+          "label": "Image Layout",
+          "description": "How the panel images (below) are arranged. Leave as None for a text-only panel.",
+          "value": "",
+          "options": [
+            { "name": "None", "value": "" },
+            { "name": "Grid (two side by side, third full width)", "value": "grid" },
+            { "name": "Half width (single image, aligned left)", "value": "half" },
+            { "name": "Beside card (image left of a purple card)", "value": "beside" }
+          ]
+        },
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "images",
+          "label": "Panel Images",
+          "description": "One or more images shown in this panel, arranged per the Image Layout above.",
+          "multi": true
         }
       ]
     }
