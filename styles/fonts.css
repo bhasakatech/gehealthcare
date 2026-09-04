@@ -1,10 +1,18 @@
 /* stylelint-disable max-line-length */
 
 /*
- * GE HealthCare Brand Hub uses Source Sans Pro. Until the licensed webfont
- * files are added to /fonts, we resolve `source-sans` through a metric-matched
- * system fallback so layout and LCP stay stable.
+ * GE HealthCare Brand Hub uses Source Sans. We self-host a latin-subset
+ * variable woff2 (weights 400–600 cover body + semibold headings/eyebrows)
+ * and keep the metric-matched Arial fallback for stable layout/LCP.
  */
+@font-face {
+  font-family: source-sans;
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('/fonts/source-sans-3.woff2') format('woff2');
+}
+
 @font-face {
   font-family: source-sans-fallback;
   size-adjust: 100%;

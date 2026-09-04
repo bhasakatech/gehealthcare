@@ -44,4 +44,29 @@ main .section.sidebar-layout {
     flex: 1 1 auto;
     min-width: 0;
   }
+
+  /* Lead intro pattern: the first image in the content column renders image-left
+     / text-right, with the eyebrow + heading full-width above (matches the live
+     "Our brand" intro). Only the first image-paragraph floats — later images
+     (e.g. the full-width "Our purpose" billboard) stay full-width with text
+     below. `:has(+ p)` keeps it to image-paragraphs actually followed by copy. */
+  main .section.sidebar-layout .default-content-wrapper
+    > p:has(picture):has(+ p):first-of-type {
+    float: left;
+    width: calc(50% - 12px);
+    margin: 0 24px 8px 0;
+  }
+
+  main .section.sidebar-layout .default-content-wrapper
+    > p:has(picture):has(+ p):first-of-type img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Headings clear the lead-image float so the next section starts on its own
+     line below it. */
+  main .section.sidebar-layout .default-content-wrapper h2,
+  main .section.sidebar-layout .default-content-wrapper h3 {
+    clear: both;
+  }
 }

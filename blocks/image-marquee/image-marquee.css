@@ -23,17 +23,22 @@
   animation: image-marquee-scroll var(--image-marquee-duration, 40s) linear infinite;
 }
 
+/* Uniform-height images, intrinsic width (matches the live marquee: every image
+   is the same height, widths vary by aspect ratio). */
 .image-marquee .image-marquee-item {
   flex: 0 0 auto;
-  width: calc(100vw - 48px); /* one image visible on mobile, minus the gap */
-  max-width: 360px;
+  height: var(--image-marquee-height, 280px);
 }
 
-.image-marquee .image-marquee-item picture,
+.image-marquee .image-marquee-item picture {
+  display: block;
+  height: 100%;
+}
+
 .image-marquee .image-marquee-item img {
   display: block;
-  width: 100%;
-  height: auto;
+  width: auto;
+  height: 100%;
   border-radius: 8px;
   object-fit: cover;
 }
@@ -45,15 +50,14 @@
 }
 
 @media (width >= 600px) {
-  .image-marquee .image-marquee-item {
-    width: calc((100vw - 72px) / 2);
-    max-width: 420px;
+  .image-marquee {
+    --image-marquee-height: 360px;
   }
 }
 
 @media (width >= 900px) {
-  .image-marquee .image-marquee-item {
-    width: 360px;
+  .image-marquee {
+    --image-marquee-height: 450px;
   }
 }
 
