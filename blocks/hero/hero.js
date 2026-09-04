@@ -78,5 +78,21 @@ export default function decorate(block) {
     content.append(cta);
   }
 
+  // A hero with only a video and no overlay heading/CTA renders the video
+  // "contained" (centered, locked to 16:9) instead of as a full-bleed banner.
+  const hasOverlay = !!content.querySelector('h1') || !!ctaHref;
+  if (videoUrl && !hasOverlay) {
+    block.classList.add('hero-contained');
+    // The contained video is the primary content, so expose playback controls
+    // and drop the decorative aria-hidden (matches the live /our-brand/ tag).
+    const video = bg.querySelector('video');
+    if (video) {
+      video.controls = true;
+      video.removeAttribute('aria-hidden');
+    }
+    block.replaceChildren(bg);
+    return;
+  }
+
   block.replaceChildren(bg, content);
 }

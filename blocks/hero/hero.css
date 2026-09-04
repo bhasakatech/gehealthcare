@@ -10,6 +10,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  box-sizing: border-box;
   min-height: 560px;
   padding: 120px 24px 160px;
   overflow: hidden;
@@ -100,11 +101,39 @@
 
 @media (width >= 900px) {
   .hero {
-    min-height: 720px;
-    padding: 200px 32px 300px;
+    min-height: 670px;
+    padding: 120px 32px;
   }
 
   .hero .hero-content h1 {
     font-size: 64px;
   }
+}
+
+/* Contained variant: a centered 16:9 video (no full-bleed background, no
+   overlay text) — matches the /our-brand/ live treatment. */
+.hero.hero-contained {
+  display: block;
+  min-height: unset;
+  padding: 0;
+  overflow: visible;
+}
+
+.hero.hero-contained .hero-bg {
+  position: relative;
+  inset: unset;
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  aspect-ratio: 16 / 9;
+}
+
+.hero.hero-contained .hero-bg::after {
+  content: none;
+}
+
+.hero.hero-contained .hero-bg video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
