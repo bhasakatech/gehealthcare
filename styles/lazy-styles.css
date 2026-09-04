@@ -72,20 +72,23 @@ main .section.sidebar-layout {
     min-width: 0;
   }
 
-  /* Lead intro pattern: the first image in the content column renders image-left
-     / text-right, with the eyebrow + heading full-width above (matches the live
-     "Our brand" intro). Only the first image-paragraph floats — later images
-     (e.g. the full-width "Our purpose" billboard) stay full-width with text
-     below. `:has(+ p)` keeps it to image-paragraphs actually followed by copy. */
+  /* Lead intro pattern: an image that directly follows a heading renders
+     image-left / text-right, with the eyebrow + heading full-width above
+     (matches the live "Our brand" intro). The image-paragraph must sit
+     immediately after an h2/h3 (`:is(h2, h3) + p`) and be followed by copy
+     (`:has(+ p)`). This is precisely the intro shape. Image-paragraphs NOT
+     preceded by a heading — e.g. the logos social-media mockup, which is the
+     first element in its wrapper — stay full-width with the text below,
+     matching live. */
   main .section.sidebar-layout .default-content-wrapper
-    > p:has(picture):has(+ p):first-of-type {
+    > :is(h2, h3) + p:has(picture):has(+ p) {
     float: left;
     width: calc(50% - 12px);
     margin: 0 24px 8px 0;
   }
 
   main .section.sidebar-layout .default-content-wrapper
-    > p:has(picture):has(+ p):first-of-type img {
+    > :is(h2, h3) + p:has(picture):has(+ p) img {
     width: 100%;
     height: auto;
   }
@@ -96,4 +99,94 @@ main .section.sidebar-layout {
   main .section.sidebar-layout .default-content-wrapper h3 {
     clear: both;
   }
+}
+
+/* "Logo color" intro: the three labeled blurbs (Color variations / Reverse
+   logo / Black logo) sit in three text columns beneath the full-width heading,
+   matching the live `fusion-text-columns-3` block.
+
+   AEM merges all consecutive default content into one .default-content-wrapper,
+   so this wrapper also holds the preceding social-media mockup image + caption.
+   Columnizing the whole wrapper would (wrongly) columnize those too. Instead,
+   target only the <p> siblings that FOLLOW the #logo-color heading via `~`, and
+   float them into three equal columns. The heading and everything before it
+   stay full-width; the float is cleared by the next heading/section. */
+@media (width >= 900px) {
+  /* Contain the floated blurbs so they can't leak into the next section. */
+  main .section.sidebar-layout .default-content-wrapper:has(> h2#logo-color) {
+    display: flow-root;
+  }
+
+  main .section.sidebar-layout .default-content-wrapper > h2#logo-color ~ p {
+    float: left;
+    width: calc((100% - 80px) / 3);
+    margin: 0 40px 0 0;
+    box-sizing: border-box;
+  }
+
+  /* Last blurb (Black logo is the final <p> in the wrapper) drops its gap so the
+     three columns fit exactly within the content width. */
+  main .section.sidebar-layout .default-content-wrapper > h2#logo-color ~ p:last-of-type {
+    margin-right: 0;
+  }
+
+  /* The next heading in the wrapper clears the columned blurbs. */
+  main .section.sidebar-layout .default-content-wrapper > h2#logo-color ~ h2,
+  main .section.sidebar-layout .default-content-wrapper > h2#logo-color ~ h3 {
+    clear: both;
+  }
+}
+
+/* Auto-grid: runs of consecutive image/caption cards (grouped by
+   section-nav.js into `.media-grid-auto`) flow into a fixed number of columns,
+   matching the multi-column example grids on the live brand-foundation pages.
+   The column count is set per section by section-nav.js: exactly three tiles →
+   3-up; every other run → 2-up (a 6-tile run wraps to three rows of two).
+   Mobile stacks to one column. */
+.media-grid-auto {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin: 24px 0;
+}
+
+@media (width >= 600px) {
+  .media-grid-auto.media-grid-2up {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .media-grid-auto.media-grid-3up {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Cards inside the grid drop their own vertical margin (the grid owns spacing)
+   and fill their column. */
+.media-grid-auto > .content-media-wrapper {
+  margin: 0;
+}
+
+/* Mixed example rows (Logo integrity, GE HealthCare name): a good-example
+   caption card shares a row with its ✗ don't cards. The dos-donts block is
+   flattened with `display: contents` so its individual cards become direct
+   grid columns alongside the caption card, matching the live equal-width row. */
+.media-grid-auto > .dos-donts-wrapper.dos-donts-inline,
+.media-grid-auto > .dos-donts-wrapper.dos-donts-inline > .dos-donts,
+.media-grid-auto > .dos-donts-wrapper.dos-donts-inline > .dos-donts > ul {
+  display: contents;
+}
+
+.media-grid-auto .content-media {
+  display: block;
+  max-width: none;
+  padding: 0;
+}
+
+.media-grid-auto .content-media .content-media-figure {
+  display: block;
+}
+
+.media-grid-auto .content-media .content-media-figure img {
+  width: 100%;
+  height: auto;
 }

@@ -92,6 +92,118 @@ function setupScrollSpy(anchorLinks) {
   targets.forEach((t) => observer.observe(t));
 }
 
+/**
+ * Group each section's image "cards" into a responsive grid, matching the
+ * multi-column example grids on the live brand-foundation pages (e.g. Logos).
+ *
+ * On the live page, a section's example tiles flow into 2-up / 3-up grids. In
+ * the migrated EDS content each tile is a standalone single-column
+ * `content-media` block (the `caption` / `image-only` variants), and the
+ * section's descriptive prose was split into separate `default-content-wrapper`
+ * blocks interleaved *between* those tiles — so they stack vertically.
+ *
+ * This regroups per section: a section starts at a heading (h2/h3) and runs
+ * until the next heading. Within a section, all image tiles are collected and
+ * moved into one `.media-grid-auto` grid, positioned where the first tile was.
+ * Text/prose keeps its place; only the image tiles are gathered so they lay out
+ * side by side like the live grids. A grid is only created when a section has
+ * 2+ tiles, so lone images (and pages without such runs — legal, our-brand,
+ * home) are untouched.
+ */
+function groupMediaCards(content) {
+  // Only caption cards flow into the multi-column grid. image-only tiles (the
+  // full-width primary logo, platform length banners, placement diagrams) stay
+  // full width, matching the live 1/1 rows — so a section like "Logo versions"
+  // keeps Horizontal full width above a 2-up of Stacked + Platform.
+  //
+  // This runs before content-media decorates (section-nav is the first block in
+  // the section), so the `.caption` class isn't set yet. Read the authored
+  // layout instead: the decorated class if present, else the raw layout cell
+  // (the block's last field), which holds the value from the moment it renders.
+  const cardLayout = (el) => {
+    const cm = el?.querySelector(':scope > .content-media');
+    if (!cm) return null;
+    const known = ['text-left', 'text-right', 'text-only', 'image-only', 'caption', 'caption-wide'];
+    const cls = known.find((l) => cm.classList.contains(l));
+    if (cls) return cls;
+    const rows = [...cm.children];
+    const firstCells = rows[0] ? [...rows[0].children] : [];
+    const cells = firstCells.length > 1 ? firstCells : rows.map((r) => r.firstElementChild || r);
+    const raw = cells[cells.length - 1]?.textContent.trim();
+    return known.includes(raw) ? raw : null;
+  };
+  const isCard = (el) => el?.classList?.contains('content-media-wrapper')
+    && cardLayout(el) === 'caption';
+  const isDosDonts = (el) => el?.classList?.contains('dos-donts-wrapper')
+    || !!el?.querySelector?.(':scope > .dos-donts');
+  const dosDontsCount = (el) => {
+    const block = el.querySelector(':scope > .dos-donts') || el;
+    // Pre-decoration: each dont is a direct child <div> row; post-decoration:
+    // an <li> in the built <ul>. Count whichever is present.
+    const lis = block.querySelectorAll(':scope > ul > li');
+    if (lis.length) return lis.length;
+    return block.querySelectorAll(':scope > div').length;
+  };
+
+  // Group tiles into one grid with an explicit column count that matches the
+  // live page (auto-fill can't tell a 3-up from a 2-up). `place` is the element
+  // the grid is inserted before; `members` are moved into it.
+  const buildGrid = (place, members, columns) => {
+    const grid = document.createElement('div');
+    grid.className = 'media-grid-auto';
+    grid.classList.add(`media-grid-${columns}up`);
+    content.insertBefore(grid, place);
+    members.forEach((m) => grid.append(m));
+    return grid;
+  };
+
+  const kids = [...content.children];
+  let i = 0;
+  while (i < kids.length) {
+    const el = kids[i];
+
+    // Mixed example row: a caption card immediately followed by one or more
+    // dos-donts blocks (the "Logo integrity" / "GE HealthCare name" example
+    // rows on live — a good example beside its ✗ don't cards). Merge the good
+    // card and each dont card into one equal-column grid. The dos-donts wrapper
+    // is flattened (`display: contents`) so its cards become grid columns.
+    if (isCard(el) && isDosDonts(kids[i + 1])) {
+      const members = [el];
+      let tiles = 1;
+      let j = i + 1;
+      while (isDosDonts(kids[j])) {
+        kids[j].classList.add('dos-donts-inline');
+        tiles += dosDontsCount(kids[j]);
+        members.push(kids[j]);
+        j += 1;
+      }
+      // Cap at 3 columns; more tiles wrap (e.g. 1 good + 4 don'ts → 3 then 2),
+      // matching the live 1/3-width columns.
+      buildGrid(el, members, Math.min(tiles, 3));
+      i = j;
+      // eslint-disable-next-line no-continue
+      continue;
+    }
+
+    // Plain caption grid: a run of 2+ consecutive caption cards (Logo color,
+    // Logo versions, placement, …). Exactly three tiles → 3-up; otherwise 2-up
+    // (a 6-tile run wraps to three rows of two).
+    if (isCard(el)) {
+      const run = [];
+      let j = i;
+      while (isCard(kids[j])) { run.push(kids[j]); j += 1; }
+      if (run.length >= 2) {
+        buildGrid(run[0], run, run.length === 3 ? 3 : 2);
+        i = j;
+        // eslint-disable-next-line no-continue
+        continue;
+      }
+    }
+
+    i += 1;
+  }
+}
+
 export default async function decorate(block) {
   const items = [...block.children]
     .map(parseRow)
@@ -238,6 +350,7 @@ export default async function decorate(block) {
         if (child !== wrapper) content.append(child);
       });
       section.append(content);
+      groupMediaCards(content);
     }
   }
 }
