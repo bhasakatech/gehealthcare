@@ -46,7 +46,9 @@
             { "name": "Text left", "value": "text-left" },
             { "name": "Text right", "value": "text-right" },
             { "name": "Text only", "value": "text-only" },
-            { "name": "Image only", "value": "image-only" }
+            { "name": "Image only", "value": "image-only" },
+            { "name": "Caption card (image + label, grids with siblings)", "value": "caption" },
+            { "name": "Caption card, full width (image + label, never grids)", "value": "caption-wide" }
           ]
         }
       ]

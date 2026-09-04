@@ -1,7 +1,7 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
-const LAYOUTS = ['text-left', 'text-right', 'text-only', 'image-only'];
+const LAYOUTS = ['text-left', 'text-right', 'text-only', 'image-only', 'caption', 'caption-wide'];
 
 /**
  * loads and decorates the content-media block
@@ -64,7 +64,17 @@ export default function decorate(block) {
   block.classList.add(layout);
 
   const children = [];
-  if (layout !== 'image-only') children.push(text);
-  if (layout !== 'text-only' && img) children.push(figure);
+  // Caption cards put the image on top inside a bordered card, with the label
+  // below — matching the live example tiles. caption-wide is the same card but
+  // stays full width (the grid engine only groups plain `caption` cards), for
+  // wide banner diagrams the live page keeps full width and stacked. Every
+  // other layout keeps text first (side-by-side split, or text-only).
+  if (layout === 'caption' || layout === 'caption-wide') {
+    if (img) children.push(figure);
+    children.push(text);
+  } else {
+    if (layout !== 'image-only') children.push(text);
+    if (layout !== 'text-only' && img) children.push(figure);
+  }
   block.replaceChildren(...children);
 }
