@@ -16,14 +16,23 @@ const DEFAULT_CATEGORY = 'Pages and sections';
 // Preferred display order of the category groups.
 const CATEGORY_ORDER = [
   'Pages and sections', 'Our brand', 'Brand foundations',
-  'Guidelines', 'Downloads', 'Training and learning', 'Legal',
+  'Downloads', 'Guidelines', 'Training and learning', 'Legal',
 ];
+
+// Maps an asset feed `category` value to its display group.
+const ASSET_CATEGORY = {
+  download: 'Downloads',
+  guideline: 'Guidelines',
+  training: 'Training and learning',
+};
 
 // Rows we never want to surface as search results.
 const EXCLUDE_PATHS = /^\/(nav|footer|drafts\/|faq-items|search)/;
 
-function getCategory(path) {
-  const rule = CATEGORY_RULES.find((r) => r.test.test(path));
+function getCategory(row) {
+  // Asset rows carry an explicit category; page rows are grouped by path.
+  if (row.asset) return ASSET_CATEGORY[row.category] || DEFAULT_CATEGORY;
+  const rule = CATEGORY_RULES.find((r) => r.test.test(row.path || ''));
   return rule ? rule.label : DEFAULT_CATEGORY;
 }
 
@@ -67,15 +76,25 @@ function scoreRow(row, terms) {
 function renderResultCard(row, terms) {
   const li = document.createElement('li');
   li.className = 'search-results-card';
+  if (row.asset) li.classList.add(`search-results-card-${row.category}`);
 
   const link = document.createElement('a');
   link.className = 'search-results-link';
-  link.href = row.path;
+  link.href = row.asset ? row.url : row.path;
 
   const title = row.title || titleFromPath(row.path);
   const h3 = document.createElement('h3');
   h3.innerHTML = highlight(title, terms);
   link.append(h3);
+
+  // File-type badge for asset results (ZIP / PDF / VIDEO …), like the source.
+  if (row.asset && row.fileType) {
+    const badge = document.createElement('span');
+    badge.className = 'search-results-filetype';
+    badge.textContent = row.fileType;
+    h3.append(document.createTextNode(' '));
+    link.insertBefore(badge, h3.nextSibling);
+  }
 
   if (row.description) {
     const p = document.createElement('p');
@@ -88,7 +107,11 @@ function renderResultCard(row, terms) {
 
   const go = document.createElement('span');
   go.className = 'search-results-go';
-  go.textContent = 'Go to page';
+  if (row.asset) {
+    go.textContent = row.category === 'training' ? 'View' : `Download ${row.fileType || 'file'}`;
+  } else {
+    go.textContent = 'Go to page';
+  }
   link.append(go);
 
   li.append(link);
@@ -137,7 +160,7 @@ function renderGroup(category, rows, terms) {
 function groupResults(rows) {
   const groups = new Map();
   rows.forEach((row) => {
-    const cat = getCategory(row.path);
+    const cat = getCategory(row);
     if (!groups.has(cat)) groups.set(cat, []);
     groups.get(cat).push(row);
   });
@@ -154,7 +177,8 @@ export default async function decorate(block) {
   // Read config from authored cells, then clear the block.
   const cells = [...block.querySelectorAll(':scope > div > div')];
   const source = (cells[0]?.textContent.trim()) || '/query-index.json';
-  const placeholder = (cells[1]?.textContent.trim()) || 'Search…';
+  const assetsSource = cells[2] ? (cells[1]?.textContent.trim()) : '';
+  const placeholder = (cells[cells.length - 1]?.textContent.trim()) || 'Search…';
   block.textContent = '';
 
   const params = new URLSearchParams(window.location.search);
@@ -187,18 +211,32 @@ export default async function decorate(block) {
 
   heading.innerHTML = `Search results for “${escapeHTML(query)}”`;
 
-  let data = [];
-  try {
-    const resp = await fetch(source);
-    if (resp.ok) ({ data } = await resp.json());
-  } catch (e) {
-    output.innerHTML = '<p class="search-results-empty">Search is temporarily unavailable.</p>';
-    return;
-  }
+  // Fetch pages and assets in parallel; a missing/failed asset feed just means
+  // page-only results, never a broken page.
+  const fetchData = async (url) => {
+    if (!url) return [];
+    try {
+      const resp = await fetch(url);
+      if (!resp.ok) return [];
+      const json = await resp.json();
+      return Array.isArray(json.data) ? json.data : [];
+    } catch (e) {
+      return [];
+    }
+  };
+
+  const [pages, assets] = await Promise.all([
+    fetchData(source),
+    fetchData(assetsSource),
+  ]);
+
+  const pageRows = pages
+    .filter((row) => row.path && !EXCLUDE_PATHS.test(row.path) && row.robots !== 'noindex');
+  // Tag asset rows so grouping/rendering can treat them as external files.
+  const assetRows = assets.map((row) => ({ ...row, asset: true }));
 
   const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
-  const matches = data
-    .filter((row) => row.path && !EXCLUDE_PATHS.test(row.path) && row.robots !== 'noindex')
+  const matches = [...pageRows, ...assetRows]
     .map((row) => ({ row, score: scoreRow(row, terms) }))
     .filter((m) => m.score > 0)
     .sort((a, b) => b.score - a.score)

@@ -26,7 +26,15 @@
           "name": "source",
           "label": "Index Source",
           "value": "/query-index.json",
-          "description": "Path to the query-index JSON used for searching."
+          "description": "Path to the query-index JSON used for searching pages."
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "assets",
+          "label": "Assets Source",
+          "value": "/search-assets.json",
+          "description": "Path to the JSON feed of downloadable assets (Downloads, Guidelines, Training). Leave blank to search pages only."
         },
         {
           "component": "text",

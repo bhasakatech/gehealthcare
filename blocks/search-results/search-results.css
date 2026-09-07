@@ -130,6 +130,18 @@
   font-weight: 700;
 }
 
+.search-results .search-results-filetype {
+  display: inline-block;
+  margin: 0 0 8px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: #f0ebf7;
+  color: var(--brand-color);
+  font-size: var(--body-font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
 .search-results .search-results-go {
   display: inline-block;
   font-size: var(--body-font-size-xs);
