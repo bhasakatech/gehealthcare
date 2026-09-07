@@ -1,0 +1,605 @@
+{
+  "total": 81,
+  "offset": 0,
+  "limit": 81,
+  "data": [
+    {
+      "title": "GE HealthCare suite",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Logo-Pack.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes stacked and standard GE HealthCare logos for different layout needs, along with a logo legend PDF outlining usage guidelines, formats, and specifications."
+    },
+    {
+      "title": "GE Santé suite",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GESant%C3%A9_Logo-Pack.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE Santé logos for digital and print use cases, along with a logo legend PDF outlining usage guidelines, formats, and specifications."
+    },
+    {
+      "title": "Channel Partner suite",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Channel-Partner_Logo-Pack.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare partner logos tailored for distributor, sales representative, and service provider use cases."
+    },
+    {
+      "title": "Source Sans Pro",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Fonts_Source-Sans-Pro.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes Source Sans Pro font files in multiple weights and styles, along with an OFL license file outlining usage and distribution terms."
+    },
+    {
+      "title": "Source Hans Sans",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Fonts_Source-Han-Sans.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes Source Han Sans font files with multiple formats and language support options, along with license, readme, and design guide documents outlining usage, specifications, and implementation guidance."
+    },
+    {
+      "title": "Iconography suite (ppt)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/downloads/documents/gehealthcare-iconography-icon-pack.pptx",
+      "category": "download",
+      "fileType": "PPTX",
+      "description": "Includes Ethos Design System (EDS) icons formatted for PowerPoint presentations, with guidance on usage and updates for consistent application."
+    },
+    {
+      "title": "PowerPoint and Microsoft 365 suite",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Brand-Templates_M365-Pack.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare brand templates for Microsoft 365, including PowerPoint presentations, email signatures, Teams backgrounds, and email banners for consistent brand application across communications."
+    },
+    {
+      "title": "Biography",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Brand-Templates_Biography-Card.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare biography card templates in ISO A4 and US Letter formats for consistent professional profiles and presentations."
+    },
+    {
+      "title": "Policy document template",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/downloads/documents/gehealthcare-brand-templates-policy-document-template.docx",
+      "category": "download",
+      "fileType": "DOCX",
+      "description": "Includes GE HealthCare policy document templates for structured, on-brand documentation, supporting clear communication of policy content and supporting information."
+    },
+    {
+      "title": "Core marketing collateral",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Core-Marketing-Content.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes core GE HealthCare marketing content templates such as brochures, case studies, fact sheets, flyers, and white papers for consistent, on-brand communication."
+    },
+    {
+      "title": "Promotional materials",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Promotional-Materials.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare promotional material templates such as flyers, postcards, posters, and trifold layouts for consistent, on-brand marketing communication."
+    },
+    {
+      "title": "Editorial content",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Editorial-Content.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare editorial content templates such as bio cards and newsletters for structured, on-brand communication."
+    },
+    {
+      "title": "Stationery",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Marketing-Templates_Stationery.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare stationery templates such as business cards, envelopes, letterhead, memo, and other materials for consistent, on-brand communication."
+    },
+    {
+      "title": "African Affinity Forum",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_NGRGs_African-Affinity-Forum.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare African Affinity Forum assets such as banner templates, email banners, imagery, print-ready materials, and Teams backgrounds for consistent, on-brand event and communications support."
+    },
+    {
+      "title": "Asian Pacific Allies and Friends",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_NGRGs_Asian-Pacific-Allies-and-Friends.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare Asian Pacific Allies and Friends assets such as banner templates, email banners, imagery, print-ready materials, and Teams backgrounds for consistent, on-brand event and communications support."
+    },
+    {
+      "title": "Disability Advocacy Network",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_NGRGs_Disability-Advocacy-Network.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare Disability Advocacy Network assets such as banner templates, email banners, imagery, print-ready materials, and Teams backgrounds for consistent, on-brand event and communications support."
+    },
+    {
+      "title": "Green Team Network",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_NGRGs_Green-Team-Network.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare Green Team Network assets such as banner templates, email banners, imagery, print-ready materials, and Teams backgrounds for consistent, on-brand event and communications support."
+    },
+    {
+      "title": "Pride Alliance",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_NGRGs_Pride-Alliance.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare Pride Alliance assets such as banner templates, email banners, imagery, print-ready materials, and Teams backgrounds for consistent, on-brand event and communications support."
+    },
+    {
+      "title": "STEAM Girls",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_NGRGs_STEAM-Girls.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare Unidos assets such as banner templates, email banners, imagery, print-ready materials, LinkedIn banners, and Teams backgrounds for consistent, on-brand event and communications support."
+    },
+    {
+      "title": "Unidos",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_NGRGs_Unidos.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare Unidos assets such as banner templates, email banners, imagery, print-ready materials, LinkedIn banners, and Teams backgrounds for consistent, on-brand event and communications support."
+    },
+    {
+      "title": "Veterans Network",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_NGRGs_Veterans-Network.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare Veterans Network assets such as banner templates, email banners, imagery, print-ready materials, and Teams backgrounds for consistent, on-brand event and communications support."
+    },
+    {
+      "title": "Women’s Network",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_NGRGs_Womens-Network.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare Women’s Network assets such as banner templates, email banners, imagery, print-ready materials, and Teams backgrounds for consistent, on-brand event and communications support."
+    },
+    {
+      "title": "Africa Day",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Observances_Africa-Day.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare Africa Day campaign assets such as templates, email banners, presentation covers, Teams backgrounds, and campaign calendar materials for consistent, on-brand communication."
+    },
+    {
+      "title": "Asian American and Pacific Islander Heritage Month",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Observances_Asian-American-and-Pacific-Islander-Heritage-Month.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare Asian American and Pacific Islander Heritage Month campaign assets such as templates, email banners, presentation covers, Teams backgrounds, and campaign calendar materials for consistent, on-brand communication."
+    },
+    {
+      "title": "Black History Month",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Observances_Black-History-Month.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare Black History Month campaign assets such as templates, email banners, presentation covers, Teams backgrounds, and campaign calendar materials for consistent, on-brand communication."
+    },
+    {
+      "title": "Breast Cancer Awareness Month",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Observances_Breast-Cancer-Awareness-Month.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare Breast Cancer Awareness Month campaign assets such as templates, email banners, presentation covers, Teams backgrounds, ribbons, posters, social media materials, and campaign calendar materials for consistent, on-brand communication."
+    },
+    {
+      "title": "International Day of Persons with Disabilities",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Observances_International-Day-of-Persons-with-Disabilities.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare International Day of Persons with Disabilities campaign assets such as templates, email banners, presentation covers, Teams backgrounds, and campaign calendar materials for consistent, on-brand communication."
+    },
+    {
+      "title": "International Women’s Day",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Observances_International-Womens-Day.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare International Women’s Day campaign assets such as templates, email banners, presentation covers, Teams backgrounds, posters, and campaign calendar materials for consistent, on-brand communication."
+    },
+    {
+      "title": "International Women in Engineering Day",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Observances_International-Women-in-Engineering-Day.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare International Women in Engineering Day campaign assets such as templates, email banners, presentation covers, Teams backgrounds, and campaign calendar materials for consistent, on-brand communication."
+    },
+    {
+      "title": "Juneteenth",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Observances_Juneteenth.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare Juneteenth campaign assets such as templates, email banners, presentation covers, Teams backgrounds, and campaign calendar materials for consistent, on-brand communication."
+    },
+    {
+      "title": "Latino and Hispanic Heritage Month",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Observances_National-Hispanic-Heritage-Month.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare Lunar New Year campaign assets such as templates, email banners, presentation covers, Teams backgrounds, and campaign calendar materials for consistent, on-brand communication."
+    },
+    {
+      "title": "Lunar New Year",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Observances_Lunar-New-Year.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare Lunar New Year campaign assets such as templates, email banners, presentation covers, Teams backgrounds, and campaign calendar materials for consistent, on-brand communication."
+    },
+    {
+      "title": "Movember",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Observances_Movember.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare Movember campaign assets such as templates, email banners, presentation covers, Teams backgrounds, and campaign calendar materials for consistent, on-brand communication."
+    },
+    {
+      "title": "Pride Month",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Observances_Pride-Month.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare Pride Month campaign assets such as templates, email banners, presentation covers, Teams backgrounds, posters, and campaign calendar materials for consistent, on-brand communication"
+    },
+    {
+      "title": "Prostate Cancer Awareness Month",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Observances_Prostate-Cancer-Awareness-Month.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare Prostate Cancer Awareness Month campaign assets such as templates, email banners, presentation covers, Teams backgrounds, ribbons, and campaign calendar materials for consistent, on-brand communication."
+    },
+    {
+      "title": "World Alzheimer’s Month",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Observances_World-Alzheimers-Month.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare World Alzheimer’s Month campaign assets such as templates, email banners, presentation covers, Teams backgrounds, ribbons, posters, and campaign calendar materials for consistent, on-brand communication."
+    },
+    {
+      "title": "World Cancer Day",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Observances_World-Cancer-Day.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare World Cancer Day campaign assets such as templates, email banners, presentation covers, Teams backgrounds, ribbons, and campaign calendar materials for consistent, on-brand communication."
+    },
+    {
+      "title": "World Heart Day",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Observances_World-Heart-Day.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare World Heart Day campaign assets such as templates, email banners, presentation covers, Teams backgrounds, ribbons, and campaign calendar materials for consistent, on-brand communication."
+    },
+    {
+      "title": "World Lung Cancer Day",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Observances_World-Lung-Cancer-Day.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare World Lung Cancer Day campaign assets such as templates, email banners, presentation covers, Teams backgrounds, and campaign calendar materials for consistent, on-brand communication."
+    },
+    {
+      "title": "Image library (external)",
+      "url": "https://brandhub.gehealthcare.com/image-library",
+      "category": "download",
+      "fileType": "FILE",
+      "description": "Provides access to the GE HealthCare image library, offering a wide selection of approved images for use across marketing and communications."
+    },
+    {
+      "title": "Photoshoot operations",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Brand-Templates_Photoshoot-Operations.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare photoshoot operations templates such as consent form trackers, contact sheets, and summary sheets to support planning, organization, and documentation of photoshoots."
+    },
+    {
+      "title": "Consent form",
+      "url": "https://privacydatatrust.gehealthcare.com/agreement-templates/",
+      "category": "download",
+      "fileType": "FILE",
+      "description": "Provides access to the GE HealthCare agreement and template library, offering centralized privacy and compliance templates, with SSO required for access."
+    },
+    {
+      "title": "Logo intro and outro",
+      "url": "https://assets.gehealthcare.com/api/gehc/assets?action=download&assetPath=/content/dam/assets/brand-assets/brand-hub-assets/downloads/documents/GEHealthCare_Logo-Animation.zip",
+      "category": "download",
+      "fileType": "ZIP",
+      "description": "Includes GE HealthCare logo animation files for intro and outro use in video content, supporting consistent and professional brand presentation."
+    },
+    {
+      "title": "Brand Guidelines (pdf)",
+      "url": "/assets/documents/gehealthcare-brand-guidelines.pdf",
+      "category": "guideline",
+      "fileType": "PDF",
+      "description": ""
+    },
+    {
+      "title": "GE Santé Guidelines (pdf)",
+      "url": "/assets/documents/gehealthcare-sant-c3-a9-guidelines.pdf",
+      "category": "guideline",
+      "fileType": "PDF",
+      "description": ""
+    },
+    {
+      "title": "PDx Product Packaging Guidelines (pdf)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-pdx-product-packaging-guidelines.pdf",
+      "category": "guideline",
+      "fileType": "PDF",
+      "description": ""
+    },
+    {
+      "title": "Product Brand Guidelines (pdf)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-product-brand-guidelines.pdf",
+      "category": "guideline",
+      "fileType": "PDF",
+      "description": ""
+    },
+    {
+      "title": "Accent Color Guidelines (pdf)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-accent-color-guidelines.pdf",
+      "category": "guideline",
+      "fileType": "PDF",
+      "description": ""
+    },
+    {
+      "title": "Infographic Guidelines (pdf)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-infographic-guidelines.pdf",
+      "category": "guideline",
+      "fileType": "PDF",
+      "description": ""
+    },
+    {
+      "title": "Motion Graphics Guidelines (ppt)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-motion-graphic-guidelines.pptx",
+      "category": "guideline",
+      "fileType": "PPTX",
+      "description": ""
+    },
+    {
+      "title": "Photography Guidelines (pdf)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-photography-guidelines.pdf",
+      "category": "guideline",
+      "fileType": "PDF",
+      "description": ""
+    },
+    {
+      "title": "Stationery Guidelines (pdf)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-stationery-guidelines.pdf",
+      "category": "guideline",
+      "fileType": "PDF",
+      "description": ""
+    },
+    {
+      "title": "Video Guidelines (ppt)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-video-guidelines.pptx",
+      "category": "guideline",
+      "fileType": "PPTX",
+      "description": ""
+    },
+    {
+      "title": "Editorial Style Guide (pdf)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-editorial-style-guide.pdf",
+      "category": "guideline",
+      "fileType": "PDF",
+      "description": ""
+    },
+    {
+      "title": "Email Banner Guidelines (pdf)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-email-banner-guidelines.pdf",
+      "category": "guideline",
+      "fileType": "PDF",
+      "description": ""
+    },
+    {
+      "title": "Exterior Signage Guidelines (pdf)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-exterior-signage-guidelines.pdf",
+      "category": "guideline",
+      "fileType": "PDF",
+      "description": ""
+    },
+    {
+      "title": "Interior Site Branding Guidelines (pdf)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/geheathcare-interior-site-branding-guidelines.pdf",
+      "category": "guideline",
+      "fileType": "PDF",
+      "description": ""
+    },
+    {
+      "title": "Marketo Guidelines (pdf)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-marketo-guidelines.pdf",
+      "category": "guideline",
+      "fileType": "PDF",
+      "description": ""
+    },
+    {
+      "title": "Next Generation Resource Group (NGRG) Guidelines (pdf)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/ge-healthcare-next-generation-resource-group-guidelines.pdf",
+      "category": "guideline",
+      "fileType": "PDF",
+      "description": ""
+    },
+    {
+      "title": "Observances Guidelines (pdf)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-observance-guidelines.pdf",
+      "category": "guideline",
+      "fileType": "PDF",
+      "description": ""
+    },
+    {
+      "title": "Trade Show and Events Guidelines (pdf)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-trade-show-and-events-guidelines.pdf",
+      "category": "guideline",
+      "fileType": "PDF",
+      "description": ""
+    },
+    {
+      "title": "Website Guidelines (pdf)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-website-guidelines.pdf",
+      "category": "guideline",
+      "fileType": "PDF",
+      "description": ""
+    },
+    {
+      "title": "Channel Partners Guidelines (pdf)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-channel-partner-guidelines.pdf",
+      "category": "guideline",
+      "fileType": "PDF",
+      "description": ""
+    },
+    {
+      "title": "Co-branding Guidelines (pdf)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-co-branding-guidelines.pdf",
+      "category": "guideline",
+      "fileType": "PDF",
+      "description": ""
+    },
+    {
+      "title": "Branded Merchandise Guidelines (pdf)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-merchandise-guidelines.pdf",
+      "category": "guideline",
+      "fileType": "PDF",
+      "description": ""
+    },
+    {
+      "title": "Uniform Guidelines (pdf)",
+      "url": "/assets/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-uniform-guidelines.pdf",
+      "category": "guideline",
+      "fileType": "PDF",
+      "description": ""
+    },
+    {
+      "title": "Parent Brand Guidelines",
+      "url": "https://s7d9.scene7.com/is/content/gehealthcare/GEHealthCare_Brand-Guidelines_Training_Video",
+      "category": "training",
+      "fileType": "VIDEO",
+      "description": "Parent Brand Guidelines training covers GE HealthCare’s brand strategy, visual identity and verbal identity to help teams apply GE HealthCare’s brand consistently.",
+      "presentation": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-brand-guidelines-training-presentation.pdf",
+      "guideline": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-brand-guidelines.pdf"
+    },
+    {
+      "title": "Product Brand Guidelines",
+      "url": "https://s7d9.scene7.com/is/content/gehealthcare/GEHealthCare_Product-Brand-Guidelines_Training_Video",
+      "category": "training",
+      "fileType": "VIDEO",
+      "description": "Product Brand Guidelines training covers the principles and standards for creating and managing GE HealthCare product brands consistently.",
+      "presentation": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-product-brand-guidelines-training-presentation.pptx",
+      "guideline": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-product-brand-guidelines.pdf"
+    },
+    {
+      "title": "PDx Product Brand Guidelines",
+      "url": "https://s7d9.scene7.com/is/content/gehealthcare/GEHealthCare_PDx-Product-Brand_Guidelines_Training_Video",
+      "category": "training",
+      "fileType": "VIDEO",
+      "description": "PDx Product Brand Guidelines training covers the standards for Pharmaceutical Diagnostics branding to help teams apply PDx product brands consistently.",
+      "presentation": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-pdx-product-guidelines-training-presentation.pdf",
+      "guideline": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-pdx-product-packaging-guidelines.pdf"
+    },
+    {
+      "title": "Photography Guidelines",
+      "url": "https://s7d9.scene7.com/is/content/gehealthcare/GEHealthCare_Photography-Guidelines_Training_Video",
+      "category": "training",
+      "fileType": "VIDEO",
+      "description": "Photography Guidelines training covers image style, principles and best practices to help teams create authentic, on-brand photography.",
+      "presentation": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-photography-guidelines-training-presentation.pdf",
+      "guideline": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-photography-guidelines.pdf"
+    },
+    {
+      "title": "Video Guidelines",
+      "url": "https://s7d9.scene7.com/is/content/gehealthcare/GEHealthCare_Trade-Show-and-Events-Guidelines_Training_Video",
+      "category": "training",
+      "fileType": "VIDEO",
+      "description": "Video Guidelines training covers creative direction, production standards and storytelling best practices to help teams create consistent branded video content.",
+      "presentation": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-video-guidelines-training-presentation.pptx",
+      "guideline": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-video-guidelines.pptx"
+    },
+    {
+      "title": "Motion Graphics Guidelines",
+      "url": "https://s7d9.scene7.com/is/content/gehealthcare/GEHealthCare_Motion-Graphics-Guidelines_Training_Video",
+      "category": "training",
+      "fileType": "VIDEO",
+      "description": "Motion Graphics Guidelines training covers animation principles, transitions and graphic treatments to help teams create consistent motion experiences.",
+      "presentation": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-motion-graphic-guidelines-training-presentation.pptx",
+      "guideline": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-motion-graphic-guidelines.pptx"
+    },
+    {
+      "title": "Website Guidelines",
+      "url": "https://s7d9.scene7.com/is/content/gehealthcare/GEHealthCare_Video-Guidelines_Training_Video",
+      "category": "training",
+      "fileType": "VIDEO",
+      "description": "Website Guidelines training covers digital design principles and website standards to help teams create consistent online experiences.",
+      "presentation": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-website-guidelines-training-presentation.pptx",
+      "guideline": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-website-guidelines.pdf"
+    },
+    {
+      "title": "Marketo Guidelines",
+      "url": "https://s7d9.scene7.com/is/content/gehealthcare/GEHealthCare_Marketo-Guidelines_Training_Video",
+      "category": "training",
+      "fileType": "VIDEO",
+      "description": "Marketo Guidelines training covers email and marketing automation standards to help teams create consistent branded marketing communications.",
+      "presentation": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-marketo-guidelines-training-presentation.pdf",
+      "guideline": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-marketo-guidelines.pdf"
+    },
+    {
+      "title": "Trade Show and Events Guidelines",
+      "url": "https://s7d9.scene7.com/is/content/gehealthcare/GEHealthCare_Trade-Show-and-Events-Guidelines_Training_Video",
+      "category": "training",
+      "fileType": "VIDEO",
+      "description": "Trade Show and Events Guidelines training covers event branding standards and best practices to help teams create consistent in-person experiences.",
+      "presentation": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-trade-show-and-events-guidelines-presentation.pdf",
+      "guideline": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-trade-show-and-events-guidelines.pdf"
+    },
+    {
+      "title": "Observances Guidelines",
+      "url": "https://s7d9.scene7.com/is/content/gehealthcare/GEHealthCare_Observance-Guidelines_Training_Video",
+      "category": "training",
+      "fileType": "VIDEO",
+      "description": "Observances Guidelines training covers planning principles and brand standards to help teams create thoughtful, consistent observance campaigns.",
+      "presentation": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-observance-guidelines-training-presentation.pdf",
+      "guideline": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-observance-guidelines.pdf"
+    },
+    {
+      "title": "Packaging Guidelines",
+      "url": "https://s7d9.scene7.com/is/content/gehealthcare/GEHealthCare_Packaging-Guidelines_Training_Video",
+      "category": "training",
+      "fileType": "VIDEO",
+      "description": "Packaging Guidelines training covers packaging standards and design principles to help teams apply GE HealthCare’s brand consistently across packaging materials.",
+      "presentation": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-packaging-guidelines-training-presentation.pdf",
+      "guideline": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-packaging-guidelines.pdf"
+    },
+    {
+      "title": "Site Branding Guidelines",
+      "url": "https://s7d9.scene7.com/is/content/gehealthcare/GEHealthCare_Site-Branding-Guidelines_Training_Video",
+      "category": "training",
+      "fileType": "VIDEO",
+      "description": "Site Branding Guidelines training covers environmental branding standards to help teams create consistent branded spaces and facilities.",
+      "presentation": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-site-branding-guidelines-training-presentation.pdf",
+      "guideline": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/geheathcare-interior-site-branding-guidelines.pdf"
+    },
+    {
+      "title": "Co‑Branding Guidelines",
+      "url": "https://s7d9.scene7.com/is/content/gehealthcare/GEHealthCare_Co-branding-Guidelines_Training_Video",
+      "category": "training",
+      "fileType": "VIDEO",
+      "description": "Co-Branding Guidelines training covers partnership branding standards to help teams represent GE HealthCare’s brand consistently alongside other organizations.",
+      "presentation": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-co-branding-guidelines-training-presentation.pdf",
+      "guideline": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-co-branding-guidelines.pdf"
+    },
+    {
+      "title": "Channel Partner Guidelines",
+      "url": "https://s7d9.scene7.com/is/content/gehealthcare/GEHealthCare_Channel-Partner-Guidelines_Training_Video",
+      "category": "training",
+      "fileType": "VIDEO",
+      "description": "Channel Partner Guidelines training covers partner branding standards to help teams represent GE HealthCare’s brand consistently through partner channels.",
+      "presentation": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-channel-partner-guidelines-presentation.pdf",
+      "guideline": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-channel-partner-guidelines.pdf"
+    },
+    {
+      "title": "Stationery Guidelines",
+      "url": "https://s7d9.scene7.com/is/content/gehealthcare/GEHealthCare_Stationery-Guidelines_Training_Video",
+      "category": "training",
+      "fileType": "VIDEO",
+      "description": "Stationery Guidelines training covers business communication standards to help teams create consistent, on-brand stationery and correspondence.",
+      "presentation": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-stationery-guidelines-training-presentation.pdf",
+      "guideline": "/assets/assets/brand-assets/brand-hub-assets/guidelines/documents/gehealthcare-stationery-guidelines.pdf"
+    }
+  ],
+  ":type": "sheet"
+}
