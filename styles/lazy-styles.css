@@ -33,6 +33,10 @@ main .section.sidebar-layout {
      live brand-hub sidebar). */
   main .section.sidebar-layout > .section-nav-wrapper {
     flex: 0 0 240px;
+
+    /* Include padding in the 240px so the sidebar column ends exactly where the
+       full-height band's divider is (border-box), keeping both aligned. */
+    box-sizing: border-box;
     position: sticky;
     top: var(--nav-height);
     align-self: stretch;
@@ -40,10 +44,10 @@ main .section.sidebar-layout {
     overflow-y: auto;
     padding: 24px 16px;
 
-    /* Soft lavender-grey band + divider, matching the live sidebar
-       (#main_sidebar in the brand-hub theme). */
+    /* Soft lavender-grey band, matching the live sidebar (#main_sidebar). The
+       divider + full-bleed left band are painted by the section ::before below
+       so they run the full section height, not just the sticky viewport. */
     background-color: #f4f1f8;
-    border-right: 1px solid #d1d2d4;
 
     /* Tint the internal scrollbar so its track blends into the grey band
        instead of showing a white strip on the right. */
@@ -51,11 +55,11 @@ main .section.sidebar-layout {
     scrollbar-color: #c9c4d6 #f4f1f8;
   }
 
-  /* Extend the sidebar grey band to the left viewport edge (full-bleed), so
-     there's no white strip on the far left where the centered content column
-     has its gutter. The wrapper's own `overflow-y: auto` clips an outset
-     box-shadow, so paint the bleed with a pseudo-element on the section (which
-     is overflow: visible). It sits behind the sidebar and spans its height. */
+  /* Sidebar grey band: a full-height pseudo-element on the section (which is
+     overflow: visible, unlike the scrolling wrapper whose overflow clips an
+     outset box-shadow). It bleeds to the left viewport edge and carries the
+     right divider, so the band + divider stay aligned to the 240px column edge
+     for the whole section height — not just the short sticky sidebar. */
   main .section.sidebar-layout::before {
     content: '';
     position: absolute;
@@ -64,6 +68,7 @@ main .section.sidebar-layout {
     right: calc(100% - 240px);
     width: 100vw;
     background-color: #f4f1f8;
+    border-right: 1px solid #d1d2d4;
     z-index: -1;
   }
 
