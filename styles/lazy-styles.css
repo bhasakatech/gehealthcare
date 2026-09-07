@@ -6,7 +6,7 @@
  * content. Below 900px it stacks (sidebar first, collapsible disclosure).
  */
 main .section.sidebar-layout {
-  max-width: 1140px;
+  max-width: var(--content-max-width);
   margin: 0 auto;
 }
 
