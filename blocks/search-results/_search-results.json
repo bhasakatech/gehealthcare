@@ -1,0 +1,42 @@
+{
+  "definitions": [
+    {
+      "title": "Search Results",
+      "id": "search-results",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Search Results",
+              "model": "search-results"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "search-results",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "source",
+          "label": "Index Source",
+          "value": "/query-index.json",
+          "description": "Path to the query-index JSON used for searching."
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "placeholder",
+          "label": "Search Placeholder",
+          "value": "Search…"
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

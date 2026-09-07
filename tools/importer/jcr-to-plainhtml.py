@@ -123,6 +123,9 @@ def main():
             elif model == 'support-card':
                 out.append(block('support-card', [
                     decode_rich(a.get('heading', '')), decode_rich(a.get('body', ''))]))
+            elif model == 'search-results':
+                out.append(block('search-results', [
+                    a.get('source', ''), decode_rich(a.get('placeholder', ''))]))
             else:
                 out.append(block(slug(a.get('name', 'block')), [
                     decode_rich(a.get('text', '')),
