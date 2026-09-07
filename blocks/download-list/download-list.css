@@ -14,7 +14,12 @@
 
 .download-list .download-list-heading {
   margin: 0 0 16px;
-  font-size: var(--heading-font-size-m);
+
+  /* Match the live brand hub group headings (Core brand, Visual identity …):
+     ~32px mobile, 48px desktop, weight 500, tight 1.1 line-height. */
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.1;
   color: var(--text-color);
 }
 
@@ -119,5 +124,6 @@
 
   .download-list .download-list-heading {
     margin: 0;
+    font-size: 48px;
   }
 }
