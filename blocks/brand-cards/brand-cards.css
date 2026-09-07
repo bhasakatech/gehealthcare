@@ -19,7 +19,7 @@ main .section > .default-content-wrapper:has(+ .brand-cards-wrapper) {
 }
 
 .brand-cards {
-  max-width: 1140px;
+  max-width: var(--content-max-width);
   margin: 0 auto;
   padding: 64px 20px 80px;
 }

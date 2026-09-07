@@ -6,7 +6,7 @@
  * content. Below 900px it stacks (sidebar first, collapsible disclosure).
  */
 main .section.sidebar-layout {
-  max-width: 1140px;
+  max-width: var(--content-max-width);
   margin: 0 auto;
 }
 
@@ -17,6 +17,7 @@ main .section.sidebar-layout {
     display: flex;
     align-items: flex-start;
     gap: 40px;
+    position: relative;
   }
 
   /* Override the boilerplate `main > .section > div { margin-top: auto }`,
@@ -40,17 +41,30 @@ main .section.sidebar-layout {
     padding: 24px 16px;
 
     /* Soft lavender-grey band + divider, matching the live sidebar
-       (#main_sidebar in the brand-hub theme). The box-shadow extends the same
-       grey to the left viewport edge (full-bleed), so there's no white strip on
-       the far left where the centered 1140px container has its gutter. */
+       (#main_sidebar in the brand-hub theme). */
     background-color: #f4f1f8;
     border-right: 1px solid #d1d2d4;
-    box-shadow: -100vw 0 0 #f4f1f8;
 
     /* Tint the internal scrollbar so its track blends into the grey band
        instead of showing a white strip on the right. */
     scrollbar-width: thin;
     scrollbar-color: #c9c4d6 #f4f1f8;
+  }
+
+  /* Extend the sidebar grey band to the left viewport edge (full-bleed), so
+     there's no white strip on the far left where the centered content column
+     has its gutter. The wrapper's own `overflow-y: auto` clips an outset
+     box-shadow, so paint the bleed with a pseudo-element on the section (which
+     is overflow: visible). It sits behind the sidebar and spans its height. */
+  main .section.sidebar-layout::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: calc(100% - 240px);
+    width: 100vw;
+    background-color: #f4f1f8;
+    z-index: -1;
   }
 
   main .section.sidebar-layout > .section-nav-wrapper::-webkit-scrollbar {

@@ -22,7 +22,7 @@
 
 /* mobile-first: stacked, image on top */
 .feature-card .feature-card-media {
-  max-width: 1140px;
+  max-width: var(--content-max-width);
   margin: 0 auto;
   border-radius: 16px 16px 0 0;
   overflow: hidden;
@@ -37,7 +37,7 @@
 }
 
 .feature-card .feature-card-body {
-  max-width: 1140px;
+  max-width: var(--content-max-width);
   margin: 0 auto;
   background-color: var(--background-color);
   border-radius: 0 0 16px 16px;
@@ -75,7 +75,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: stretch;
-    max-width: 1180px;
+    max-width: var(--content-max-width);
     margin: 0 auto;
     padding: 85px 20px 160px;
     column-gap: 0;
