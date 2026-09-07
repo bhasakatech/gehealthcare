@@ -110,11 +110,24 @@ def main():
                 items = [dict(c.attrib) for c in children(node) if local(c.tag).startswith('item')]
                 out.append(item_block('section-nav', items, [
                     {'name': 'title'}, {'name': 'link', 'type': 'link'}, {'name': 'parent'}]))
+            elif flt == 'image-grid':
+                items = [dict(c.attrib) for c in children(node) if local(c.tag).startswith('item')]
+                cls = 'image-grid'
+                variant = re.sub(r'^\[|\]$', '', a.get('classes', ''))
+                if variant:
+                    cls += ' ' + variant
+                out.append(item_block(cls, items, [
+                    {'name': 'image', 'type': 'image'}, {'name': 'imageAlt'}, {'name': 'caption'}]))
             elif flt == 'dos-donts':
                 items = [dict(c.attrib) for c in children(node) if local(c.tag).startswith('item')]
                 out.append(item_block('dos-donts', items, [
                     {'name': 'status'}, {'name': 'image', 'type': 'image'},
                     {'name': 'example'}, {'name': 'caption'}]))
+            elif flt == 'legal-panels':
+                items = [dict(c.attrib) for c in children(node) if local(c.tag).startswith('item')]
+                out.append(item_block('legal-panels', items, [
+                    {'name': 'content'}, {'name': 'mediaLayout'},
+                    {'name': 'images', 'type': 'image'}]))
             elif model == 'content-media':
                 out.append(block('content-media', [
                     decode_rich(a.get('text', '')),

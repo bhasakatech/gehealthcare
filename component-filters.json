@@ -77,6 +77,12 @@
     ]
   },
   {
+    "id": "image-grid",
+    "components": [
+      "image-grid-item"
+    ]
+  },
+  {
     "id": "image-marquee",
     "components": [
       "marquee-image"
