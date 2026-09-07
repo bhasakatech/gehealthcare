@@ -117,12 +117,12 @@ header nav .nav-tools {
 header nav .nav-search {
   display: flex;
   align-items: stretch;
+  position: relative;
   height: 44px;
   width: 320px;
   max-width: 40vw;
   border: 1px solid #5b5b67;
   border-radius: 4px;
-  overflow: hidden;
   background-color: #fff;
 }
 
@@ -130,6 +130,7 @@ header nav .nav-search input[type='search'] {
   flex: 1 1 auto;
   min-width: 0;
   border: 0;
+  border-radius: 4px 0 0 4px;
   padding: 0 14px;
   font: inherit;
   font-size: 16px;
@@ -146,7 +147,7 @@ header nav .nav-search button {
   flex: 0 0 auto;
   margin: 0;
   border: 0;
-  border-radius: 0;
+  border-radius: 0 4px 4px 0;
   padding: 0 16px;
   background-color: #6022a6;
   color: #fff;
@@ -261,6 +262,68 @@ header nav .nav-hamburger-icon::after { top: 7px; }
     padding: 12px 0;
     border-top: 1px solid #d1d2d4;
   }
+}
+
+/* ===== Search typeahead dropdown ===== */
+header nav .nav-search-suggest {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #d1d2d4;
+  border-radius: 4px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+  padding: 8px 0;
+}
+
+header nav .nav-suggest-group {
+  padding: 8px 0;
+}
+
+header nav .nav-suggest-group + .nav-suggest-group {
+  border-top: 1px solid #eee;
+}
+
+header nav .nav-suggest-title {
+  margin: 0;
+  padding: 6px 20px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
+}
+
+header nav .nav-suggest-keyword,
+header nav .nav-suggest-link {
+  display: block;
+  padding: 8px 20px;
+  color: #333;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+header nav .nav-suggest-keyword:hover,
+header nav .nav-suggest-link:hover {
+  background: #f4f1f8;
+}
+
+header nav .nav-suggest-keyword strong,
+header nav .nav-suggest-link strong {
+  font-weight: 700;
+  color: #222;
+}
+
+header nav .nav-suggest-kind {
+  display: block;
+  font-size: 12px;
+  color: #888;
+}
+
+header nav .nav-suggest-link .nav-suggest-label {
+  color: var(--brand-color, #512286);
 }
 
 /* ===== Desktop (>= 1024px) ===== */

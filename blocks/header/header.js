@@ -1,5 +1,6 @@
 import { getMetadata, decorateIcons } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import attachSearchTypeahead from './search-typeahead.js';
 
 // Below this width the nav collapses to icons (matches source data-breakpoint=1024).
 const isDesktop = window.matchMedia('(min-width: 1024px)');
@@ -130,6 +131,10 @@ export default async function decorate(block) {
     </div>`;
 
   nav.append(navBrand, navSections, navTools, navMobileTools);
+
+  // Attach the search typeahead (Suggested Keywords + Quick Links dropdown).
+  const searchForm = navTools.querySelector('.nav-search');
+  if (searchForm) attachSearchTypeahead(searchForm);
 
   // hamburger opens the menu drawer
   const hamburgerBtn = navMobileTools.querySelector('.nav-hamburger button');

@@ -1,0 +1,771 @@
+{
+  "total": 134,
+  "offset": 0,
+  "limit": 134,
+  ":type": "multi-sheet",
+  ":names": [
+    "keywords",
+    "quicklinks"
+  ],
+  "keywords": {
+    "total": 134,
+    "offset": 0,
+    "limit": 134,
+    "data": [
+      {
+        "keyword": "Our brand"
+      },
+      {
+        "keyword": "Our purpose"
+      },
+      {
+        "keyword": "Experience principles"
+      },
+      {
+        "keyword": "Brand foundations"
+      },
+      {
+        "keyword": "Logos"
+      },
+      {
+        "keyword": "Versions"
+      },
+      {
+        "keyword": "Color"
+      },
+      {
+        "keyword": "Sizing"
+      },
+      {
+        "keyword": "Logo don’ts"
+      },
+      {
+        "keyword": "Platform"
+      },
+      {
+        "keyword": "Palette & accents"
+      },
+      {
+        "keyword": "Usage & accessibility"
+      },
+      {
+        "keyword": "Color don’ts"
+      },
+      {
+        "keyword": "Typography"
+      },
+      {
+        "keyword": "Fonts"
+      },
+      {
+        "keyword": "Styles"
+      },
+      {
+        "keyword": "Typography don’ts"
+      },
+      {
+        "keyword": "Design elements"
+      },
+      {
+        "keyword": "Layout system"
+      },
+      {
+        "keyword": "Graphic device"
+      },
+      {
+        "keyword": "Iconography"
+      },
+      {
+        "keyword": "Usage & applications"
+      },
+      {
+        "keyword": "Voice and messaging"
+      },
+      {
+        "keyword": "Voice principles"
+      },
+      {
+        "keyword": "Messaging"
+      },
+      {
+        "keyword": "Before & afters"
+      },
+      {
+        "keyword": "Dos and don’ts"
+      },
+      {
+        "keyword": "Photography"
+      },
+      {
+        "keyword": "Style"
+      },
+      {
+        "keyword": "Principles"
+      },
+      {
+        "keyword": "Themes"
+      },
+      {
+        "keyword": "Photography don’ts"
+      },
+      {
+        "keyword": "Video"
+      },
+      {
+        "keyword": "Video direction"
+      },
+      {
+        "keyword": "Formatting & production"
+      },
+      {
+        "keyword": "Best practice videos"
+      },
+      {
+        "keyword": "Motion"
+      },
+      {
+        "keyword": "Motion principles"
+      },
+      {
+        "keyword": "Openers & transitions"
+      },
+      {
+        "keyword": "Overlays & treatments"
+      },
+      {
+        "keyword": "Best practice motion"
+      },
+      {
+        "keyword": "Guidelines"
+      },
+      {
+        "keyword": "Downloads"
+      },
+      {
+        "keyword": "Learn"
+      },
+      {
+        "keyword": "Legal"
+      },
+      {
+        "keyword": "Core brand"
+      },
+      {
+        "keyword": "Visual identity"
+      },
+      {
+        "keyword": "Verbal identity"
+      },
+      {
+        "keyword": "Applying the brand"
+      },
+      {
+        "keyword": "Partnerships"
+      },
+      {
+        "keyword": "Merchandise"
+      },
+      {
+        "keyword": "Brand templates"
+      },
+      {
+        "keyword": "Marketing templates"
+      },
+      {
+        "keyword": "NGRGs & Observances"
+      },
+      {
+        "keyword": "Image library"
+      },
+      {
+        "keyword": "Photography and video toolkit"
+      },
+      {
+        "keyword": "Core brand & product brand"
+      },
+      {
+        "keyword": "Visual & media guidelines"
+      },
+      {
+        "keyword": "Digital & platform guidelines"
+      },
+      {
+        "keyword": "Marketing, campaigns & experiences"
+      },
+      {
+        "keyword": "Partnerships & co‑branding"
+      },
+      {
+        "keyword": "Templates & stationery"
+      },
+      {
+        "keyword": "Trademark"
+      },
+      {
+        "keyword": "Approval"
+      },
+      {
+        "keyword": "Video & Motion"
+      },
+      {
+        "keyword": "GE HealthCare suite"
+      },
+      {
+        "keyword": "GE Santé suite"
+      },
+      {
+        "keyword": "Channel Partner suite"
+      },
+      {
+        "keyword": "Source Sans Pro"
+      },
+      {
+        "keyword": "Source Hans Sans"
+      },
+      {
+        "keyword": "Iconography suite"
+      },
+      {
+        "keyword": "PowerPoint and Microsoft 365 suite"
+      },
+      {
+        "keyword": "Biography"
+      },
+      {
+        "keyword": "Policy document template"
+      },
+      {
+        "keyword": "Core marketing collateral"
+      },
+      {
+        "keyword": "Promotional materials"
+      },
+      {
+        "keyword": "Editorial content"
+      },
+      {
+        "keyword": "Stationery"
+      },
+      {
+        "keyword": "African Affinity Forum"
+      },
+      {
+        "keyword": "Asian Pacific Allies and Friends"
+      },
+      {
+        "keyword": "Disability Advocacy Network"
+      },
+      {
+        "keyword": "Green Team Network"
+      },
+      {
+        "keyword": "Pride Alliance"
+      },
+      {
+        "keyword": "STEAM Girls"
+      },
+      {
+        "keyword": "Unidos"
+      },
+      {
+        "keyword": "Veterans Network"
+      },
+      {
+        "keyword": "Women’s Network"
+      },
+      {
+        "keyword": "Africa Day"
+      },
+      {
+        "keyword": "Black History Month"
+      },
+      {
+        "keyword": "Breast Cancer Awareness Month"
+      },
+      {
+        "keyword": "International Women’s Day"
+      },
+      {
+        "keyword": "International Women in Engineering Day"
+      },
+      {
+        "keyword": "Juneteenth"
+      },
+      {
+        "keyword": "Latino and Hispanic Heritage Month"
+      },
+      {
+        "keyword": "Lunar New Year"
+      },
+      {
+        "keyword": "Movember"
+      },
+      {
+        "keyword": "Pride Month"
+      },
+      {
+        "keyword": "Prostate Cancer Awareness Month"
+      },
+      {
+        "keyword": "World Alzheimer’s Month"
+      },
+      {
+        "keyword": "World Cancer Day"
+      },
+      {
+        "keyword": "World Heart Day"
+      },
+      {
+        "keyword": "World Lung Cancer Day"
+      },
+      {
+        "keyword": "Photoshoot operations"
+      },
+      {
+        "keyword": "Consent form"
+      },
+      {
+        "keyword": "Logo intro and outro"
+      },
+      {
+        "keyword": "Brand Guidelines"
+      },
+      {
+        "keyword": "GE Santé Guidelines"
+      },
+      {
+        "keyword": "PDx Product Packaging Guidelines"
+      },
+      {
+        "keyword": "Product Brand Guidelines"
+      },
+      {
+        "keyword": "Accent Color Guidelines"
+      },
+      {
+        "keyword": "Infographic Guidelines"
+      },
+      {
+        "keyword": "Motion Graphics Guidelines"
+      },
+      {
+        "keyword": "Photography Guidelines"
+      },
+      {
+        "keyword": "Stationery Guidelines"
+      },
+      {
+        "keyword": "Video Guidelines"
+      },
+      {
+        "keyword": "Editorial Style Guide"
+      },
+      {
+        "keyword": "Email Banner Guidelines"
+      },
+      {
+        "keyword": "Exterior Signage Guidelines"
+      },
+      {
+        "keyword": "Interior Site Branding Guidelines"
+      },
+      {
+        "keyword": "Marketo Guidelines"
+      },
+      {
+        "keyword": "Next Generation Resource Group"
+      },
+      {
+        "keyword": "Observances Guidelines"
+      },
+      {
+        "keyword": "Trade Show and Events Guidelines"
+      },
+      {
+        "keyword": "Website Guidelines"
+      },
+      {
+        "keyword": "Channel Partners Guidelines"
+      },
+      {
+        "keyword": "Co-branding Guidelines"
+      },
+      {
+        "keyword": "Branded Merchandise Guidelines"
+      },
+      {
+        "keyword": "Uniform Guidelines"
+      },
+      {
+        "keyword": "Parent Brand Guidelines"
+      },
+      {
+        "keyword": "PDx Product Brand Guidelines"
+      },
+      {
+        "keyword": "Packaging Guidelines"
+      },
+      {
+        "keyword": "Site Branding Guidelines"
+      },
+      {
+        "keyword": "Co‑Branding Guidelines"
+      },
+      {
+        "keyword": "Channel Partner Guidelines"
+      }
+    ]
+  },
+  "quicklinks": {
+    "total": 69,
+    "offset": 0,
+    "limit": 69,
+    "data": [
+      {
+        "title": "Our brand",
+        "link": "/our-brand",
+        "type": "Page"
+      },
+      {
+        "title": "Our purpose",
+        "link": "/our-brand#our-purpose",
+        "type": "Our brand"
+      },
+      {
+        "title": "Experience principles",
+        "link": "/our-brand#experience-principles",
+        "type": "Our brand"
+      },
+      {
+        "title": "Brand foundations",
+        "link": "/brand-foundations",
+        "type": "Page"
+      },
+      {
+        "title": "Logos",
+        "link": "/brand-foundations/logos",
+        "type": "Brand foundations"
+      },
+      {
+        "title": "Versions",
+        "link": "/brand-foundations/logos#logo-versions",
+        "type": "Logos"
+      },
+      {
+        "title": "Color",
+        "link": "/brand-foundations/logos#logo-color",
+        "type": "Logos"
+      },
+      {
+        "title": "Sizing",
+        "link": "/brand-foundations/logos#logo-sizing",
+        "type": "Logos"
+      },
+      {
+        "title": "Logo don’ts",
+        "link": "/brand-foundations/logos#logo-donts",
+        "type": "Logos"
+      },
+      {
+        "title": "Platform",
+        "link": "/brand-foundations/logos#platform-logo",
+        "type": "Logos"
+      },
+      {
+        "title": "Color",
+        "link": "/brand-foundations/color",
+        "type": "Brand foundations"
+      },
+      {
+        "title": "Palette & accents",
+        "link": "/brand-foundations/color#palette-and-accents",
+        "type": "Color"
+      },
+      {
+        "title": "Usage & accessibility",
+        "link": "/brand-foundations/color#usage-and-accessibility",
+        "type": "Color"
+      },
+      {
+        "title": "Color don’ts",
+        "link": "/brand-foundations/color#color-donts",
+        "type": "Color"
+      },
+      {
+        "title": "Typography",
+        "link": "/brand-foundations/typography",
+        "type": "Brand foundations"
+      },
+      {
+        "title": "Fonts",
+        "link": "/brand-foundations/typography#fonts",
+        "type": "Typography"
+      },
+      {
+        "title": "Styles",
+        "link": "/brand-foundations/typography#styles",
+        "type": "Typography"
+      },
+      {
+        "title": "Typography don’ts",
+        "link": "/brand-foundations/typography#typography-donts",
+        "type": "Typography"
+      },
+      {
+        "title": "Design elements",
+        "link": "/brand-foundations/design-elements",
+        "type": "Brand foundations"
+      },
+      {
+        "title": "Layout system",
+        "link": "/brand-foundations/design-elements#layout-system",
+        "type": "Design elements"
+      },
+      {
+        "title": "Graphic device",
+        "link": "/brand-foundations/design-elements#graphic-device",
+        "type": "Design elements"
+      },
+      {
+        "title": "Iconography",
+        "link": "/brand-foundations/design-elements#iconography",
+        "type": "Design elements"
+      },
+      {
+        "title": "Usage & applications",
+        "link": "/brand-foundations/design-elements#usage-and-applications",
+        "type": "Design elements"
+      },
+      {
+        "title": "Voice and messaging",
+        "link": "/brand-foundations/voice-and-messaging",
+        "type": "Brand foundations"
+      },
+      {
+        "title": "Voice principles",
+        "link": "/brand-foundations/voice-and-messaging#voice-principles",
+        "type": "Voice and messaging"
+      },
+      {
+        "title": "Messaging",
+        "link": "/brand-foundations/voice-and-messaging#messaging",
+        "type": "Voice and messaging"
+      },
+      {
+        "title": "Before & afters",
+        "link": "/brand-foundations/voice-and-messaging#before-and-after",
+        "type": "Voice and messaging"
+      },
+      {
+        "title": "Dos and don’ts",
+        "link": "/brand-foundations/voice-and-messaging#dos-and-donts",
+        "type": "Voice and messaging"
+      },
+      {
+        "title": "Photography",
+        "link": "/brand-foundations/photography",
+        "type": "Brand foundations"
+      },
+      {
+        "title": "Style",
+        "link": "/brand-foundations/photography#style",
+        "type": "Photography"
+      },
+      {
+        "title": "Principles",
+        "link": "/brand-foundations/photography#principles",
+        "type": "Photography"
+      },
+      {
+        "title": "Themes",
+        "link": "/brand-foundations/photography#themes",
+        "type": "Photography"
+      },
+      {
+        "title": "Photography don’ts",
+        "link": "/brand-foundations/photography#photography-donts",
+        "type": "Photography"
+      },
+      {
+        "title": "Video",
+        "link": "/brand-foundations/video",
+        "type": "Brand foundations"
+      },
+      {
+        "title": "Video direction",
+        "link": "/brand-foundations/video#video-direction",
+        "type": "Video"
+      },
+      {
+        "title": "Formatting & production",
+        "link": "/brand-foundations/video#formatting-and-production",
+        "type": "Video"
+      },
+      {
+        "title": "Best practice videos",
+        "link": "/brand-foundations/video#best-practice-videos",
+        "type": "Video"
+      },
+      {
+        "title": "Motion",
+        "link": "/brand-foundations/motion",
+        "type": "Brand foundations"
+      },
+      {
+        "title": "Motion principles",
+        "link": "/brand-foundations/motion#motion-principles",
+        "type": "Motion"
+      },
+      {
+        "title": "Openers & transitions",
+        "link": "/brand-foundations/motion#openers-and-transitions",
+        "type": "Motion"
+      },
+      {
+        "title": "Overlays & treatments",
+        "link": "/brand-foundations/motion#overlays-and-treatments",
+        "type": "Motion"
+      },
+      {
+        "title": "Best practice motion",
+        "link": "/brand-foundations/motion#best-practice-motion",
+        "type": "Motion"
+      },
+      {
+        "title": "Guidelines",
+        "link": "/guidelines",
+        "type": "Page"
+      },
+      {
+        "title": "Downloads",
+        "link": "/downloads",
+        "type": "Page"
+      },
+      {
+        "title": "Learn",
+        "link": "/learn",
+        "type": "Page"
+      },
+      {
+        "title": "Legal",
+        "link": "/legal",
+        "type": "Page"
+      },
+      {
+        "title": "Core brand",
+        "link": "/guidelines#core-brand",
+        "type": "Guidelines"
+      },
+      {
+        "title": "Visual identity",
+        "link": "/guidelines#visual-identity",
+        "type": "Guidelines"
+      },
+      {
+        "title": "Verbal identity",
+        "link": "/guidelines#verbal-identity",
+        "type": "Guidelines"
+      },
+      {
+        "title": "Applying the brand",
+        "link": "/guidelines#applying-the-brand",
+        "type": "Guidelines"
+      },
+      {
+        "title": "Partnerships",
+        "link": "/guidelines#partnerships",
+        "type": "Guidelines"
+      },
+      {
+        "title": "Merchandise",
+        "link": "/guidelines#merchandise",
+        "type": "Guidelines"
+      },
+      {
+        "title": "Logos",
+        "link": "/downloads#logos",
+        "type": "Downloads"
+      },
+      {
+        "title": "Fonts",
+        "link": "/downloads#fonts",
+        "type": "Downloads"
+      },
+      {
+        "title": "Iconography",
+        "link": "/downloads#iconography",
+        "type": "Downloads"
+      },
+      {
+        "title": "Brand templates",
+        "link": "/downloads#brand-templates",
+        "type": "Downloads"
+      },
+      {
+        "title": "Marketing templates",
+        "link": "/downloads#marketing-templates",
+        "type": "Downloads"
+      },
+      {
+        "title": "NGRGs & Observances",
+        "link": "/downloads#next-generation-resource-groups-and-observances",
+        "type": "Downloads"
+      },
+      {
+        "title": "Image library",
+        "link": "/downloads#image-library",
+        "type": "Downloads"
+      },
+      {
+        "title": "Photography and video toolkit",
+        "link": "/downloads#photography-and-video-toolkit",
+        "type": "Downloads"
+      },
+      {
+        "title": "Core brand & product brand",
+        "link": "/learn#core-brand-product-brand",
+        "type": "Learn"
+      },
+      {
+        "title": "Visual & media guidelines",
+        "link": "/learn#visual-media-guidelines",
+        "type": "Learn"
+      },
+      {
+        "title": "Digital & platform guidelines",
+        "link": "/learn#digital-platform-guidelines",
+        "type": "Learn"
+      },
+      {
+        "title": "Marketing, campaigns & experiences",
+        "link": "/learn#marketing-campaigns-experiences",
+        "type": "Learn"
+      },
+      {
+        "title": "Partnerships & co‑branding",
+        "link": "/learn#partnerships-co-branding",
+        "type": "Learn"
+      },
+      {
+        "title": "Templates & stationery",
+        "link": "/learn#templates-stationery",
+        "type": "Learn"
+      },
+      {
+        "title": "Trademark",
+        "link": "/legal#trademark",
+        "type": "Legal"
+      },
+      {
+        "title": "Approval",
+        "link": "/legal#approval",
+        "type": "Legal"
+      },
+      {
+        "title": "Video & Motion",
+        "link": "/legal#video",
+        "type": "Legal"
+      }
+    ]
+  }
+}
