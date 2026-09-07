@@ -11,14 +11,15 @@ alongside the page index.
 Re-run whenever the Downloads / Guidelines / Learn pages change:
   python3 tools/importer/build-search-assets.py
 
-Writes: content/search-assets.json
+Writes: search-assets.json (repo root — committed and served from the code bus,
+so it deploys via git without an AEM-author upload).
 """
 import re
 import html
 import json
 
 JCR = 'migration-work/jcr-content'
-OUT = 'content/search-assets.json'
+OUT = 'search-assets.json'
 
 
 def unescape(s):
