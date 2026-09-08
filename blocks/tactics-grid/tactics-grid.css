@@ -10,28 +10,35 @@
   display: none;
 }
 
+/* Left label (e.g. "Messaging pillars", "Before") — body-size text, matching
+   the live fusion-text size. */
 .tactics-grid .tactics-grid-label {
-  font-size: var(--body-font-size-m);
+  font-size: 16px;
+  line-height: 1.5;
   color: var(--text-color);
   margin-top: 8px;
 }
 
+/* Principle heading — the live column titles use the h3 typography (larger,
+   Compassion Purple, regular weight, tight line-height). */
 .tactics-grid .tactics-grid-head .tactics-grid-title {
   margin: 0 0 4px;
   color: var(--brand-color);
-  font-size: var(--heading-font-size-m);
-  font-weight: 700;
+  font-size: var(--heading-font-size-l);
+  font-weight: 400;
   line-height: 1.1;
 }
 
 .tactics-grid .tactics-grid-head .tactics-grid-subtitle {
   margin: 0;
-  font-size: var(--body-font-size-s);
+  font-size: 16px;
+  line-height: 1.5;
   color: var(--text-color);
 }
 
 .tactics-grid .tactics-grid-cell {
-  font-size: var(--body-font-size-s);
+  font-size: 16px;
+  line-height: 1.5;
   color: var(--text-color);
 }
 
