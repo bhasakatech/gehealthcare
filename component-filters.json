@@ -16,7 +16,8 @@
       "cards",
       "columns",
       "fragment",
-      "image-grid"
+      "image-grid",
+      "tactics-grid"
     ]
   },
   {
@@ -111,6 +112,12 @@
     "id": "section-nav",
     "components": [
       "section-nav-item"
+    ]
+  },
+  {
+    "id": "tactics-grid",
+    "components": [
+      "tactics-column"
     ]
   },
   {

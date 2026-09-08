@@ -1,0 +1,65 @@
+.tactics-grid .tactics-grid-table {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px 32px;
+  align-items: start;
+}
+
+/* The empty top-left corner and left labels are hidden on mobile (stacked). */
+.tactics-grid .tactics-grid-corner {
+  display: none;
+}
+
+.tactics-grid .tactics-grid-label {
+  font-size: var(--body-font-size-m);
+  color: var(--text-color);
+  margin-top: 8px;
+}
+
+.tactics-grid .tactics-grid-head .tactics-grid-title {
+  margin: 0 0 4px;
+  color: var(--brand-color);
+  font-size: var(--heading-font-size-m);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.tactics-grid .tactics-grid-head .tactics-grid-subtitle {
+  margin: 0;
+  font-size: var(--body-font-size-s);
+  color: var(--text-color);
+}
+
+.tactics-grid .tactics-grid-cell {
+  font-size: var(--body-font-size-s);
+  color: var(--text-color);
+}
+
+.tactics-grid .tactics-grid-cell > *:first-child {
+  margin-top: 0;
+}
+
+.tactics-grid .tactics-grid-cell > *:last-child {
+  margin-bottom: 0;
+}
+
+.tactics-grid .tactics-grid-cell strong {
+  font-weight: 700;
+}
+
+/* Desktop: a matrix — left label rail + one column per principle. */
+@media (width >= 900px) {
+  .tactics-grid .tactics-grid-table {
+    grid-template-columns: 140px repeat(var(--tactics-cols), 1fr);
+    gap: 40px 48px;
+  }
+
+  .tactics-grid .tactics-grid-corner {
+    display: block;
+  }
+
+  .tactics-grid .tactics-grid-label {
+    margin-top: 0;
+    font-weight: 400;
+  }
+}
