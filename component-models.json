@@ -889,6 +889,49 @@
     ]
   },
   {
+    "id": "tactics-grid",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "rowLabels",
+        "label": "Row Labels",
+        "value": "Tactic 1, Tactic 2, Tactic 3",
+        "description": "Comma-separated labels for the left column (one per tactic row)."
+      }
+    ]
+  },
+  {
+    "id": "tactics-column",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "heading",
+        "label": "Principle Heading",
+        "description": "Principle title + subtitle, e.g. a heading “Embody compassion” followed by “We’re here because we care”."
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "tactic1",
+        "label": "Tactic 1"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "tactic2",
+        "label": "Tactic 2"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "tactic3",
+        "label": "Tactic 3"
+      }
+    ]
+  },
+  {
     "id": "video-card",
     "fields": [
       {
