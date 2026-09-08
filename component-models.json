@@ -895,9 +895,9 @@
         "component": "text",
         "valueType": "string",
         "name": "rowLabels",
-        "label": "Row Labels",
+        "label": "Row Labels (left column)",
         "value": "Tactic 1, Tactic 2, Tactic 3",
-        "description": "Comma-separated labels for the left column (one per tactic row)."
+        "description": "Comma-separated labels for the left column, one per row (top to bottom). Author your own, e.g. \"Messaging pillars\" or \"Before, After\". Reusable for any matrix (tactics, messaging, before/after examples)."
       }
     ]
   },
