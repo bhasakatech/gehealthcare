@@ -15,14 +15,17 @@ function getVideoUrl(cell) {
   return /\.mp4($|\?)/i.test(text) ? text : '';
 }
 
-/** Builds a muted, looping, inline video with optional poster. */
+/** Builds a muted, looping, autoplaying inline video with optional poster. */
 function buildVideo(url, poster) {
   const video = document.createElement('video');
   video.setAttribute('playsinline', '');
   video.muted = true;
   video.loop = true;
+  video.autoplay = true;
   video.controls = true;
-  video.setAttribute('preload', 'metadata');
+  // muted + playsinline are required for autoplay to be allowed on mobile.
+  video.setAttribute('autoplay', '');
+  video.setAttribute('preload', 'auto');
   if (poster?.src) video.setAttribute('poster', poster.src);
   const source = document.createElement('source');
   source.src = url;
