@@ -52,7 +52,9 @@
         "columns",
         "fragment",
         "image-grid",
-        "tactics-grid"
+        "tactics-grid",
+        "text-matrix",
+        "video-grid"
       ]
     }
   ]

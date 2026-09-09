@@ -1,0 +1,103 @@
+.video-grid .video-grid-list {
+  list-style: none;
+  margin: 24px 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.video-grid .video-grid-item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.video-grid .video-grid-media {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.video-grid .video-grid-media video,
+.video-grid .video-grid-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.video-grid .video-grid-caption {
+  margin: 0;
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.video-grid .video-grid-text {
+  font-size: var(--body-font-size-s);
+  color: var(--text-color);
+}
+
+.video-grid .video-grid-text > *:first-child { margin-top: 0; }
+.video-grid .video-grid-text > *:last-child { margin-bottom: 0; }
+
+/* Column layouts (tablet+). */
+@media (width >= 600px) {
+  .video-grid.columns-2 .video-grid-list,
+  .video-grid.columns-3 .video-grid-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .video-grid.columns-2 .video-grid-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .video-grid.columns-3 .video-grid-list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+}
+
+/* "Only video": each video full-width, no side text. */
+.video-grid.layout-video-only .video-grid-list { grid-template-columns: 1fr; }
+.video-grid.layout-video-only .video-grid-text { display: none; }
+
+/* "None": plain single column, no special framing. */
+.video-grid.layout-none .video-grid-list { grid-template-columns: 1fr; }
+
+/* Side-by-side video + text layouts (desktop). */
+@media (width >= 900px) {
+  .video-grid.layout-video-text .video-grid-list,
+  .video-grid.layout-text-video .video-grid-list {
+    grid-template-columns: 1fr;
+  }
+
+  .video-grid.layout-video-text .video-grid-item,
+  .video-grid.layout-text-video .video-grid-item {
+    flex-direction: row;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .video-grid.layout-video-text .video-grid-media,
+  .video-grid.layout-text-video .video-grid-media {
+    flex: 1 1 50%;
+    min-width: 0;
+  }
+
+  .video-grid.layout-video-text .video-grid-text,
+  .video-grid.layout-text-video .video-grid-text {
+    flex: 1 1 50%;
+    min-width: 0;
+    font-size: var(--body-font-size-m);
+  }
+
+  /* Text-first variant: put the copy on the left. */
+  .video-grid.layout-text-video .video-grid-text { order: -1; }
+}

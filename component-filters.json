@@ -17,7 +17,9 @@
       "columns",
       "fragment",
       "image-grid",
-      "tactics-grid"
+      "tactics-grid",
+      "text-matrix",
+      "video-grid"
     ]
   },
   {
@@ -121,9 +123,21 @@
     ]
   },
   {
+    "id": "text-matrix",
+    "components": [
+      "text-matrix-column"
+    ]
+  },
+  {
     "id": "video-cards",
     "components": [
       "video-card"
+    ]
+  },
+  {
+    "id": "video-grid",
+    "components": [
+      "video-grid-item"
     ]
   }
 ]
