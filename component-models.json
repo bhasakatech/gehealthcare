@@ -932,6 +932,45 @@
     ]
   },
   {
+    "id": "text-matrix",
+    "fields": [
+      {
+        "component": "select",
+        "name": "classes",
+        "value": "columns-3",
+        "label": "Columns",
+        "description": "Number of columns (default 3).",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "2 Columns",
+            "value": "columns-2"
+          },
+          {
+            "name": "3 Columns",
+            "value": "columns-3"
+          },
+          {
+            "name": "4 Columns",
+            "value": "columns-4"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "text-matrix-column",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "content",
+        "label": "Content",
+        "description": "A heading (e.g. Calm) followed by the column's body text."
+      }
+    ]
+  },
+  {
     "id": "video-card",
     "fields": [
       {
@@ -993,6 +1032,83 @@
         "label": "Image",
         "multi": false,
         "description": "Optional thumbnail. If absent, a purple tile is used."
+      }
+    ]
+  },
+  {
+    "id": "video-grid",
+    "fields": [
+      {
+        "component": "select",
+        "name": "classes",
+        "value": "columns-3",
+        "label": "Columns / Layout",
+        "description": "How many videos per row, or a side-by-side video+text layout.",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "1 Column",
+            "value": "columns-1"
+          },
+          {
+            "name": "2 Columns",
+            "value": "columns-2"
+          },
+          {
+            "name": "3 Columns",
+            "value": "columns-3"
+          },
+          {
+            "name": "Left video, right text",
+            "value": "layout-video-text"
+          },
+          {
+            "name": "Left text, right video",
+            "value": "layout-text-video"
+          },
+          {
+            "name": "Only video",
+            "value": "layout-video-only"
+          },
+          {
+            "name": "None",
+            "value": "layout-none"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "video-grid-item",
+    "fields": [
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "video",
+        "label": "Video (MP4)",
+        "description": "The MP4 video file to play."
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "poster",
+        "label": "Poster Image",
+        "multi": false,
+        "description": "Optional preview image shown before playback."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "caption",
+        "label": "Caption",
+        "description": "Optional caption / label shown below the video."
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text",
+        "description": "Optional copy shown beside the video in the video+text layouts."
       }
     ]
   }

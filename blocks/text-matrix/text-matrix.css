@@ -1,0 +1,55 @@
+.text-matrix .text-matrix-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.text-matrix .text-matrix-col > *:first-child {
+  margin-top: 0;
+}
+
+.text-matrix .text-matrix-col > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Column heading (e.g. Calm) — bold, body-scale, matching the live layout. */
+.text-matrix .text-matrix-col .text-matrix-title {
+  margin: 0 0 16px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--text-color);
+}
+
+.text-matrix .text-matrix-col p {
+  margin: 0 0 16px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+@media (width >= 600px) {
+  .text-matrix.columns-2 .text-matrix-list,
+  .text-matrix.columns-3 .text-matrix-list,
+  .text-matrix.columns-4 .text-matrix-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .text-matrix.columns-2 .text-matrix-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px;
+  }
+
+  .text-matrix.columns-3 .text-matrix-list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+  }
+
+  .text-matrix.columns-4 .text-matrix-list {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+}
