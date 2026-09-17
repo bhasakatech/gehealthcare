@@ -46,8 +46,8 @@ function segmentToLabel(segment) {
 /**
  * Builds a breadcrumb trail from the current page path. Labels are resolved
  * from the nav menu links when possible, otherwise derived from the path
- * segment. The first item is always a "Home" link and the last item (the
- * current page) is rendered as plain text, matching the live site.
+ * segment. Each ancestor segment is a link; the last item (the current page)
+ * is rendered as plain text — matching the live site (no "Home" item).
  * @param {Element} menuList the primary nav <ul>, used to look up nice labels
  * @returns {Element|null} a <nav> breadcrumb element, or null on the home page
  */
@@ -64,7 +64,7 @@ function buildBreadcrumbs(menuList) {
     if (href) navLabels[href] = a.textContent.trim();
   });
 
-  const crumbs = [{ label: 'Home', href: '/' }];
+  const crumbs = [];
   let current = '';
   segments.forEach((segment) => {
     current += `/${segment}`;
