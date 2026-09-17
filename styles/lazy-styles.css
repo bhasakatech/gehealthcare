@@ -10,6 +10,15 @@ main .section.sidebar-layout {
   margin: 0 auto;
 }
 
+/* Gap between the nav and the sidebar/content layout, matching the live
+   brand-hub pages (the grey sidebar band and breadcrumb start below the nav
+   with breathing room rather than flush against it). */
+@media (width >= 900px) {
+  main .section.sidebar-layout {
+    margin-top: 24px;
+  }
+}
+
 @media (width >= 900px) {
   /* Two-column flex row: fixed sidebar + flexible content. Flex guarantees the
      sidebar stays pinned at the top (no grid auto-placement to push it down). */

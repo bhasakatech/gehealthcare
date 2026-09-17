@@ -204,6 +204,69 @@ function groupMediaCards(content) {
   }
 }
 
+/**
+ * Turns a path segment ("brand-foundations") into a readable label
+ * ("Brand foundations") when no authored title is available.
+ */
+function segmentToLabel(segment) {
+  const words = decodeURIComponent(segment).replace(/[-_]+/g, ' ').trim();
+  return words.charAt(0).toUpperCase() + words.slice(1);
+}
+
+/**
+ * Builds the breadcrumb trail shown at the top of the content column, beside
+ * the sidebar (matching the live brand-hub pages). The trail follows the
+ * current page's path hierarchy — each ancestor is a link and the current page
+ * is plain text. Labels are resolved from the authored section-nav item titles
+ * when the path matches, otherwise derived from the path segment. There is no
+ * leading "Home" item (the live site hides it).
+ *
+ * @param {Array} items parsed section-nav rows ({ title, link, ... })
+ * @param {(p:string)=>string} normalisePath strips /content + trailing slash
+ * @param {string} prefix preview "/content" prefix (empty in production)
+ * @returns {Element|null} the breadcrumb <nav>, or null if there is no trail
+ */
+function buildBreadcrumb(items, normalisePath, prefix) {
+  const here = normalisePath(window.location.pathname);
+  const segments = here.split('/').filter((s) => s.length);
+  if (segments.length === 0) return null;
+
+  // Map normalised authored path -> nice title from the sidebar items. Only
+  // exact page links (no #hash) qualify — in-page anchor sub-items (e.g.
+  // "/brand-foundations/logos/#platform") share a parent's path and would
+  // otherwise clobber its label.
+  const labelByPath = {};
+  items.forEach((item) => {
+    if (!item.link || item.link.includes('#')) return;
+    const p = normalisePath(item.link);
+    if (p && p !== '/' && !labelByPath[p]) labelByPath[p] = item.title;
+  });
+
+  const breadcrumb = document.createElement('nav');
+  breadcrumb.className = 'section-nav-breadcrumb';
+  breadcrumb.setAttribute('aria-label', 'Breadcrumb');
+  const ol = document.createElement('ol');
+
+  let path = '';
+  segments.forEach((segment, i) => {
+    path += `/${segment}`;
+    const label = labelByPath[path] || segmentToLabel(segment);
+    const li = document.createElement('li');
+    if (i === segments.length - 1) {
+      li.textContent = label;
+      li.setAttribute('aria-current', 'page');
+    } else {
+      const a = document.createElement('a');
+      a.href = prefix + path;
+      a.textContent = label;
+      li.append(a);
+    }
+    ol.append(li);
+  });
+  breadcrumb.append(ol);
+  return breadcrumb;
+}
+
 export default async function decorate(block) {
   const items = [...block.children]
     .map(parseRow)
@@ -351,6 +414,10 @@ export default async function decorate(block) {
       });
       section.append(content);
       groupMediaCards(content);
+      // Breadcrumb sits at the top of the content column, beside the sidebar
+      // (matches the live brand-hub layout).
+      const breadcrumb = buildBreadcrumb(items, normalisePath, prefix);
+      if (breadcrumb) content.prepend(breadcrumb);
     }
   }
 }
