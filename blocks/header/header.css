@@ -326,6 +326,54 @@ header nav .nav-suggest-link .nav-suggest-label {
   color: var(--brand-color, #512286);
 }
 
+/* ===== Breadcrumb row (below the nav) ===== */
+header .nav-breadcrumb {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 12px 20px;
+}
+
+header .nav-breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--body-font-size-s);
+}
+
+header .nav-breadcrumb li {
+  display: flex;
+  align-items: center;
+  color: var(--dark-color);
+}
+
+/* separator slash between items */
+header .nav-breadcrumb li + li::before {
+  content: '/';
+  margin-right: 8px;
+  color: var(--border-color);
+}
+
+/* stylelint-disable no-descending-specificity */
+header .nav-breadcrumb a:any-link {
+  color: var(--dark-color);
+  text-decoration: none;
+}
+
+header .nav-breadcrumb a:any-link:hover {
+  color: var(--link-color);
+  text-decoration: underline;
+}
+/* stylelint-enable no-descending-specificity */
+
+header .nav-breadcrumb li[aria-current='page'] {
+  color: var(--text-color);
+  font-weight: 600;
+}
+
 /* ===== Desktop (>= 1024px) ===== */
 @media (width >= 1024px) {
   header nav .nav-mobile-tools {
