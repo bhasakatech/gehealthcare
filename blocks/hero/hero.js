@@ -79,6 +79,19 @@ export default function decorate(block) {
     cta.className = 'hero-cta';
     cta.href = ctaHref;
     cta.innerHTML = `<span>${ctaLabel}</span>`;
+
+    // Smooth-scroll on click. If the CTA points at an in-page anchor
+    // (e.g. "#intro-jump") that doesn't exist on the page, fall back to
+    // scrolling past the hero to the next block instead of doing nothing.
+    cta.addEventListener('click', (e) => {
+      if (!ctaHref.startsWith('#')) return;
+      e.preventDefault();
+      const targetId = ctaHref.slice(1);
+      const target = targetId ? document.getElementById(targetId) : null;
+      const heroWrapper = block.closest('.hero-wrapper') || block;
+      const scrollTo = target || heroWrapper.nextElementSibling;
+      if (scrollTo) scrollTo.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   }
 
   // A hero with only a video and no overlay heading/CTA renders the video
