@@ -48,7 +48,13 @@ export default function decorate(block) {
   const heading = text.querySelector('h1, h2, h3');
   if (heading) {
     const prev = heading.previousElementSibling;
-    if (prev && prev.tagName === 'P' && !prev.querySelector('a')) prev.classList.add('content-media-eyebrow');
+    if (prev && prev.tagName === 'P' && !prev.querySelector('a')) {
+      prev.classList.add('content-media-eyebrow');
+      // The first content-media eyebrow on the page is the scroll target for
+      // the hero "Explore the Brand" CTA (href="#intro-jump").
+      const isFirst = !document.getElementById('intro-jump');
+      if (isFirst) prev.id = 'intro-jump';
+    }
   }
 
   // Image side
