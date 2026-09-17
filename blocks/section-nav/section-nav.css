@@ -154,3 +154,47 @@
     padding: 0;
   }
 }
+
+/* ===== Breadcrumb (top of the content column, beside the sidebar) ===== */
+.section-nav-breadcrumb {
+  margin: 0 0 8px;
+}
+
+.section-nav-breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 16px;
+}
+
+.section-nav-breadcrumb li {
+  display: flex;
+  align-items: center;
+  color: var(--text-color);
+  font-weight: 400;
+}
+
+/* separator slash between items */
+.section-nav-breadcrumb li + li::before {
+  content: '/';
+  margin-right: 6px;
+  color: var(--text-color);
+}
+
+.section-nav-breadcrumb a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+.section-nav-breadcrumb a:hover {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}
+
+.section-nav-breadcrumb li[aria-current='page'] {
+  color: var(--text-color);
+}

@@ -35,68 +35,6 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 }
 
 /**
- * Turns a path segment ("brand-foundations") into a readable label
- * ("Brand foundations") for use when the nav has no matching link.
- */
-function segmentToLabel(segment) {
-  const words = decodeURIComponent(segment).replace(/[-_]+/g, ' ').trim();
-  return words.charAt(0).toUpperCase() + words.slice(1);
-}
-
-/**
- * Builds a breadcrumb trail from the current page path. Labels are resolved
- * from the nav menu links when possible, otherwise derived from the path
- * segment. Each ancestor segment is a link; the last item (the current page)
- * is rendered as plain text — matching the live site (no "Home" item).
- * @param {Element} menuList the primary nav <ul>, used to look up nice labels
- * @returns {Element|null} a <nav> breadcrumb element, or null on the home page
- */
-function buildBreadcrumbs(menuList) {
-  const path = window.location.pathname.replace(/\.html$/, '');
-  const segments = path.split('/').filter((s) => s.length);
-  // Drop the internal "/content" path prefix so it doesn't surface as a
-  // breadcrumb item (the public site is served from the content root).
-  if (segments[0] === 'content') segments.shift();
-  // No breadcrumbs on the home page.
-  if (segments.length === 0) return null;
-
-  // Map "/path" -> "Nice Label" from the authored nav links.
-  const navLabels = {};
-  menuList?.querySelectorAll('a').forEach((a) => {
-    const href = (a.getAttribute('href') || '').replace(/\/$/, '');
-    if (href) navLabels[href] = a.textContent.trim();
-  });
-
-  const crumbs = [];
-  let current = '';
-  segments.forEach((segment) => {
-    current += `/${segment}`;
-    crumbs.push({ label: navLabels[current] || segmentToLabel(segment), href: current });
-  });
-
-  const breadcrumb = document.createElement('nav');
-  breadcrumb.className = 'nav-breadcrumb';
-  breadcrumb.setAttribute('aria-label', 'Breadcrumb');
-  const ol = document.createElement('ol');
-  crumbs.forEach((crumb, i) => {
-    const li = document.createElement('li');
-    const isLast = i === crumbs.length - 1;
-    if (isLast) {
-      li.textContent = crumb.label;
-      li.setAttribute('aria-current', 'page');
-    } else {
-      const a = document.createElement('a');
-      a.href = crumb.href;
-      a.textContent = crumb.label;
-      li.append(a);
-    }
-    ol.append(li);
-  });
-  breadcrumb.append(ol);
-  return breadcrumb;
-}
-
-/**
  * loads and decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
@@ -217,10 +155,6 @@ export default async function decorate(block) {
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
-
-  // Breadcrumb row below the nav (skipped on the home page).
-  const breadcrumb = buildBreadcrumbs(menuList);
-  if (breadcrumb) navWrapper.append(breadcrumb);
 
   decorateIcons(brandbar);
   decorateIcons(nav);
