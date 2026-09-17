@@ -54,6 +54,9 @@ function segmentToLabel(segment) {
 function buildBreadcrumbs(menuList) {
   const path = window.location.pathname.replace(/\.html$/, '');
   const segments = path.split('/').filter((s) => s.length);
+  // Drop the internal "/content" path prefix so it doesn't surface as a
+  // breadcrumb item (the public site is served from the content root).
+  if (segments[0] === 'content') segments.shift();
   // No breadcrumbs on the home page.
   if (segments.length === 0) return null;
 
