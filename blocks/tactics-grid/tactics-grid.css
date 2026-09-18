@@ -54,11 +54,43 @@
   font-weight: 700;
 }
 
+/* A tactic that leads with an authored image is a small status marker (e.g. a
+   red ✗ / green ✓ icon), not a full-width image. Cap it to icon size and give
+   it a little space above the caption, matching the live ❌/✅ markers. */
+.tactics-grid .tactics-grid-cell .tactics-grid-marker {
+  margin: 0 0 12px;
+  line-height: 0;
+}
+
+.tactics-grid .tactics-grid-cell .tactics-grid-marker img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* Unlabeled grids (Dos/Don'ts): each cell is topped by a thin divider line,
+   matching the live site (which shows a rule above every paragraph). */
+.tactics-grid .tactics-grid-unlabeled .tactics-grid-cell {
+  border-top: 1px solid #d1d2d4;
+  padding-top: 24px;
+}
+
+/* An empty cell (a column with fewer paragraphs) shouldn't show a stray line. */
+.tactics-grid .tactics-grid-unlabeled .tactics-grid-cell:empty {
+  border-top: 0;
+  padding-top: 0;
+}
+
 /* Desktop: a matrix — left label rail + one column per principle. */
 @media (width >= 900px) {
   .tactics-grid .tactics-grid-table {
     grid-template-columns: 140px repeat(var(--tactics-cols), 1fr);
     gap: 40px 48px;
+  }
+
+  /* Unlabeled grids have no rail, so the columns start flush left. */
+  .tactics-grid .tactics-grid-unlabeled.tactics-grid-table {
+    grid-template-columns: repeat(var(--tactics-cols), 1fr);
   }
 
   .tactics-grid .tactics-grid-corner {
