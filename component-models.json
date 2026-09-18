@@ -898,14 +898,6 @@
         "label": "Row Labels (left column)",
         "value": "Tactic 1, Tactic 2, Tactic 3",
         "description": "Comma-separated labels for the left column, one per row (top to bottom). Author your own, e.g. \"Messaging pillars\" or \"Before, After\". Reusable for any matrix (tactics, messaging, before/after examples)."
-      },
-      {
-        "component": "reference",
-        "valueType": "string",
-        "name": "marker",
-        "label": "Marker icon (optional)",
-        "multi": false,
-        "description": "Optional status icon shown above every tactic in this grid (e.g. a red ✗ for Don'ts or green ✓ for Dos). Leave empty for no icon. Pick from the DAM or paste an image URL."
       }
     ]
   },
