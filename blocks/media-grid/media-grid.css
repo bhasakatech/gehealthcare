@@ -58,6 +58,38 @@
   object-fit: cover;
 }
 
+/*
+ * Spec tiles — the LinkedIn "typical sizes" grid. A label (ratio + name) sits
+ * beside a decorative solid-purple box sized to the tile's aspect ratio.
+ * No media, no link; purely illustrative of each format.
+ */
+.media-grid .media-tile-spec {
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+}
+
+.media-grid .media-tile-spec-label {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.media-grid .media-tile-spec-ratio,
+.media-grid .media-tile-spec-name {
+  color: var(--text-color);
+}
+
+.media-grid .media-tile-spec-box {
+  height: 180px;
+  width: auto;
+  background-color: var(--brand-color);
+  border-radius: 8px;
+  flex: 0 0 auto;
+}
+
 @media (width >= 900px) {
   .media-grid .media-grid-list {
     grid-template-columns: repeat(2, 1fr);
