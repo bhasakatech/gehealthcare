@@ -423,7 +423,7 @@
         "valueType": "string",
         "name": "group",
         "label": "Group Heading",
-        "description": "Category heading. Repeat the same value across items to cluster them into one group."
+        "description": "Category heading. Repeat the same value across items to cluster them into one group. To place items in a collapsible sub-panel, append \" > Sub-group name\" (e.g. \"NGRGs & Observances > Observance assets\") — those items are hidden until the sub-group is expanded."
       },
       {
         "component": "text",
