@@ -48,44 +48,11 @@
           "label": "Caption"
         },
         {
-          "component": "text",
+          "component": "richtext",
           "valueType": "string",
-          "name": "links_link1",
-          "label": "Link 1 URL"
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "links_link1Text",
-          "label": "Link 1 Text"
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "links_link2",
-          "label": "Link 2 URL",
-          "description": "Optional second link URL."
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "links_link2Text",
-          "label": "Link 2 Text",
-          "description": "Optional second link text."
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "links_link3",
-          "label": "Link 3 URL",
-          "description": "Optional third link URL."
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "links_link3Text",
-          "label": "Link 3 Text",
-          "description": "Optional third link text."
+          "name": "links",
+          "label": "Links",
+          "description": "Add any number of links. The FIRST link is the video/thumbnail target; the remaining links (e.g. View presentation, View guideline 1, View guideline 2 …) render as action buttons in the card body."
         },
         {
           "component": "reference",
