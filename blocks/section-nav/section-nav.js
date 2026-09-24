@@ -25,7 +25,10 @@ function parseRow(row) {
     title: cells[0]?.textContent.trim() || '',
     link: cells[1]?.textContent.trim() || '',
     parent: cells[2]?.textContent.trim() || '',
-    cell: cells[0],
+    // Keep the item's row element: the editor's per-item instrumentation lives
+    // on the row (the block's direct child), and must be carried onto the
+    // surviving <li> so the "add item" affordance keeps working.
+    row,
   };
 }
 
@@ -57,7 +60,6 @@ function createLink(item, prefix) {
   a.className = 'section-nav-link';
   a.href = resolveHref(item.link || '#', prefix);
   a.textContent = item.title;
-  if (item.cell) moveInstrumentation(item.cell, a);
   return a;
 }
 
@@ -320,6 +322,9 @@ export default async function decorate(block) {
   items.forEach((item) => {
     const li = document.createElement('li');
     li.className = 'section-nav-item';
+    // Carry the row's editor instrumentation onto the <li> so Universal Editor
+    // keeps tracking this item instance (and the "add item" affordance works).
+    if (item.row) moveInstrumentation(item.row, li);
     const link = createLink(item, prefix);
     li.append(link);
     registerAnchor(link);
