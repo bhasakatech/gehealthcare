@@ -843,6 +843,10 @@
     ]
   },
   {
+    "id": "section-nav",
+    "fields": []
+  },
+  {
     "id": "section-nav-item",
     "fields": [
       {
