@@ -37,16 +37,17 @@
       "id": "image-grid",
       "fields": [
         {
-          "component": "select",
+          "component": "multiselect",
           "name": "classes",
           "value": "columns-2",
-          "label": "Columns",
-          "description": "Number of columns for the image grid (default 2).",
+          "label": "Columns / Style",
+          "description": "Number of columns for the image grid (default 2). Optionally enable Placeholder to render decorative purple boxes for items without an image.",
           "valueType": "string",
           "options": [
             { "name": "1 Column", "value": "columns-1" },
             { "name": "2 Columns", "value": "columns-2" },
-            { "name": "3 Columns", "value": "columns-3" }
+            { "name": "3 Columns", "value": "columns-3" },
+            { "name": "Placeholder (purple boxes for empty items)", "value": "placeholder" }
           ]
         }
       ]

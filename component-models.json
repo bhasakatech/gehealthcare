@@ -423,7 +423,7 @@
         "valueType": "string",
         "name": "group",
         "label": "Group Heading",
-        "description": "Category heading. Repeat the same value across items to cluster them into one group."
+        "description": "Category heading. Repeat the same value across items to cluster them into one group. To place items in a collapsible sub-panel, append \" > Sub-group name\" (e.g. \"NGRGs & Observances > Observance assets\") — those items are hidden until the sub-group is expanded."
       },
       {
         "component": "text",
@@ -643,11 +643,11 @@
     "id": "image-grid",
     "fields": [
       {
-        "component": "select",
+        "component": "multiselect",
         "name": "classes",
         "value": "columns-2",
-        "label": "Columns",
-        "description": "Number of columns for the image grid (default 2).",
+        "label": "Columns / Style",
+        "description": "Number of columns for the image grid (default 2). Optionally enable Placeholder to render decorative purple boxes for items without an image.",
         "valueType": "string",
         "options": [
           {
@@ -661,6 +661,10 @@
           {
             "name": "3 Columns",
             "value": "columns-3"
+          },
+          {
+            "name": "Placeholder (purple boxes for empty items)",
+            "value": "placeholder"
           }
         ]
       }
@@ -998,44 +1002,11 @@
         "label": "Caption"
       },
       {
-        "component": "text",
+        "component": "richtext",
         "valueType": "string",
-        "name": "links_link1",
-        "label": "Link 1 URL"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "links_link1Text",
-        "label": "Link 1 Text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "links_link2",
-        "label": "Link 2 URL",
-        "description": "Optional second link URL."
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "links_link2Text",
-        "label": "Link 2 Text",
-        "description": "Optional second link text."
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "links_link3",
-        "label": "Link 3 URL",
-        "description": "Optional third link URL."
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "links_link3Text",
-        "label": "Link 3 Text",
-        "description": "Optional third link text."
+        "name": "links",
+        "label": "Links",
+        "description": "Add any number of links. The FIRST link is the video/thumbnail target; the remaining links (e.g. View presentation, View guideline 1, View guideline 2 …) render as action buttons in the card body."
       },
       {
         "component": "reference",

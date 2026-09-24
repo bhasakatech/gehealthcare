@@ -118,6 +118,15 @@ def main():
                     cls += ' ' + variant
                 out.append(item_block(cls, items, [
                     {'name': 'image', 'type': 'image'}, {'name': 'imageAlt'}, {'name': 'caption'}]))
+            elif flt == 'media-grid':
+                items = [dict(c.attrib) for c in children(node) if local(c.tag).startswith('item')]
+                cls = 'media-grid'
+                variant = re.sub(r'^\[|\]$', '', a.get('classes', ''))
+                if variant:
+                    cls += ' ' + variant
+                out.append(item_block(cls, items, [
+                    {'name': 'title'}, {'name': 'image', 'type': 'image'},
+                    {'name': 'video', 'type': 'link'}, {'name': 'link', 'type': 'link'}]))
             elif flt == 'dos-donts':
                 items = [dict(c.attrib) for c in children(node) if local(c.tag).startswith('item')]
                 out.append(item_block('dos-donts', items, [

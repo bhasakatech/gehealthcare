@@ -15,6 +15,10 @@ const COLUMN_CLASSES = ['columns-1', 'columns-2', 'columns-3'];
 export default function decorate(block) {
   const rows = [...block.children];
 
+  // In the `placeholder` variant an item without an image renders as a
+  // decorative purple box (matches the live "standard video format" swatch).
+  const isPlaceholder = block.classList.contains('placeholder');
+
   const ul = document.createElement('ul');
   ul.className = 'image-grid-list';
 
@@ -41,6 +45,11 @@ export default function decorate(block) {
         figure.append(figcaption);
       }
       li.append(figure);
+    } else if (isPlaceholder) {
+      const box = document.createElement('div');
+      box.className = 'image-grid-placeholder-box';
+      box.setAttribute('aria-hidden', 'true');
+      li.append(box);
     }
 
     ul.append(li);

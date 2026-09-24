@@ -29,6 +29,14 @@
   color: var(--text-color);
 }
 
+/* Decorative purple swatch used for empty items in the `placeholder` variant. */
+.image-grid .image-grid-placeholder-box {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  background-color: var(--brand-color);
+  border-radius: 8px;
+}
+
 /* Column counts kick in at tablet+; mobile stays single-column. */
 @media (width >= 600px) {
   .image-grid.columns-2 .image-grid-list,

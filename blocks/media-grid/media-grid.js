@@ -28,8 +28,46 @@ export default function decorate(block) {
     const linkAnchor = linkCell?.querySelector('a');
     const href = linkAnchor?.getAttribute('href') || (linkCell?.textContent.trim() || '');
 
-    // Title (rendered as a heading link)
     const titleText = titleCell?.textContent.trim() || '';
+    const videoAnchor = videoCell?.querySelector('a');
+    const videoUrl = videoAnchor?.getAttribute('href')
+      || (videoCell?.textContent.trim().match(/\.mp4($|\?)/i) ? videoCell.textContent.trim() : '');
+    const img = imageCell?.querySelector('img');
+
+    // Spec tile: a title with an aspect ratio (e.g. "1:1 square") and no media
+    // renders as a label beside a decorative purple box sized to that ratio.
+    // Matches the live LinkedIn "typical sizes" grid (no image/video/link).
+    const ratioMatch = titleText.match(/^(\d+)\s*:\s*(\d+)\b\s*([\s\S]*)$/);
+    if (ratioMatch && !videoUrl && !img && !href) {
+      const [, w, h, label] = ratioMatch;
+      li.classList.add('media-tile-spec');
+
+      const caption = document.createElement('div');
+      caption.className = 'media-tile-spec-label';
+      const ratioEl = document.createElement('span');
+      ratioEl.className = 'media-tile-spec-ratio';
+      ratioEl.textContent = `${w}:${h}`;
+      caption.append(ratioEl);
+      const nameText = label.trim();
+      if (nameText) {
+        const nameEl = document.createElement('span');
+        nameEl.className = 'media-tile-spec-name';
+        nameEl.textContent = nameText;
+        caption.append(nameEl);
+      }
+      li.append(caption);
+
+      const box = document.createElement('div');
+      box.className = 'media-tile-media media-tile-spec-box';
+      box.style.aspectRatio = `${w} / ${h}`;
+      box.setAttribute('aria-hidden', 'true');
+      li.append(box);
+
+      ul.append(li);
+      return;
+    }
+
+    // Title (rendered as a heading link)
     if (titleText) {
       const h = document.createElement('h3');
       h.className = 'media-tile-title';
@@ -47,11 +85,6 @@ export default function decorate(block) {
     // Media tile (video takes precedence over image)
     const media = document.createElement('div');
     media.className = 'media-tile-media';
-
-    const videoAnchor = videoCell?.querySelector('a');
-    const videoUrl = videoAnchor?.getAttribute('href')
-      || (videoCell?.textContent.trim().match(/\.mp4($|\?)/i) ? videoCell.textContent.trim() : '');
-    const img = imageCell?.querySelector('img');
 
     if (videoUrl) {
       const video = document.createElement('video');

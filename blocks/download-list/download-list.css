@@ -29,6 +29,43 @@
   padding: 0;
 }
 
+/* Collapsible sub-group (e.g. "Observance assets" under NGRGs & Observances). */
+.download-list .download-list-subgroup-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 12px 0;
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--text-color);
+  font-size: var(--body-font-size-m);
+}
+
+.download-list .download-list-subgroup-toggle:hover {
+  color: var(--brand-color);
+}
+
+.download-list .download-list-toggle {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--brand-color);
+  line-height: 0;
+}
+
+/* Collapse the vertical bar of the "+" to turn it into a "−" when expanded. */
+.download-list .download-list-subgroup-toggle[aria-expanded="true"] .download-list-toggle-v {
+  opacity: 0;
+}
+
+.download-list .download-list-subgroup-panel[hidden] {
+  display: none;
+}
+
 .download-list .download-list-item {
   display: flex;
   align-items: center;
