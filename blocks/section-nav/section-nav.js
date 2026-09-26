@@ -1,55 +1,48 @@
-import { moveInstrumentation } from '../../scripts/scripts.js';
-
 /**
  * Section Nav — the brand hub sidebar navigation.
  *
- * A reusable, multi-level, click-to-expand accordion sidebar. Authored as
- * repeatable "Section Nav Item" rows (see _section-nav.json), each carrying:
- *   [title, link, parent]
- * where `parent` is the title of the item this row nests under (empty = top
- * level). Nesting can be arbitrary depth (a child can itself be a parent).
+ * NOTE: All decoration logic is temporarily commented out so that Universal
+ * Editor can read the instrumented source rows (data-aue-* attributes) and
+ * surface the dialog fields (Title / Link / Parent) for each Section Nav Item.
  *
- * Behaviour mirrors the live site sidebar:
- *   - items with children show a caret; clicking it expands/collapses
- *   - the current page's branch is expanded by default
- *   - in-page anchor links (#..) scroll smoothly and highlight via scrollspy
- *
- * The "For support" contact card is a separate, reusable Support Card block
- * placed beneath this one in the sidebar.
+ * The rows must NOT be hidden (display:none) while diagnosing UE dialog issues,
+ * because UE needs them to be in the visible DOM to resolve instrumentation.
  *
  * @param {Element} block
  */
+
+/* ─── Helper functions (commented out for UE dialog debugging) ──────────────
+
 function parseRow(row) {
   const cells = [...row.children];
   return {
     title: cells[0]?.textContent.trim() || '',
     link: cells[1]?.textContent.trim() || '',
     parent: cells[2]?.textContent.trim() || '',
+    row,
     cell: cells[0],
   };
 }
 
-/**
- * Resolve an authored link to the environment the page is served from.
- * Authored links use production paths with a trailing slash (e.g.
- * "/our-brand/"). EDS serves pages at the extension-less path *without* the
- * trailing slash, so the trailing slash must always be stripped — keeping it
- * redirects to a 404. In a preview that serves pages under a "/content"
- * prefix, that prefix is also added. External links, in-page anchors and
- * asset URLs are returned unchanged.
- */
 function resolveHref(href, prefix) {
-  // Leave external links, protocol-relative links, in-page anchors and assets
-  // untouched. Also skip anything already carrying the preview prefix.
   if (!href.startsWith('/') || href.startsWith('//') || href.startsWith('#')
     || href.startsWith('/assets') || (prefix && href.startsWith(prefix))) return href;
 
   const hashIdx = href.indexOf('#');
   const rawPath = hashIdx === -1 ? href : href.slice(0, hashIdx);
   const hash = hashIdx === -1 ? '' : href.slice(hashIdx);
-  // Strip a trailing slash from the page path (but never reduce root "/" to "").
   const path = rawPath.length > 1 ? rawPath.replace(/\/$/, '') : rawPath;
   return prefix + path + hash;
+}
+
+function copyInstrumentation(from, to) {
+  [...from.attributes]
+    .map(({ nodeName }) => nodeName)
+    .filter((attr) => attr.startsWith('data-aue-') || attr.startsWith('data-richtext-'))
+    .forEach((attr) => {
+      const value = from.getAttribute(attr);
+      if (value) to.setAttribute(attr, value);
+    });
 }
 
 function createLink(item, prefix) {
@@ -57,13 +50,23 @@ function createLink(item, prefix) {
   a.className = 'section-nav-link';
   a.href = resolveHref(item.link || '#', prefix);
   a.textContent = item.title;
-  if (item.cell) moveInstrumentation(item.cell, a);
+  if (item.cell) copyInstrumentation(item.cell, a);
   return a;
+}
+
+function createItem(item, prefix) {
+  const li = document.createElement('li');
+  li.className = 'section-nav-item';
+  if (item.row) copyInstrumentation(item.row, li);
+  const link = createLink(item, prefix);
+  li.append(link);
+  return li;
 }
 
 function scrollToAnchor(hash) {
   const id = decodeURIComponent((hash || '').slice(1));
-  const target = document.getElementById(id) || document.querySelector(`[name="${CSS.escape(id)}"]`);
+  const target = document.getElementById(id)
+    || document.querySelector(`[name="${CSS.escape(id)}"]`);
   if (!target) return false;
   target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   return true;
@@ -92,34 +95,7 @@ function setupScrollSpy(anchorLinks) {
   targets.forEach((t) => observer.observe(t));
 }
 
-/**
- * Group each section's image "cards" into a responsive grid, matching the
- * multi-column example grids on the live brand-foundation pages (e.g. Logos).
- *
- * On the live page, a section's example tiles flow into 2-up / 3-up grids. In
- * the migrated EDS content each tile is a standalone single-column
- * `content-media` block (the `caption` / `image-only` variants), and the
- * section's descriptive prose was split into separate `default-content-wrapper`
- * blocks interleaved *between* those tiles — so they stack vertically.
- *
- * This regroups per section: a section starts at a heading (h2/h3) and runs
- * until the next heading. Within a section, all image tiles are collected and
- * moved into one `.media-grid-auto` grid, positioned where the first tile was.
- * Text/prose keeps its place; only the image tiles are gathered so they lay out
- * side by side like the live grids. A grid is only created when a section has
- * 2+ tiles, so lone images (and pages without such runs — legal, our-brand,
- * home) are untouched.
- */
 function groupMediaCards(content) {
-  // Only caption cards flow into the multi-column grid. image-only tiles (the
-  // full-width primary logo, platform length banners, placement diagrams) stay
-  // full width, matching the live 1/1 rows — so a section like "Logo versions"
-  // keeps Horizontal full width above a 2-up of Stacked + Platform.
-  //
-  // This runs before content-media decorates (section-nav is the first block in
-  // the section), so the `.caption` class isn't set yet. Read the authored
-  // layout instead: the decorated class if present, else the raw layout cell
-  // (the block's last field), which holds the value from the moment it renders.
   const cardLayout = (el) => {
     const cm = el?.querySelector(':scope > .content-media');
     if (!cm) return null;
@@ -138,16 +114,11 @@ function groupMediaCards(content) {
     || !!el?.querySelector?.(':scope > .dos-donts');
   const dosDontsCount = (el) => {
     const block = el.querySelector(':scope > .dos-donts') || el;
-    // Pre-decoration: each dont is a direct child <div> row; post-decoration:
-    // an <li> in the built <ul>. Count whichever is present.
     const lis = block.querySelectorAll(':scope > ul > li');
     if (lis.length) return lis.length;
     return block.querySelectorAll(':scope > div').length;
   };
 
-  // Group tiles into one grid with an explicit column count that matches the
-  // live page (auto-fill can't tell a 3-up from a 2-up). `place` is the element
-  // the grid is inserted before; `members` are moved into it.
   const buildGrid = (place, members, columns) => {
     const grid = document.createElement('div');
     grid.className = 'media-grid-auto';
@@ -162,11 +133,6 @@ function groupMediaCards(content) {
   while (i < kids.length) {
     const el = kids[i];
 
-    // Mixed example row: a caption card immediately followed by one or more
-    // dos-donts blocks (the "Logo integrity" / "GE HealthCare name" example
-    // rows on live — a good example beside its ✗ don't cards). Merge the good
-    // card and each dont card into one equal-column grid. The dos-donts wrapper
-    // is flattened (`display: contents`) so its cards become grid columns.
     if (isCard(el) && isDosDonts(kids[i + 1])) {
       const members = [el];
       let tiles = 1;
@@ -177,17 +143,12 @@ function groupMediaCards(content) {
         members.push(kids[j]);
         j += 1;
       }
-      // Cap at 3 columns; more tiles wrap (e.g. 1 good + 4 don'ts → 3 then 2),
-      // matching the live 1/3-width columns.
       buildGrid(el, members, Math.min(tiles, 3));
       i = j;
       // eslint-disable-next-line no-continue
       continue;
     }
 
-    // Plain caption grid: a run of 2+ consecutive caption cards (Logo color,
-    // Logo versions, placement, …). Exactly three tiles → 3-up; otherwise 2-up
-    // (a 6-tile run wraps to three rows of two).
     if (isCard(el)) {
       const run = [];
       let j = i;
@@ -204,37 +165,16 @@ function groupMediaCards(content) {
   }
 }
 
-/**
- * Turns a path segment ("brand-foundations") into a readable label
- * ("Brand foundations") when no authored title is available.
- */
 function segmentToLabel(segment) {
   const words = decodeURIComponent(segment).replace(/[-_]+/g, ' ').trim();
   return words.charAt(0).toUpperCase() + words.slice(1);
 }
 
-/**
- * Builds the breadcrumb trail shown at the top of the content column, beside
- * the sidebar (matching the live brand-hub pages). The trail follows the
- * current page's path hierarchy — each ancestor is a link and the current page
- * is plain text. Labels are resolved from the authored section-nav item titles
- * when the path matches, otherwise derived from the path segment. There is no
- * leading "Home" item (the live site hides it).
- *
- * @param {Array} items parsed section-nav rows ({ title, link, ... })
- * @param {(p:string)=>string} normalisePath strips /content + trailing slash
- * @param {string} prefix preview "/content" prefix (empty in production)
- * @returns {Element|null} the breadcrumb <nav>, or null if there is no trail
- */
 function buildBreadcrumb(items, normalisePath, prefix) {
   const here = normalisePath(window.location.pathname);
   const segments = here.split('/').filter((s) => s.length);
   if (segments.length === 0) return null;
 
-  // Map normalised authored path -> nice title from the sidebar items. Only
-  // exact page links (no #hash) qualify — in-page anchor sub-items (e.g.
-  // "/brand-foundations/logos/#platform") share a parent's path and would
-  // otherwise clobber its label.
   const labelByPath = {};
   items.forEach((item) => {
     if (!item.link || item.link.includes('#')) return;
@@ -267,157 +207,22 @@ function buildBreadcrumb(items, normalisePath, prefix) {
   return breadcrumb;
 }
 
+─── End of commented-out helpers ─────────────────────────────────────────── */
+
+/**
+ * Minimal decorate stub — keeps all source rows visible in the DOM so
+ * Universal Editor's instrumentation (data-aue-*) attributes can be resolved
+ * and the Section Nav Item dialog fields (Title / Link / Parent) are shown.
+ *
+ *
+ * @param {Element} block
+ */
+// eslint-disable-next-line no-unused-vars
 export default async function decorate(block) {
-  const items = [...block.children]
-    .map(parseRow)
-    .filter((i) => i.title);
-
-  const nav = document.createElement('nav');
-  nav.className = 'section-nav-menu';
-  nav.setAttribute('aria-label', 'Section navigation');
-
-  const rootList = document.createElement('ul');
-  rootList.className = 'section-nav-list';
-
-  const liByTitle = new Map();
-  const anchorLinks = new Map();
-  // Normalise the current path so preview (/content/our-brand) and production
-  // (/our-brand/) resolve the same way when matching authored links.
-  const normalisePath = (p) => p.replace(/^\/content/, '').replace(/\/$/, '') || '/';
-  const here = normalisePath(window.location.pathname);
-  // In a preview that serves pages under "/content", rewrite authored links to
-  // that prefix; in production the prefix is empty and links are unchanged.
-  const prefix = window.location.pathname.startsWith('/content/') ? '/content' : '';
-
-  // A link is "on this page" when it has a #hash and either starts with '#' or
-  // its pathname matches the current page. Those scroll in-page (with
-  // scrollspy); everything else navigates normally.
-  const registerAnchor = (a) => {
-    const href = a.getAttribute('href') || '';
-    if (!href.includes('#')) return;
-    const hash = href.slice(href.indexOf('#'));
-    if (hash.length <= 1) return;
-
-    let samePage = href.startsWith('#');
-    if (!samePage) {
-      try {
-        const url = new URL(href, window.location.origin);
-        samePage = normalisePath(url.pathname) === here;
-      } catch (e) { /* non-URL href */ }
-    }
-    if (!samePage) return;
-
-    anchorLinks.set(decodeURIComponent(hash.slice(1)), a);
-    a.addEventListener('click', (e) => {
-      if (scrollToAnchor(hash)) {
-        e.preventDefault();
-        window.history.replaceState(null, '', hash);
-      }
-    });
-  };
-
-  // Build in authored order so parents exist before their children.
-  items.forEach((item) => {
-    const li = document.createElement('li');
-    li.className = 'section-nav-item';
-    const link = createLink(item, prefix);
-    li.append(link);
-    registerAnchor(link);
-    // Mark the exact page link (no #hash) as current so its branch highlights
-    // and auto-expands; child anchors highlight via scrollspy while scrolling.
-    const rawHref = link.getAttribute('href') || '';
-    if (!rawHref.startsWith('#') && !rawHref.includes('#')) {
-      try {
-        const linkPath = normalisePath(new URL(link.href, window.location.origin).pathname);
-        if (linkPath && linkPath === here) li.classList.add('section-nav-current');
-      } catch (e) { /* non-URL href */ }
-    }
-    liByTitle.set(item.title, li);
-
-    if (item.parent && liByTitle.has(item.parent)) {
-      const parentLi = liByTitle.get(item.parent);
-      let sub = parentLi.querySelector(':scope > ul.section-nav-sublist');
-      if (!sub) {
-        sub = document.createElement('ul');
-        sub.className = 'section-nav-sublist';
-        parentLi.classList.add('section-nav-item-parent');
-        const toggle = document.createElement('button');
-        toggle.type = 'button';
-        toggle.className = 'section-nav-toggle';
-        toggle.setAttribute('aria-label', `Toggle ${item.parent}`);
-        toggle.setAttribute('aria-expanded', 'false');
-        toggle.addEventListener('click', (e) => {
-          e.preventDefault();
-          const open = parentLi.classList.toggle('section-nav-open');
-          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-        });
-        parentLi.append(toggle, sub);
-      }
-      sub.append(li);
-    } else {
-      rootList.append(li);
-    }
-  });
-
-  // Expand the branch containing the current page.
-  let node = rootList.querySelector('.section-nav-current');
-  while (node && node !== rootList) {
-    if (node.classList?.contains('section-nav-item-parent')) {
-      node.classList.add('section-nav-open');
-      const t = node.querySelector(':scope > .section-nav-toggle');
-      if (t) t.setAttribute('aria-expanded', 'true');
-    }
-    node = node.parentElement ? node.parentElement.closest('.section-nav-item') : null;
-  }
-
-  nav.append(rootList);
-
-  // Mobile collapsible wrapper (disclosure); desktop shows it always open.
-  const details = document.createElement('details');
-  details.className = 'section-nav-collapsible';
-  const summary = document.createElement('summary');
-  summary.className = 'section-nav-summary';
-  summary.textContent = 'Menu';
-  details.append(summary, nav);
-
-  // A closed <details> hides its content, so on desktop (where the summary is
-  // hidden) keep the navigation open regardless of the disclosure state.
-  const desktop = window.matchMedia('(min-width: 900px)');
-  const syncDisclosure = () => { if (desktop.matches) details.open = true; };
-  syncDisclosure();
-  desktop.addEventListener('change', syncDisclosure);
-
-  block.replaceChildren(details);
-  setupScrollSpy(anchorLinks);
-
-  // Rebuild the sidebar layout as a robust two-column flex row:
-  //   .section-nav-wrapper  (sidebar: nav + support card, one sticky unit)
-  //   .sidebar-layout-content (everything else, in document order)
-  // Grouping the content in its own wrapper guarantees the sidebar stays a
-  // single fixed-width flex child pinned to the top — it can't be pushed down
-  // by grid auto-placement or tall content rows.
-  const wrapper = block.closest('.section-nav-wrapper');
-  const section = block.closest('.section');
-  if (wrapper && section) {
-    const supportWrapper = section.querySelector('.support-card-wrapper');
-    // Pull the support card into the sidebar so both scroll together.
-    if (supportWrapper && !wrapper.contains(supportWrapper)) {
-      wrapper.append(supportWrapper);
-    }
-    // Wrap all remaining direct children (the page content) in one column,
-    // preserving their order.
-    if (!section.querySelector(':scope > .sidebar-layout-content')) {
-      const content = document.createElement('div');
-      content.className = 'sidebar-layout-content';
-      [...section.children].forEach((child) => {
-        if (child !== wrapper) content.append(child);
-      });
-      section.append(content);
-      groupMediaCards(content);
-      // Breadcrumb sits at the top of the content column, beside the sidebar
-      // (matches the live brand-hub layout).
-      const breadcrumb = buildBreadcrumb(items, normalisePath, prefix);
-      if (breadcrumb) content.prepend(breadcrumb);
-    }
-  }
+  // Intentionally left minimal so UE can surface the dialog fields.
+  // The original rows remain visible (NOT hidden) so data-aue-* attributes
+  // are accessible in the live DOM.
+  //
+  // Full decoration logic is commented out above — restore it once the dialog
+  // is confirmed to be working correctly in Universal Editor.
 }
