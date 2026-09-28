@@ -317,6 +317,98 @@
     ]
   },
   {
+    "id": "cookie-consent",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "message",
+        "label": "Banner Content",
+        "description": "A heading (the banner title) followed by the cookie notice. Link text to \"#cookie-preferences\" to open the preferences dialog (e.g. \"Cookie Consent Tool\")."
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "preferences",
+        "label": "Preferences Dialog Content",
+        "description": "Headings and introduction shown above the cookie categories in the preferences dialog. The first link is also used for the sidebar \"Privacy Policy\" link."
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "logo",
+        "label": "Preferences Dialog Logo",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "logoAlt",
+        "label": "Logo Alt Text",
+        "value": "GE HealthCare"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "buttons_decline",
+        "label": "Necessary Only Button Label",
+        "value": "Allow necessary only"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "buttons_accept",
+        "label": "Accept All Button Label",
+        "value": "Accept all"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "buttons_customize",
+        "label": "Customize Button Label",
+        "value": "Customize cookies"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "buttons_save",
+        "label": "Save Choices Button Label",
+        "value": "Confirm my choices"
+      }
+    ]
+  },
+  {
+    "id": "cookie-category",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "name",
+        "label": "Category Name"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "key",
+        "label": "Category Key",
+        "description": "Identifier scripts check consent against (e.g. analytics, marketing, functional). Defaults to the name."
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description"
+      },
+      {
+        "component": "boolean",
+        "valueType": "boolean",
+        "name": "required",
+        "label": "Always Required",
+        "description": "Required categories (e.g. Essential Cookies) cannot be turned off."
+      }
+    ]
+  },
+  {
     "id": "cta-banner",
     "fields": [
       {

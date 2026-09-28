@@ -4,8 +4,10 @@ import {
   loadFooter,
   decorateIcons,
   decorateSections,
+  decorateBlock,
   decorateBlocks,
   decorateTemplateAndTheme,
+  loadBlock,
   waitForFirstImage,
   loadSection,
   loadSections,
@@ -606,6 +608,24 @@ async function loadEager(doc) {
 }
 
 /**
+ * Adds the site-wide cookie consent banner (blocks/cookie-consent/), whose
+ * content is authored once on the /cookie-consent fragment. Skipped where the
+ * block is already authored on the page (the fragment itself) and in
+ * Universal Editor, so the overlay never gets in the way of authoring.
+ * @param {Element} main The main element
+ */
+function loadCookieConsent(main) {
+  if (main?.querySelector('.cookie-consent, [data-aue-resource]')) return;
+  const block = document.createElement('div');
+  block.className = 'cookie-consent';
+  const host = document.createElement('div');
+  host.append(block);
+  document.body.prepend(host);
+  decorateBlock(block);
+  loadBlock(block);
+}
+
+/**
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
  */
@@ -620,6 +640,7 @@ async function loadLazy(doc) {
   if (hash && element) element.scrollIntoView();
 
   loadFooter(doc.querySelector('footer'));
+  loadCookieConsent(main);
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();

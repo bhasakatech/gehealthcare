@@ -77,6 +77,12 @@
     ]
   },
   {
+    "id": "cookie-consent",
+    "components": [
+      "cookie-category"
+    ]
+  },
+  {
     "id": "dos-donts",
     "components": [
       "guidance"
