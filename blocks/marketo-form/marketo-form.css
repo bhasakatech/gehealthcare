@@ -1,0 +1,419 @@
+/* =============================================================================
+   Marketo Form Block — teaser section
+   ============================================================================= */
+
+.marketo-form .marketo-form-teaser {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.marketo-form .marketo-form-teaser-title {
+  font-size: var(--heading-font-size-l);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-color);
+  margin: 0;
+}
+
+.marketo-form .marketo-form-teaser-title h1,
+.marketo-form .marketo-form-teaser-title h2,
+.marketo-form .marketo-form-teaser-title h3,
+.marketo-form .marketo-form-teaser-title h4 {
+  margin: 0;
+}
+
+.marketo-form .marketo-form-teaser-desc {
+  font-size: var(--body-font-size-s);
+  color: var(--dark-color);
+  margin: 0;
+}
+
+.marketo-form .marketo-form-teaser-desc > :first-child {
+  margin-top: 0;
+}
+
+.marketo-form .marketo-form-teaser-desc > :last-child {
+  margin-bottom: 0;
+}
+
+/* =============================================================================
+   Modal overlay
+   ============================================================================= */
+
+.marketo-form-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: rgb(0 0 0 / 50%);
+  padding: 16px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.marketo-form-modal[hidden] {
+  display: none;
+}
+
+/* =============================================================================
+   Modal dialog
+   ============================================================================= */
+
+.marketo-form-modal .marketo-form-dialog {
+  position: relative;
+  background-color: var(--background-color);
+  border-radius: 4px;
+  width: 100%;
+  max-width: 560px;
+  margin: auto;
+  box-shadow: 0 8px 40px rgb(0 0 0 / 20%);
+  box-sizing: border-box;
+}
+
+.marketo-form-modal .marketo-form-dialog-body {
+  padding: 40px 32px 32px;
+}
+
+/* Close button */
+.marketo-form-modal .marketo-form-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--dark-color);
+  padding: 6px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.marketo-form-modal .marketo-form-close:hover,
+.marketo-form-modal .marketo-form-close:focus-visible {
+  color: var(--text-color);
+  background-color: var(--lighter-color);
+  outline: 2px solid var(--brand-color);
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   Dialog heading
+   ============================================================================= */
+
+.marketo-form-modal h2#marketo-form-dialog-title {
+  font-size: var(--heading-font-size-m);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text-color);
+  margin: 0 0 24px;
+}
+
+.marketo-form-modal .marketo-form-title-accent {
+  color: var(--brand-color);
+}
+
+/* =============================================================================
+   Form layout
+   ============================================================================= */
+
+.marketo-form-modal .marketo-form-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.marketo-form-modal .marketo-form-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.marketo-form-modal .marketo-form-legend {
+  font-weight: 600;
+  font-size: var(--body-font-size-xs);
+  color: var(--text-color);
+  display: block;
+  margin-bottom: 4px;
+  padding: 0;
+  width: 100%;
+}
+
+.marketo-form-modal .marketo-form-legend-sub {
+  display: block;
+  font-weight: 400;
+  font-size: var(--body-font-size-xs);
+  color: var(--dark-color);
+  margin-top: 2px;
+}
+
+.marketo-form-modal .marketo-form-legend-sub-accent {
+  color: var(--brand-color);
+}
+
+/* =============================================================================
+   Interest tabs
+   ============================================================================= */
+
+.marketo-form-modal .marketo-form-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.marketo-form-modal .marketo-form-tab {
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  color: var(--text-color);
+  padding: 6px 14px;
+  border-radius: 3px;
+  font-size: var(--body-font-size-xs);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.marketo-form-modal .marketo-form-tab:hover {
+  border-color: var(--brand-color);
+  color: var(--brand-color);
+}
+
+.marketo-form-modal .marketo-form-tab.is-active {
+  background-color: var(--brand-color);
+  border-color: var(--brand-color);
+  color: #fff;
+  font-weight: 600;
+}
+
+.marketo-form-modal .marketo-form-tab:focus-visible {
+  outline: 2px solid var(--brand-color);
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   Interest textarea
+   ============================================================================= */
+
+.marketo-form-modal .marketo-form-interest-text {
+  width: 100%;
+  min-height: 100px;
+  resize: vertical;
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  padding: 10px 12px;
+  font: inherit;
+  font-size: var(--body-font-size-xs);
+  color: var(--dark-color);
+  box-sizing: border-box;
+  background-color: var(--background-color);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.marketo-form-modal .marketo-form-interest-text:focus {
+  outline: none;
+  border-color: var(--brand-color);
+  box-shadow: 0 0 0 2px rgb(96 34 166 / 20%);
+}
+
+/* =============================================================================
+   Row / field layout
+   ============================================================================= */
+
+.marketo-form-modal .marketo-form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.marketo-form-modal .marketo-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* =============================================================================
+   Labels and inputs
+   ============================================================================= */
+
+.marketo-form-modal .marketo-form-label {
+  font-size: var(--body-font-size-xs);
+  color: var(--text-color);
+  font-weight: 400;
+}
+
+.marketo-form-modal .marketo-form-required {
+  color: var(--brand-color);
+  margin-left: 2px;
+}
+
+.marketo-form-modal .marketo-form-input {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  padding: 8px 10px;
+  font: inherit;
+  font-size: var(--body-font-size-xs);
+  color: var(--text-color);
+  background-color: var(--background-color);
+  box-sizing: border-box;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.marketo-form-modal .marketo-form-input:focus {
+  outline: none;
+  border-color: var(--brand-color);
+  box-shadow: 0 0 0 2px rgb(96 34 166 / 20%);
+}
+
+.marketo-form-modal .marketo-form-input:invalid:not(:placeholder-shown) {
+  border-color: #c00;
+}
+
+/* =============================================================================
+   Select
+   ============================================================================= */
+
+.marketo-form-modal .marketo-form-select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.marketo-form-modal .marketo-form-select {
+  width: 100%;
+  appearance: none;
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  padding: 8px 36px 8px 10px;
+  font: inherit;
+  font-size: var(--body-font-size-xs);
+  color: var(--text-color);
+  background-color: var(--background-color);
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.marketo-form-modal .marketo-form-select:focus {
+  outline: none;
+  border-color: var(--brand-color);
+  box-shadow: 0 0 0 2px rgb(96 34 166 / 20%);
+}
+
+.marketo-form-modal .marketo-form-select-arrow {
+  position: absolute;
+  right: 10px;
+  pointer-events: none;
+  color: var(--dark-color);
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* =============================================================================
+   Opt-in checkbox
+   ============================================================================= */
+
+.marketo-form-modal .marketo-form-optin {
+  margin-top: -8px;
+}
+
+.marketo-form-modal .marketo-form-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: var(--body-font-size-xs);
+  color: var(--dark-color);
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+.marketo-form-modal .marketo-form-checkbox {
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--brand-color);
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+/* =============================================================================
+   reCAPTCHA notice + privacy links
+   ============================================================================= */
+
+.marketo-form-modal .marketo-form-recaptcha {
+  font-size: 11px;
+  color: var(--brand-color);
+  margin: -12px 0 0;
+}
+
+.marketo-form-modal .marketo-form-privacy-link {
+  color: var(--brand-color);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.marketo-form-modal .marketo-form-privacy-link:hover {
+  color: var(--brand-color-dark);
+}
+
+/* =============================================================================
+   Submit row
+   ============================================================================= */
+
+.marketo-form-modal .marketo-form-submit-row {
+  padding-top: 4px;
+}
+
+.marketo-form-modal .marketo-form-submit {
+  min-width: 120px;
+}
+
+/* =============================================================================
+   Success / error messages
+   ============================================================================= */
+
+.marketo-form-modal .marketo-form-message {
+  padding: 12px 16px;
+  border-radius: 4px;
+  font-size: var(--body-font-size-xs);
+}
+
+.marketo-form-modal .marketo-form-message-success {
+  background-color: #edf7ed;
+  color: #1a5e20;
+  border: 1px solid #a5d6a7;
+}
+
+.marketo-form-modal .marketo-form-message-error {
+  background-color: #fdecea;
+  color: #b71c1c;
+  border: 1px solid #ef9a9a;
+}
+
+/* =============================================================================
+   Responsive — tablet +
+   ============================================================================= */
+
+@media (width >= 600px) {
+  .marketo-form-modal .marketo-form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .marketo-form-modal .marketo-form-dialog-body {
+    padding: 40px 40px 36px;
+  }
+}
+
+@media (width >= 900px) {
+  .marketo-form-modal {
+    padding: 40px 24px;
+  }
+}

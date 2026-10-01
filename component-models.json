@@ -761,6 +761,32 @@
     ]
   },
   {
+    "id": "marketo-form",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "title",
+        "value": "",
+        "label": "Title",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "description",
+        "value": "",
+        "label": "Description",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "name": "buttonLabel",
+        "value": "Contact Us",
+        "label": "Button Label",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "media-tile",
     "fields": [
       {
