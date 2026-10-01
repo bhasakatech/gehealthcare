@@ -1033,6 +1033,18 @@
     ]
   },
   {
+    "id": "simple-title",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "value": "",
+        "label": "Title",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "support-card",
     "fields": [
       {

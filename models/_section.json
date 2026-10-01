@@ -71,7 +71,8 @@
         "video-cards",
         "video-grid",
         "marketo-form",
-        "contact-form"
+        "contact-form",
+        "simple-title"
       ]
     }
   ]

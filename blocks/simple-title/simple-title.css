@@ -1,0 +1,12 @@
+.simple-title .simple-title-heading {
+  margin: 0;
+  font-size: var(--heading-font-size-l);
+  line-height: 1.2;
+  color: var(--text-color);
+}
+
+@media (width >= 900px) {
+  .simple-title .simple-title-heading {
+    font-size: var(--heading-font-size-xl);
+  }
+}
