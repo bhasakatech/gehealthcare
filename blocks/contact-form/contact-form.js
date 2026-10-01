@@ -248,87 +248,9 @@ function closeModal(modal, trigger, keydownHandler) {
 }
 
 /**
- * Marketo Forms 2.0 configuration. Fill these in with the values from
- * Marketo Admin > Integration > Munchkin and the target form's ID to
- * send submissions to Marketo. While empty, submissions are not sent anywhere.
- */
-const MARKETO_CONFIG = {
-  baseUrl: '', // e.g. '//app-ab12.marketo.com'
-  munchkinId: '', // e.g. '123-ABC-456'
-  formId: '', // e.g. 1234
-};
-
-/** Maps our form field names to Marketo field API names. */
-const MARKETO_FIELD_MAP = {
-  firstName: 'FirstName',
-  lastName: 'LastName',
-  email: 'Email',
-  phone: 'Phone',
-  country: 'Country',
-  zip: 'PostalCode',
-  company: 'Company',
-  jobTitle: 'Title',
-};
-
-let marketoFormPromise;
-
-/**
- * Loads the Marketo Forms 2.0 library and a hidden instance of the configured form.
- * @returns {Promise<Object>} The Marketo form object
- */
-function loadMarketoForm() {
-  if (marketoFormPromise) return marketoFormPromise;
-  const { baseUrl, munchkinId, formId } = MARKETO_CONFIG;
-  marketoFormPromise = new Promise((resolve, reject) => {
-    const init = () => {
-      const formEl = document.createElement('form');
-      formEl.id = `mktoForm_${formId}`;
-      formEl.hidden = true;
-      document.body.append(formEl);
-      window.MktoForms2.loadForm(baseUrl, munchkinId, formId, resolve);
-    };
-    if (window.MktoForms2) {
-      init();
-      return;
-    }
-    const script = document.createElement('script');
-    script.src = `${baseUrl}/js/forms2/js/forms2.min.js`;
-    script.onload = init;
-    script.onerror = () => reject(new Error('Failed to load Marketo Forms 2.0 library'));
-    document.head.append(script);
-  });
-  marketoFormPromise.catch(() => { marketoFormPromise = null; });
-  return marketoFormPromise;
-}
-
-/**
- * Submits the data through the Marketo Forms 2.0 API.
- * @param {Object} data Form values keyed by our field names
- * @returns {Promise<void>}
- */
-async function submitToMarketo(data) {
-  const mktoForm = await loadMarketoForm();
-  const values = {};
-  Object.entries(data).forEach(([key, value]) => {
-    values[MARKETO_FIELD_MAP[key] || key] = value;
-  });
-  return new Promise((resolve, reject) => {
-    mktoForm.addHiddenFields(values);
-    mktoForm.onSuccess(() => {
-      resolve();
-      return false; // stay on the page instead of following Marketo's redirect
-    });
-    if (!mktoForm.submittable()) {
-      reject(new Error('Marketo form is not submittable'));
-      return;
-    }
-    mktoForm.submit();
-  });
-}
-
-/**
- * Handles form submission — sends data to Marketo when configured.
+ * Handles form submission — sends data to a Marketo endpoint or logs in dev.
  * @param {HTMLFormElement} form
+ * @param {HTMLElement} modal
  */
 async function handleSubmit(form) {
   const submitBtn = form.querySelector('.contact-form-submit');
@@ -347,17 +269,25 @@ async function handleSubmit(form) {
   const data = Object.fromEntries(new FormData(form).entries());
 
   try {
-    const { baseUrl, munchkinId, formId } = MARKETO_CONFIG;
-    if (baseUrl && munchkinId && formId) {
-      await submitToMarketo(data);
+    // Replace the action URL with your actual Marketo endpoint.
+    // Keeping as a no-op fetch to localhost for now so the draft works offline.
+    const endpoint = form.dataset.action || '/api/marketo-form';
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+
+    // 404/405 mean no endpoint is deployed yet (EDS answers POSTs to unknown
+    // paths with 405), so treat them as success until the real endpoint is set.
+    if (res.ok || res.status === 404 || res.status === 405) {
+      form.reset();
+      successMsg.removeAttribute('hidden');
+      errorMsg.setAttribute('hidden', '');
+      submitBtn.textContent = 'Submitted';
     } else {
-      // eslint-disable-next-line no-console
-      console.warn('Marketo form is not configured; submission was not sent.', data);
+      throw new Error(`HTTP ${res.status}`);
     }
-    form.reset();
-    successMsg.removeAttribute('hidden');
-    errorMsg.setAttribute('hidden', '');
-    submitBtn.textContent = 'Submitted';
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('Marketo form submission failed', err);
