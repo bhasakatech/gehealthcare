@@ -197,6 +197,13 @@
         "name": "cardLinkText",
         "label": "Link Text",
         "value": "Learn more"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "testDescription",
+        "label": "Test Description",
+        "description": "Additional description shown below the main description"
       }
     ]
   },
