@@ -8,7 +8,7 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
  * is provided, otherwise an image), a title + description, and a "Learn more"
  * link. The whole card links to the target brand-foundation page.
  *
- * Authored cells per row: [image, video, text(h3 + p), cardLink, cardLinkText].
+ * Authored cells per row: [image, video, text(h3 + p), cardLink].
  *
  * @param {Element} block
  */
@@ -18,7 +18,7 @@ export default function decorate(block) {
 
   [...block.children].forEach((row) => {
     const cells = [...row.children];
-    const [imageCell, videoCell, textCell, linkCell, linkTextCell] = cells;
+    const [imageCell, videoCell, textCell, linkCell] = cells;
 
     const li = document.createElement('li');
     li.className = 'brand-card';
@@ -77,15 +77,13 @@ export default function decorate(block) {
       while (textCell.firstChild) body.append(textCell.firstChild);
     }
 
-    // --- "Learn more" link (collapsed link+text: anchor href = link, text = label) ---
+    // --- "Learn more" link (anchor text is the label when it isn't just the URL) ---
     if (href) {
       const cta = document.createElement('a');
       cta.className = 'brand-card-cta';
       cta.href = href;
       const anchorText = linkAnchor?.textContent.trim();
-      const label = (linkTextCell?.textContent.trim())
-        || (anchorText && anchorText !== href ? anchorText : '')
-        || 'Learn more';
+      const label = (anchorText && anchorText !== href ? anchorText : '') || 'Learn more';
       cta.innerHTML = `<span>${label}</span>`;
       body.append(cta);
     }

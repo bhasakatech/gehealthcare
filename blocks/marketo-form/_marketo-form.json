@@ -35,16 +35,32 @@
           "valueType": "string"
         },
         {
-          "component": "aem-content",
-          "name": "button",
-          "label": "Button Link",
-          "valueType": "string"
+          "component": "select",
+          "name": "formId",
+          "label": "Form ID",
+          "description": "Which form opens. Links to #marketo-form-{id} on the page open the same form.",
+          "valueType": "string",
+          "value": "1001",
+          "options": [
+            {
+              "name": "1001 – Contact Us",
+              "value": "1001"
+            },
+            {
+              "name": "1002 – Product Demo",
+              "value": "1002"
+            },
+            {
+              "name": "1003 – Newsletter",
+              "value": "1003"
+            }
+          ]
         },
         {
           "component": "text",
-          "name": "buttonText",
-          "value": "Contact Us",
+          "name": "buttonLabel",
           "label": "Button Text",
+          "description": "Leave empty to use the form's default label",
           "valueType": "string"
         }
       ]

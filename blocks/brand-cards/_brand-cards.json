@@ -62,13 +62,6 @@
           "valueType": "string",
           "name": "cardLink",
           "label": "Card Link"
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "cardLinkText",
-          "label": "Link Text",
-          "value": "Learn more"
         }
       ]
     }
