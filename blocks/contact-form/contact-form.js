@@ -278,9 +278,7 @@ async function handleSubmit(form) {
       body: JSON.stringify(data),
     });
 
-    // 404/405 mean no endpoint is deployed yet (EDS answers POSTs to unknown
-    // paths with 405), so treat them as success until the real endpoint is set.
-    if (res.ok || res.status === 404 || res.status === 405) {
+    if (res.ok || res.status === 404 /* dev stub */) {
       form.reset();
       successMsg.removeAttribute('hidden');
       errorMsg.setAttribute('hidden', '');
