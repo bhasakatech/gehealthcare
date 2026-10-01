@@ -69,7 +69,8 @@
         "tactics-grid",
         "text-matrix",
         "video-cards",
-        "video-grid"
+        "video-grid",
+        "marketo-form"
       ]
     }
   ]
