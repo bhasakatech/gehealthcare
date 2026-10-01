@@ -309,7 +309,7 @@ async function handleSubmit(form) {
 export default function decorate(block) {
   // 1. Extract authored content from block rows
   const rows = [...block.children];
-  const [titleRow, descRow, buttonRow] = rows;
+  const [titleRow, descRow, buttonRow, buttonTextRow] = rows;
 
   // 2. Build the teaser section
   const teaser = document.createElement('div');
@@ -345,9 +345,10 @@ export default function decorate(block) {
 
   if (buttonRow) {
     const anchor = buttonRow.querySelector('a');
-    triggerBtn.textContent = anchor
-      ? anchor.textContent.trim()
-      : buttonRow.textContent.trim() || 'Contact Us';
+    const labelText = buttonTextRow?.textContent?.trim()
+      || anchor?.textContent?.trim()
+      || 'Contact Us';
+    triggerBtn.textContent = labelText;
     moveInstrumentation(buttonRow, triggerBtn);
   } else {
     triggerBtn.textContent = 'Contact Us';
