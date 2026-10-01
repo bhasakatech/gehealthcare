@@ -81,10 +81,6 @@ main .section > .default-content-wrapper:has(+ .brand-cards-wrapper) {
   color: var(--dark-color);
 }
 
-.brand-cards .brand-card-test-description p {
-  font-size: 16px;
-}
-
 /* "Learn more" — purple text link with a chevron, underline on hover */
 .brand-cards .brand-card-cta {
   display: inline-flex;
