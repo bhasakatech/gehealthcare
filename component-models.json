@@ -870,10 +870,16 @@
         "valueType": "string"
       },
       {
+        "component": "aem-content",
+        "name": "button",
+        "label": "Button Link",
+        "valueType": "string"
+      },
+      {
         "component": "text",
-        "name": "buttonLabel",
+        "name": "buttonText",
         "value": "Contact Us",
-        "label": "Button Label",
+        "label": "Button Text",
         "valueType": "string"
       }
     ]
